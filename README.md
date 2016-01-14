@@ -13,7 +13,7 @@ before building Telephone.
 
 To automatically build it, call 
 
-   ./build-pjsip.sh
+    $ ./build-pjsip.sh
 
 
 or manually:
