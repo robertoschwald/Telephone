@@ -195,6 +195,10 @@
 		AAFC002A1074D0B50018C7DA /* SoundPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFC00291074D0B50018C7DA /* SoundPreferencesView.xib */; };
 		AAFC002C1074D0B50018C7DA /* GeneralPreferencesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAFC002B1074D0B50018C7DA /* GeneralPreferencesView.xib */; };
 		AAFCFFBD1074BFCA0018C7DA /* AccountSetupController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAFCFFBC1074BFCA0018C7DA /* AccountSetupController.m */; };
+		E18936C71C481B700003B15F /* Domain.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9D08031BFF7E6F0000F618 /* Domain.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E18936C81C481B700003B15F /* UseCases.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA078B291BFF80E20013FF8F /* UseCases.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E18936CA1C481CAD0003B15F /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = E18936C91C481CAD0003B15F /* README.md */; };
+		E18936CC1C481CF90003B15F /* build-pjsip.sh in Resources */ = {isa = PBXBuildFile; fileRef = E18936CB1C481CF90003B15F /* build-pjsip.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -312,6 +316,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E18936C71C481B700003B15F /* Domain.framework in CopyFiles */,
+				E18936C81C481B700003B15F /* UseCases.framework in CopyFiles */,
 				AA222C44182C4A7E0096B024 /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +596,8 @@
 		AAFC003B1074D19A0018C7DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
 		AAFCFFBB1074BFCA0018C7DA /* AccountSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AccountSetupController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAFCFFBC1074BFCA0018C7DA /* AccountSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSetupController.m; sourceTree = "<group>"; tabWidth = 4; };
+		E18936C91C481CAD0003B15F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E18936CB1C481CF90003B15F /* build-pjsip.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "build-pjsip.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -726,6 +734,8 @@
 		29B97314FDCFA39411CA2CEA /* Telephone */ = {
 			isa = PBXGroup;
 			children = (
+				E18936CB1C481CF90003B15F /* build-pjsip.sh */,
+				E18936C91C481CAD0003B15F /* README.md */,
 				080E96DDFE201D6D7F000001 /* Telephone */,
 				AA3FAB861BBAAE630064B2C3 /* TelephoneTests */,
 				AA078B2A1BFF80E30013FF8F /* UseCases */,
@@ -1163,6 +1173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Telephone" */;
 			buildPhases = (
+				E18936C61C48138E0003B15F /* Telephone: Set Environment Variables */,
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
@@ -1443,6 +1454,7 @@
 				AADAA2C3107E569200789F2D /* IncomingCallView.xib in Resources */,
 				AADAA2CD107E56FD00789F2D /* ActiveCallView.xib in Resources */,
 				AADAA2D1107E572300789F2D /* EndedCallView.xib in Resources */,
+				E18936CC1C481CF90003B15F /* build-pjsip.sh in Resources */,
 				AA7CB51F11442249004D79DA /* ActiveAccountTransferView.xib in Resources */,
 				AA7CB51D11442241004D79DA /* CallTransfer.xib in Resources */,
 				AA7CB528114423A4004D79DA /* ActiveCallTransferView.xib in Resources */,
@@ -1518,6 +1530,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E18936C61C48138E0003B15F /* Telephone: Set Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Telephone: Set Environment Variables";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Set OS release variable (to be used for pjsip library linking)\n\necho \"++ Set OS_SYSTEM_RELEASE\"\nexport OS_SYSTEM_RELEASE=`uname -r`\nset\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1527,6 +1556,7 @@
 				AA4BD4C80E07C28E005A71B2 /* AKSIPUserAgent.m in Sources */,
 				AA277A531BD174D60030ECE4 /* UserAgentSoundIOSelector.swift in Sources */,
 				AA4BD4D80E07C305005A71B2 /* AppController.m in Sources */,
+				E18936CA1C481CAD0003B15F /* README.md in Sources */,
 				AA2C03F31BD7BE36001D25F9 /* CompositionRoot.swift in Sources */,
 				AABAD7ED0E0C171A00CB5930 /* PreferencesController.m in Sources */,
 				AA2CCC840E2E4EEB00871057 /* AKSIPCall.m in Sources */,
@@ -2556,22 +2586,22 @@
 					"\"$(SRCROOT)/../pjproject/third_party/lib\"",
 				);
 				OTHER_LDFLAGS = (
-					"-lpjsua-x86_64-apple-darwin14.5.0",
-					"-lpjsip-ua-x86_64-apple-darwin14.5.0",
-					"-lpjsip-simple-x86_64-apple-darwin14.5.0",
-					"-lpjsip-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-codec-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-audiodev-x86_64-apple-darwin14.5.0",
-					"-lpjnath-x86_64-apple-darwin14.5.0",
-					"-lpjlib-util-x86_64-apple-darwin14.5.0",
-					"-lresample-x86_64-apple-darwin14.5.0",
-					"-lsrtp-x86_64-apple-darwin14.5.0",
-					"-lgsmcodec-x86_64-apple-darwin14.5.0",
-					"-lspeex-x86_64-apple-darwin14.5.0",
-					"-lilbccodec-x86_64-apple-darwin14.5.0",
-					"-lportaudio-x86_64-apple-darwin14.5.0",
-					"-lpj-x86_64-apple-darwin14.5.0",
+					"-lpjsua-x86_64-apple-darwin",
+					"-lpjsip-ua-x86_64-apple-darwin",
+					"-lpjsip-simple-x86_64-apple-darwin",
+					"-lpjsip-x86_64-apple-darwin",
+					"-lpjmedia-codec-x86_64-apple-darwin",
+					"-lpjmedia-x86_64-apple-darwin",
+					"-lpjmedia-audiodev-x86_64-apple-darwin",
+					"-lpjnath-x86_64-apple-darwin",
+					"-lpjlib-util-x86_64-apple-darwin",
+					"-lresample-x86_64-apple-darwin",
+					"-lsrtp-x86_64-apple-darwin",
+					"-lgsmcodec-x86_64-apple-darwin",
+					"-lspeex-x86_64-apple-darwin",
+					"-lilbccodec-x86_64-apple-darwin",
+					"-lportaudio-x86_64-apple-darwin",
+					"-lpj-x86_64-apple-darwin",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
 				PRODUCT_NAME = Telephone;
@@ -2610,22 +2640,22 @@
 					"\"$(SRCROOT)/../pjproject/third_party/lib\"",
 				);
 				OTHER_LDFLAGS = (
-					"-lpjsua-x86_64-apple-darwin14.5.0",
-					"-lpjsip-ua-x86_64-apple-darwin14.5.0",
-					"-lpjsip-simple-x86_64-apple-darwin14.5.0",
-					"-lpjsip-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-codec-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-x86_64-apple-darwin14.5.0",
-					"-lpjmedia-audiodev-x86_64-apple-darwin14.5.0",
-					"-lpjnath-x86_64-apple-darwin14.5.0",
-					"-lpjlib-util-x86_64-apple-darwin14.5.0",
-					"-lresample-x86_64-apple-darwin14.5.0",
-					"-lsrtp-x86_64-apple-darwin14.5.0",
-					"-lgsmcodec-x86_64-apple-darwin14.5.0",
-					"-lspeex-x86_64-apple-darwin14.5.0",
-					"-lilbccodec-x86_64-apple-darwin14.5.0",
-					"-lportaudio-x86_64-apple-darwin14.5.0",
-					"-lpj-x86_64-apple-darwin14.5.0",
+					"-lpjsua-x86_64-apple-darwin",
+					"-lpjsip-ua-x86_64-apple-darwin",
+					"-lpjsip-simple-x86_64-apple-darwin",
+					"-lpjsip-x86_64-apple-darwin",
+					"-lpjmedia-codec-x86_64-apple-darwin",
+					"-lpjmedia-x86_64-apple-darwin",
+					"-lpjmedia-audiodev-x86_64-apple-darwin",
+					"-lpjnath-x86_64-apple-darwin",
+					"-lpjlib-util-x86_64-apple-darwin",
+					"-lresample-x86_64-apple-darwin",
+					"-lsrtp-x86_64-apple-darwin",
+					"-lgsmcodec-x86_64-apple-darwin",
+					"-lspeex-x86_64-apple-darwin",
+					"-lilbccodec-x86_64-apple-darwin",
+					"-lportaudio-x86_64-apple-darwin",
+					"-lpj-x86_64-apple-darwin",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
 				PRODUCT_NAME = Telephone;

@@ -8,7 +8,17 @@ Building
 --------
 
 Telephone's SIP user agent is based on [pjsip][]. You need to build it
-before building Telephone. Name the directory _pjproject_ and place it
+before building Telephone. 
+
+
+To automatically build it, call 
+
+   ./build-pjsip.sh
+
+
+or manually:
+
+Name the directory _pjproject_ and place it
 near Telephone, in the same parent directory.
 
   [pjsip]: http://www.pjsip.org/
@@ -31,7 +41,7 @@ contents:
 
 Configure and build pjsip:
 
-    $ CFLAGS="-mmacosx-version-min=10.9" ./configure
+    $ CFLAGS="-mmacosx-version-min=10.9" ./configure --target=x86_64-apple-darwin
     $ make lib
     
 Build Telephone.
