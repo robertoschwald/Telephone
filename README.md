@@ -13,7 +13,7 @@ near Telephone, in the same parent directory.
 
   [pjsip]: http://www.pjsip.org/
 
-    $ svn checkout http://svn.pjsip.org/repos/pjproject/tags/2.2.1 pjproject
+    $ svn checkout http://svn.pjsip.org/repos/pjproject/tags/2.4.5 pjproject
     $ cd pjproject
 
 Create the file `pjlib/include/pj/config_site.h` with the following
@@ -31,15 +31,7 @@ contents:
 
 Configure and build pjsip:
 
-    $ CFLAGS="-mmacosx-version-min=10.8" ./configure
+    $ CFLAGS="-mmacosx-version-min=10.9" ./configure
     $ make lib
     
 Build Telephone.
-
-Coding Style
-------------
-
-Telephone source code follows [Google Objective-C Style Guide][coding_style]
-with the exception of maximum 120-column width and 4 spaces for indentation.
-
-  [coding_style]: http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml

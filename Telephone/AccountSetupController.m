@@ -1,0 +1,121 @@
+//
+//  AccountSetupController.m
+//  Telephone
+//
+//  Copyright (c) 2008-2015 Alexei Kuznetsov. All rights reserved.
+//
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//  1. Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//     this list of conditions and the following disclaimer in the documentation
+//     and/or other materials provided with the distribution.
+//  3. Neither the name of the copyright holder nor the names of contributors
+//     may be used to endorse or promote products derived from this software
+//     without specific prior written permission.
+//
+//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+//  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+//  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+//  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE THE COPYRIGHT HOLDER
+//  OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+//  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+//  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+//  OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+//  WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+//  OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+//  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+
+#import "AccountSetupController.h"
+
+#import "AKKeychain.h"
+
+#import "UserDefaultsKeys.h"
+
+
+NSString * const AKAccountSetupControllerDidAddAccountNotification = @"AKAccountSetupControllerDidAddAccount";
+
+@implementation AccountSetupController
+
+- (instancetype)init {
+    self = [super initWithWindowNibName:@"AccountSetup"];
+    
+    return self;
+}
+
+- (IBAction)closeSheet:(id)sender {
+    [NSApp endSheet:[sender window]];
+    [[sender window] orderOut:sender];
+}
+
+- (IBAction)addAccount:(id)sender {
+    // Reset hidden states of the invalid data indicators.
+    [[self fullNameInvalidDataView] setHidden:YES];
+    [[self domainInvalidDataView] setHidden:YES];
+    [[self usernameInvalidDataView] setHidden:YES];
+    [[self passwordInvalidDataView] setHidden:YES];
+    
+    NSCharacterSet *spacesSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *fullName = [[[self fullNameField] stringValue] stringByTrimmingCharactersInSet:spacesSet];
+    NSString *domain = [[[self domainField] stringValue] stringByTrimmingCharactersInSet:spacesSet];
+    NSString *username = [[[self usernameField] stringValue] stringByTrimmingCharactersInSet:spacesSet];
+    
+    BOOL invalidFormData = NO;
+    
+    if ([fullName length] == 0) {
+        [[self fullNameInvalidDataView] setHidden:NO];
+        invalidFormData = YES;
+    }
+    
+    if ([domain length] == 0) {
+        [[self domainInvalidDataView] setHidden:NO];
+        invalidFormData = YES;
+    }
+    
+    if ([username length] == 0) {
+        [[self usernameInvalidDataView] setHidden:NO];
+        invalidFormData = YES;
+    }
+    
+    if ([[[self passwordField] stringValue] length] == 0) {
+        [[self passwordInvalidDataView] setHidden:NO];
+        invalidFormData = YES;
+    }
+    
+    if (invalidFormData) {
+        return;
+    }
+    
+    NSMutableDictionary *accountDict = [NSMutableDictionary dictionary];
+    accountDict[kAccountEnabled] = @YES;
+    accountDict[kFullName] = fullName;
+    accountDict[kDomain] = domain;
+    accountDict[kRealm] = @"*";
+    accountDict[kUsername] = username;
+    accountDict[kReregistrationTime] = @0;
+    accountDict[kSubstitutePlusCharacter] = @NO;
+    accountDict[kPlusCharacterSubstitutionString] = @"00";
+    accountDict[kUseProxy] = @NO;
+    accountDict[kProxyHost] = @"";
+    accountDict[kProxyPort] = @0;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *savedAccounts = [NSMutableArray arrayWithArray:[defaults arrayForKey:kAccounts]];
+    [savedAccounts addObject:accountDict];
+    [defaults setObject:savedAccounts forKey:kAccounts];
+    [defaults synchronize];
+    
+    [AKKeychain addItemWithServiceName:[NSString stringWithFormat:@"SIP: %@", domain]
+                           accountName:username
+                              password:[[self passwordField] stringValue]];
+    
+    [self closeSheet:sender];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:AKAccountSetupControllerDidAddAccountNotification
+                                                        object:self
+                                                      userInfo:accountDict];
+}
+
+@end
