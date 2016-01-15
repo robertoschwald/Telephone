@@ -53,7 +53,10 @@
            "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\."
            "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\\b'"];
     
-    return ([IPAddressPredicate evaluateWithObject:self]) ? YES : NO;
+    // return ([IPAddressPredicate evaluateWithObject:self]) ? YES : NO;
+    // Workaround for offline / online change detection
+    // https://github.com/eofster/Telephone/issues/117
+    return YES;
 }
 
 @end
