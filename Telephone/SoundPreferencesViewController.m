@@ -31,6 +31,9 @@ static NSMenuItem *MenuItemForDevice(NSString *device);
 
 @interface SoundPreferencesViewController ()
 
+@property(nonatomic, readonly) id<SoundPreferencesViewEventTarget> eventTarget;
+@property(nonatomic, readonly) AKSIPUserAgent *userAgent;
+
 @property(nonatomic, weak) IBOutlet NSPopUpButton *soundInputPopUp;
 @property(nonatomic, weak) IBOutlet NSPopUpButton *soundOutputPopUp;
 @property(nonatomic, weak) IBOutlet NSPopUpButton *ringtoneOutputPopUp;
@@ -73,7 +76,7 @@ NS_ASSUME_NONNULL_END
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)ak_viewWillDisappear {
+- (void)viewWillDisappear {
     [self.eventTarget viewWillDisappear:self];
 }
 

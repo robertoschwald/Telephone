@@ -20,7 +20,7 @@ import Domain
 import CoreAudio
 import UseCases
 
-class SystemAudioDevices: SystemAudioDeviceRepository {
+final class SystemAudioDevices: SystemAudioDeviceRepository {
     func allDevices() throws -> [SystemAudioDevice] {
         return try SystemAudioDeviceIDs().all().map(deviceWithID)
     }
@@ -95,7 +95,7 @@ private func audioBufferListAddressWithScope(scope: AudioObjectPropertyScope) ->
 }
 
 private func audioBufferListCountWithLength(length: UInt32) -> Int {
-    return Int(length) / strideof(AudioBufferList)
+    return objectCount(ofType: AudioBufferList.self, inMemoryLength: Int(length))
 }
 
 private func channelCountWithBufferListPointer(bufferListPointer: UnsafeMutableAudioBufferListPointer) -> Int {

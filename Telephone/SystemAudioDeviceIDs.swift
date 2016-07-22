@@ -18,7 +18,7 @@
 
 import CoreAudio
 
-class SystemAudioDeviceIDs {
+final class SystemAudioDeviceIDs {
     private var audioObject: SystemAudioObject
 
     init() {
@@ -57,5 +57,5 @@ private func audioObjectIDsWithBytes(bytes: UnsafeMutablePointer<AudioObjectID>,
 }
 
 private func audioObjectIDCountWithLength(length: UInt32) -> Int {
-    return Int(length) / strideof(AudioObjectID)
+    return objectCount(ofType: AudioObjectID.self, inMemoryLength: Int(length))
 }

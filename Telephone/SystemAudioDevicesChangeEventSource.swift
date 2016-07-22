@@ -18,10 +18,9 @@
 
 import CoreAudio
 
-class SystemAudioDevicesChangeEventSource {
-    let target: SystemAudioDevicesChangeEventTarget
-    let queue: dispatch_queue_t
-
+final class SystemAudioDevicesChangeEventSource {
+    private let target: SystemAudioDevicesChangeEventTarget
+    private let queue: dispatch_queue_t
     private let objectID:AudioObjectID
     private var objectPropertyAddress: AudioObjectPropertyAddress
 

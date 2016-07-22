@@ -16,8 +16,8 @@
 //  GNU General Public License for more details.
 //
 
-class PreferencesSoundIOUpdater {
-    let preferences: SoundIOPreferences
+final class PreferencesSoundIOUpdater {
+    private let preferences: SoundIOPreferences
 
     init(preferences: SoundIOPreferences) {
         self.preferences = preferences

@@ -18,9 +18,9 @@
 
 import CoreAudio
 
-class SystemAudioObject {
-    let objectID: AudioObjectID
-    private(set) var propertyAddress: AudioObjectPropertyAddress
+final class SystemAudioObject {
+    private let objectID: AudioObjectID
+    private var propertyAddress: AudioObjectPropertyAddress
 
     init(objectID: AudioObjectID, propertyAddress: AudioObjectPropertyAddress) {
         self.objectID = objectID
@@ -42,4 +42,8 @@ class SystemAudioObject {
             throw TelephoneError.SystemAudioDevicePropertyDataGetError(systemErrorCode: Int(status))
         }
     }
+}
+
+func objectCount<T>(ofType type: T.Type, inMemoryLength length: Int) -> Int {
+    return Int(ceil(Double(length) / Double(strideof(type))))
 }

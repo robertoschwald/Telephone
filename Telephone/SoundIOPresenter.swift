@@ -18,15 +18,15 @@
 
 import UseCases
 
-class SoundIOPresenter {
-    let output: SoundIOPresenterOutput
+final class SoundIOPresenter {
+    private let output: SoundIOPresenterOutput
 
     init(output: SoundIOPresenterOutput) {
         self.output = output
     }
 }
 
-extension SoundIOPresenter: UserDefaultsSoundIOLoadInteractorOutput {
+extension SoundIOPresenter: UserDefaultsSoundIOLoadUseCaseOutput {
     func update(devices devices: AudioDevices, soundIO: PresentationSoundIO) {
         output.setInputDevices(devices.input)
         output.setOutputDevices(devices.output)
