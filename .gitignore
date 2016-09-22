@@ -5,3 +5,7 @@
 *.xcodeproj/xcuserdata/
 build/
 .idea/
+
+ThirdParty/Opus
+ThirdParty/LibreSSL
+ThirdParty/PJSIP

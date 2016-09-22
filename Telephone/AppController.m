@@ -18,7 +18,8 @@
 
 #import "AppController.h"
 
-#import <SystemConfiguration/SystemConfiguration.h>
+@import SystemConfiguration;
+@import UseCases;
 
 #import "AKAddressBookPhonePlugIn.h"
 #import "AKAddressBookSIPAddressPlugIn.h"
@@ -26,7 +27,6 @@
 #import "AKNSString+Scanning.h"
 #import "AKSIPAccount.h"
 #import "AKSIPCall.h"
-#import "iTunes.h"
 
 #import "AccountController.h"
 #import "AccountPreferencesViewController.h"
@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) CompositionRoot *compositionRoot;
 @property(nonatomic, readonly) PreferencesController *preferencesController;
 @property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
+@property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
 @property(nonatomic, getter=isFinishedLaunching) BOOL finishedLaunching;
 @property(nonatomic, copy) NSString *destinationToCall;
 @property(nonatomic, getter=isUserSessionActive) BOOL userSessionActive;
@@ -194,7 +195,6 @@ NS_ASSUME_NONNULL_END
         defaultsDict[kTransportPublicHost] = @"";
         defaultsDict[kRingingSound] = @"Purr";
         defaultsDict[kSignificantPhoneNumberLength] = @9;
-        defaultsDict[kPauseITunes] = @YES;
         defaultsDict[kAutoCloseCallWindow] = @NO;
         defaultsDict[kAutoCloseMissedCallWindow] = @NO;
         defaultsDict[kCallWaiting] = @YES;
@@ -203,14 +203,14 @@ NS_ASSUME_NONNULL_END
         NSString *preferredLocalization = [[NSBundle mainBundle] preferredLocalizations][0];
         
         // Do not format phone numbers in German localization by default.
-        if ([preferredLocalization isEqualToString:@"German"]) {
+        if ([preferredLocalization isEqualToString:@"de"]) {
             defaultsDict[kFormatTelephoneNumbers] = @NO;
         } else {
             defaultsDict[kFormatTelephoneNumbers] = @YES;
         }
         
         // Split last four digits in Russian localization by default.
-        if ([preferredLocalization isEqualToString:@"Russian"]) {
+        if ([preferredLocalization isEqualToString:@"ru"]) {
             defaultsDict[kTelephoneNumberFormatterSplitsLastFourDigits] = @YES;
         } else {
             defaultsDict[kTelephoneNumberFormatterSplitsLastFourDigits] = @NO;
@@ -234,14 +234,10 @@ NS_ASSUME_NONNULL_END
     [[self userAgent] setDelegate:self];
     _preferencesController = _compositionRoot.preferencesController;
     _ringtonePlayback = _compositionRoot.ringtonePlayback;
+    _musicPlayer = _compositionRoot.musicPlayer;
     _destinationToCall = @"";
     _userSessionActive = YES;
     _accountControllers = [[NSMutableArray alloc] init];
-    [self setShouldRegisterAllAccounts:NO];
-    [self setShouldRestartUserAgentASAP:NO];
-    [self setTerminating:NO];
-    [self setDidPauseITunes:NO];
-    [self setShouldPresentUserAgentLaunchError:NO];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
@@ -392,44 +388,6 @@ NS_ASSUME_NONNULL_END
     [NSApp requestUserAttention:NSInformationalRequest];
 }
 
-
-- (void)pauseITunes {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kPauseITunes]) {
-        return;
-    }
-    
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
-    if (![iTunes isRunning]) {
-        return;
-    }
-    
-    if ([iTunes playerState] == iTunesEPlSPlaying) {
-        [iTunes pause];
-        [self setDidPauseITunes:YES];
-    }
-}
-
-- (void)resumeITunesIfNeeded {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:kPauseITunes]) {
-        return;
-    }
-    
-    iTunesApplication *iTunes = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
-    if (![iTunes isRunning]) {
-        return;
-    }
-    
-    if ([self didPauseITunes] && ![self hasActiveCallControllers]) {
-        if ([iTunes playerState] == iTunesEPlSPaused) {
-            [[iTunes currentTrack] playOnce:NO];
-        }
-        
-        [self setDidPauseITunes:NO];
-    }
-}
-
 - (CallController *)callControllerByIdentifier:(NSString *)identifier {
     for (AccountController *accountController in [self enabledAccountControllers]) {
         for (CallController *callController in [accountController callControllers]) {
@@ -518,8 +476,7 @@ NS_ASSUME_NONNULL_END
                                                     @"Address Book plug-ins install error, alert "
                                                      "message text.")];
             [alert setInformativeText:[NSString stringWithFormat:
-                                       NSLocalizedString(@"Make sure you have write permission to "
-                                                          "\\U201C%@\\U201D.",
+                                       NSLocalizedString(@"Make sure you have write permission to “%@”.",
                                                          @"Address Book plug-ins install error, alert "
                                                           "informative text."),
                                        addressBookPlugInsInstallPath]];
@@ -570,6 +527,12 @@ NS_ASSUME_NONNULL_END
     for (AccountController *accountController in self.accountControllers) {
         accountController.callsShouldDisplayAccountInfo = shouldDisplay;
     }
+}
+
+- (void)remindAboutPurchasingAfterDelay {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.compositionRoot.purchaseReminder execute];
+    });
 }
 
 - (BOOL)installAddressBookPlugInsAndReturnError:(NSError **)error {
@@ -948,7 +911,8 @@ NS_ASSUME_NONNULL_END
     
     AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                         userAgent:self.userAgent
-                                                                 ringtonePlayback:self.ringtonePlayback];
+                                                                 ringtonePlayback:self.ringtonePlayback
+                                                                      musicPlayer:self.musicPlayer];
     
     [controller setAccountDescription:[[controller account] SIPAddress]];
     [[controller window] setExcludedFromWindowsMenu:YES];
@@ -1019,7 +983,8 @@ NS_ASSUME_NONNULL_END
         
         AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                             userAgent:self.userAgent
-                                                                     ringtonePlayback:self.ringtonePlayback];
+                                                                     ringtonePlayback:self.ringtonePlayback
+                                                                          musicPlayer:self.musicPlayer];
         
         [[controller window] setExcludedFromWindowsMenu:YES];
         
@@ -1330,7 +1295,8 @@ NS_ASSUME_NONNULL_END
         
         AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                             userAgent:self.userAgent
-                                                                     ringtonePlayback:self.ringtonePlayback];
+                                                                     ringtonePlayback:self.ringtonePlayback
+                                                                          musicPlayer:self.musicPlayer];
         
         [[controller window] setExcludedFromWindowsMenu:YES];
         
@@ -1381,6 +1347,8 @@ NS_ASSUME_NONNULL_END
     // Register as service provider to allow making calls from the Services
     // menu and context menus.
     [NSApp setServicesProvider:self];
+
+    [self remindAboutPurchasingAfterDelay];
     
     [self registerAllAccountsWhereManualRegistrationRequired];
 

@@ -74,6 +74,7 @@
                           accountController:accountController
                                   userAgent:userAgent
                            ringtonePlayback:accountController.ringtonePlayback
+                                musicPlayer:accountController.musicPlayer
                                    delegate:accountController])) {
         [self setSourceCallController:callController];
         _activeAccountTransferViewController = [[ActiveAccountTransferViewController alloc] initWithAccountController:accountController];
@@ -192,6 +193,13 @@
     ActiveCallTransferViewController *activeCallTransferViewController
         = (ActiveCallTransferViewController *)[self activeCallViewController];
     [[activeCallTransferViewController transferButton] setEnabled:YES];
+}
+
+- (void)SIPCallDidLocalHold:(NSNotification *)notification {
+    [super SIPCallDidLocalHold:notification];
+    ActiveCallTransferViewController *activeCallTransferViewController
+        = (ActiveCallTransferViewController *)[self activeCallViewController];
+    [activeCallTransferViewController callDidHold];
 }
 
 - (void)SIPCallDidRemoteHold:(NSNotification *)notification {

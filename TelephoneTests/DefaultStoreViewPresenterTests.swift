@@ -28,6 +28,22 @@ final class DefaultStoreViewPresenterTests: XCTestCase {
         sut = DefaultStoreViewPresenter(output: output)
     }
 
+    // MARK: - Purchase check
+
+    func testShowsPurchaseCheckProgressOnShowPurchaseCheckProgress() {
+        sut.showPurchaseCheckProgress()
+
+        XCTAssertTrue(output.didCallShowPurchaseCheckProgress)
+    }
+
+    func testDisablesPurchaseRestorationOnShowPurchaseCheckProgress() {
+        sut.showPurchaseCheckProgress()
+
+        XCTAssertTrue(output.didCallDisablePurchaseRestoration)
+    }
+
+    // MARK: - Fetch
+
     func testShowsProductsSortedByPriceOnShowProducts() {
         let product1 = Product(identifier: "123", name: "abc", price: NSDecimalNumber(integer: 3), localizedPrice: "$3")
         let product2 = Product(identifier: "456", name: "def", price: NSDecimalNumber(integer: 1), localizedPrice: "$1")
@@ -74,6 +90,8 @@ final class DefaultStoreViewPresenterTests: XCTestCase {
         XCTAssertTrue(output.didCallEnablePurchaseRestoration)
     }
 
+    // MARK: - Purchase
+
     func testShowsPurchaseProgressOnShowPurchaseProgress() {
         sut.showPurchaseProgress()
 
@@ -97,5 +115,47 @@ final class DefaultStoreViewPresenterTests: XCTestCase {
         sut.showPurchaseError("any")
 
         XCTAssertTrue(output.didCallEnablePurchaseRestoration)
+    }
+
+    // MARK: - Restoration
+
+    func testShowsPurchaseRestorationProgressOnShowPurchaseRestorationProgress() {
+        sut.showPurchaseRestorationProgress()
+
+        XCTAssertTrue(output.didCallShowPurchaseRestorationProgress)
+    }
+
+    func testDisablesPurchaseRestorationOnShowPurchaseRestorationProgress() {
+        sut.showPurchaseRestorationProgress()
+
+        XCTAssertTrue(output.didCallDisablePurchaseRestoration)
+    }
+
+    func testShowsPurchaseRestorationErrorOnShowPurchaseRestorationError() {
+        let error = "any"
+
+        sut.showPurchaseRestorationError(error)
+
+        XCTAssertEqual(output.invokedPurchaseRestorationError, error)
+    }
+
+    func testEnablesPurchaseRestorationOnShowPurchaseRestorationError() {
+        sut.showPurchaseRestorationError("any")
+
+        XCTAssertTrue(output.didCallEnablePurchaseRestoration)
+    }
+
+    // MARK: - Purchased
+
+    func testShowsPurchasedOnShowPurchased() {
+        sut.showPurchased(until: NSDate())
+
+        XCTAssertTrue(output.didCallShowPurchased)
+    }
+
+    func testShowsSubscriptionManagementOnShowPurchased() {
+        sut.showPurchased(until: NSDate())
+
+        XCTAssertTrue(output.didCallShowSubscriptionManagement)
     }
 }

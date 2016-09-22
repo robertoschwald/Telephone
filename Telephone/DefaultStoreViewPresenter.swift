@@ -25,6 +25,11 @@ final class DefaultStoreViewPresenter {
 }
 
 extension DefaultStoreViewPresenter: StoreViewPresenter {
+    func showPurchaseCheckProgress() {
+        output.showPurchaseCheckProgress()
+        output.disablePurchaseRestoration()
+    }
+
     func showProducts(products: [Product]) {
         output.showProducts(products.sort(hasLowerPrice).map({PresentationProduct($0)}))
         output.enablePurchaseRestoration()
@@ -49,6 +54,21 @@ extension DefaultStoreViewPresenter: StoreViewPresenter {
         output.showPurchaseError(error)
         output.enablePurchaseRestoration()
     }
+
+    func showPurchaseRestorationProgress() {
+        output.showPurchaseRestorationProgress()
+        output.disablePurchaseRestoration()
+    }
+
+    func showPurchaseRestorationError(error: String) {
+        output.showPurchaseRestorationError(error)
+        output.enablePurchaseRestoration()
+    }
+
+    func showPurchased(until date: NSDate) {
+        output.showPurchased(until: date)
+        output.showSubscriptionManagement()
+    }
 }
 
 private func hasLowerPrice(lhs: Product, _ rhs: Product) -> Bool {
@@ -57,7 +77,7 @@ private func hasLowerPrice(lhs: Product, _ rhs: Product) -> Bool {
 
 private func productsFetchError(withError error: String) -> String {
     let prefix = NSLocalizedString(
-        "Could not fetch products", comment: "Products fetch error."
+        "Could not fetch products.", comment: "Products fetch error."
     )
-    return "\(prefix). \(error)"
+    return "\(prefix) \(error)"
 }

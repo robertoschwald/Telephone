@@ -82,8 +82,8 @@ NSString * const AKAuthenticationFailureControllerDidChangeUsernameAndPasswordNo
             
             NSString *statusText;
             NSString *preferredLocalization = [[NSBundle mainBundle] preferredLocalizations][0];
-            if ([preferredLocalization isEqualToString:@"Russian"]) {
-                statusText = [[NSApp delegate] localizedStringForSIPResponseCode:
+            if ([preferredLocalization isEqualToString:@"ru"]) {
+                statusText = [(AppController *)[NSApp delegate] localizedStringForSIPResponseCode:
                               [[[self accountController] account] registrationStatus]];
             } else {
                 statusText = [[[self accountController] account] registrationStatusText];
@@ -97,7 +97,7 @@ NSString * const AKAuthenticationFailureControllerDidChangeUsernameAndPasswordNo
                 error = [error stringByAppendingString:@"."];
             } else {
                 error = [NSString stringWithFormat:
-                         NSLocalizedString(@"The error was: \\U201C%d %@\\U201D.", @"Error description."),
+                         NSLocalizedString(@"The error was: “%d %@”.", @"Error description."),
                          [[[self accountController] account] registrationStatus], statusText];
             }
             

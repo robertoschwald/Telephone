@@ -18,6 +18,8 @@
 
 #import "CallController.h"
 
+@import UseCases;
+
 #import "AKActiveCallView.h"
 #import "AKResponsiveProgressIndicator.h"
 #import "AKNSString+Creating.h"
@@ -46,6 +48,10 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
 
 @interface CallController ()
 
+@property(nonatomic, readonly) AKSIPUserAgent *userAgent;
+@property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
+@property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
+
 // Account description field.
 @property(nonatomic, weak) IBOutlet NSTextField *accountDescriptionField;
 
@@ -62,15 +68,16 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
 @synthesize callTransferController = _callTransferController;
 @synthesize incomingCallViewController = _incomingCallViewController;
 
-- (void)setCall:(AKSIPCall *)aCall {
-    if (_call != aCall) {
-        if ([[_call delegate] isEqual:self]) {
-            [_call setDelegate:nil];
+- (void)setCall:(AKSIPCall *)call {
+    if (_call != call) {
+        if (_call.delegate == self) {
+            _call.delegate = nil;
         }
-        
-        _call = aCall;
-        
-        [_call setDelegate:self];
+        _call = call;
+        _call.delegate = self;
+        _incomingCallViewController.representedObject = _call;
+        _activeCallViewController.representedObject = _call;
+        _endedCallViewController.representedObject = _call;
     }
 }
 
@@ -111,6 +118,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
                     accountController:(AccountController *)accountController
                             userAgent:(AKSIPUserAgent *)userAgent
                      ringtonePlayback:(id<RingtonePlaybackUseCase>)ringtonePlayback
+                          musicPlayer:(id<MusicPlayer>)musicPlayer
                              delegate:(id<CallControllerDelegate>)delegate {
 
     if ((self = [self initWithWindowNibName:windowNibName])) {
@@ -118,10 +126,8 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
         _accountController = accountController;
         _userAgent = userAgent;
         _ringtonePlayback = ringtonePlayback;
+        _musicPlayer = musicPlayer;
         _delegate = delegate;
-        _callOnHold = NO;
-        _callActive = NO;
-        _callUnhandled = NO;
     }
     return self;
 }
@@ -190,7 +196,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
     }
     
     [self setCallUnhandled:NO];
-    [[NSApp delegate] updateDockTileBadgeLabel];
+    [(AppController *)[NSApp delegate] updateDockTileBadgeLabel];
     
     [[self call] answer];
 }
@@ -225,8 +231,8 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
     [[[self incomingCallViewController] acceptCallButton] setEnabled:NO];
     [[[self incomingCallViewController] declineCallButton] setEnabled:NO];
     
-    [[NSApp delegate] resumeITunesIfNeeded];
-    [[NSApp delegate] updateDockTileBadgeLabel];
+    [self.musicPlayer resume];
+    [(AppController *)[NSApp delegate] updateDockTileBadgeLabel];
     
     // Optionally close call window.
     if ([[NSUserDefaults standardUserDefaults] boolForKey:kAutoCloseCallWindow] &&
@@ -294,15 +300,6 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
     if (aCall != nil) {
         [self setCall:aCall];
         [self setCallActive:YES];
-        if (_incomingCallViewController != nil) {
-            [_incomingCallViewController setRepresentedObject:aCall];
-        }
-        if (_activeCallViewController != nil) {
-            [_activeCallViewController setRepresentedObject:aCall];
-        }
-        if (_endedCallViewController != nil) {
-            [_endedCallViewController setRepresentedObject:nil];
-        }
     } else {
         [self showEndedCallView];
         [self setStatus:NSLocalizedString(@"Call Failed", @"Call failed.")];
@@ -310,7 +307,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
     
     if ([self isCallUnhandled]) {
         [self setCallUnhandled:NO];
-        [[NSApp delegate] updateDockTileBadgeLabel];
+        [(AppController *)[NSApp delegate] updateDockTileBadgeLabel];
     }
 }
 
@@ -417,11 +414,11 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
         
         [[self call] hangUp];
         
-        [[NSApp delegate] resumeITunesIfNeeded];
+        [self.musicPlayer resume];
     }
     
     [self setCallUnhandled:NO];
-    [[NSApp delegate] updateDockTileBadgeLabel];
+    [(AppController *)[NSApp delegate] updateDockTileBadgeLabel];
     
     [self.delegate callControllerWillClose:self];
 
@@ -452,7 +449,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
 }
 
 - (void)SIPCallEarly:(NSNotification *)notification {
-    [[NSApp delegate] pauseITunes];
+    [self.musicPlayer pause];
     
     NSNumber *sipEventCode = [notification userInfo][@"AKSIPEventCode"];
     
@@ -478,7 +475,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
 
 - (void)SIPCallDidConfirm:(NSNotification *)notification {
     [self setCallStartTime:[NSDate timeIntervalSinceReferenceDate]];
-    [[NSApp delegate] pauseITunes];
+    [self.musicPlayer pause];
     
     if ([[notification object] isIncoming]) {
         [self.ringtonePlayback stop];
@@ -507,7 +504,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
     
     if ([[notification object] isIncoming]) {
         [self.ringtonePlayback stop];
-        [[NSApp delegate] stopUserAttentionTimerIfNeeded];
+        [(AppController *)[NSApp delegate] stopUserAttentionTimerIfNeeded];
     }
     
     NSString *preferredLocalization = [[NSBundle mainBundle] preferredLocalizations][0];
@@ -535,13 +532,13 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
             break;
             
         default:
-            if ([preferredLocalization isEqualToString:@"Russian"]) {
-                NSString *statusText = [[NSApp delegate] localizedStringForSIPResponseCode:[[self call] lastStatus]];
+            if ([preferredLocalization isEqualToString:@"ru"]) {
+                NSString *statusText = [(AppController *)[NSApp delegate] localizedStringForSIPResponseCode:[[self call] lastStatus]];
                 if (statusText == nil) {
                     [self setStatus:[NSString stringWithFormat:NSLocalizedString(@"Error %d", @"Error #."),
                                      [[self call] lastStatus]]];
                 } else {
-                    [self setStatus:[[NSApp delegate] localizedStringForSIPResponseCode:[[self call] lastStatus]]];
+                    [self setStatus:[(AppController *)[NSApp delegate] localizedStringForSIPResponseCode:[[self call] lastStatus]]];
                 }
             } else {
                 [self setStatus:[[self call] lastStatusText]];
@@ -566,7 +563,7 @@ static const NSTimeInterval kRedialButtonReenableTime = 1.0;
                                    userInfo:nil
                                     repeats:NO];
     
-    [[NSApp delegate] resumeITunesIfNeeded];
+    [self.musicPlayer resume];
     
     // Show user notification.
     

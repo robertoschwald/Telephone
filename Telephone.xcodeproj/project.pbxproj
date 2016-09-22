@@ -39,7 +39,46 @@
 		8A1CC6231CAD500900901BE9 /* UserAgentAudioDevice+Equality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CC6221CAD500900901BE9 /* UserAgentAudioDevice+Equality.swift */; };
 		8A1CC6251CAD52CD00901BE9 /* NullUserAgentAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CC6241CAD52CD00901BE9 /* NullUserAgentAudioDevice.swift */; };
 		8A1CC6271CAD5AA200901BE9 /* NullSystemAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CC6261CAD5AA200901BE9 /* NullSystemAudioDevice.swift */; };
+		8A2E1BF61D50CDBB0085A5EF /* asn_codecs_prim.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BBE1D50CDBB0085A5EF /* asn_codecs_prim.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BF71D50CDBB0085A5EF /* asn_SET_OF.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BC11D50CDBB0085A5EF /* asn_SET_OF.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BF81D50CDBB0085A5EF /* ber_decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BC41D50CDBB0085A5EF /* ber_decoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion -Wno-conditional-uninitialized"; }; };
+		8A2E1BF91D50CDBB0085A5EF /* ber_tlv_length.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BC61D50CDBB0085A5EF /* ber_tlv_length.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFA1D50CDBB0085A5EF /* ber_tlv_tag.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BC81D50CDBB0085A5EF /* ber_tlv_tag.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFB1D50CDBB0085A5EF /* BIT_STRING.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BCA1D50CDBB0085A5EF /* BIT_STRING.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFC1D50CDBB0085A5EF /* constr_SEQUENCE.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BCC1D50CDBB0085A5EF /* constr_SEQUENCE.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFD1D50CDBB0085A5EF /* constr_SET_OF.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BCE1D50CDBB0085A5EF /* constr_SET_OF.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFE1D50CDBB0085A5EF /* constr_TYPE.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BD01D50CDBB0085A5EF /* constr_TYPE.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1BFF1D50CDBB0085A5EF /* constraints.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BD21D50CDBB0085A5EF /* constraints.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C001D50CDBB0085A5EF /* der_encoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BD41D50CDBB0085A5EF /* der_encoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C041D50CDBB0085A5EF /* INTEGER.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BDB1D50CDBB0085A5EF /* INTEGER.c */; settings = {COMPILER_FLAGS = "-Wno-conversion -Wno-conditional-uninitialized"; }; };
+		8A2E1C051D50CDBB0085A5EF /* NativeEnumerated.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BDD1D50CDBB0085A5EF /* NativeEnumerated.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C061D50CDBB0085A5EF /* NativeInteger.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BDF1D50CDBB0085A5EF /* NativeInteger.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C071D50CDBB0085A5EF /* OCTET_STRING.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BE11D50CDBB0085A5EF /* OCTET_STRING.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C081D50CDBB0085A5EF /* Payload.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BE31D50CDBB0085A5EF /* Payload.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C091D50CDBB0085A5EF /* per_decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BE51D50CDBB0085A5EF /* per_decoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C0A1D50CDBB0085A5EF /* per_encoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BE71D50CDBB0085A5EF /* per_encoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C0B1D50CDBB0085A5EF /* per_opentype.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BE91D50CDBB0085A5EF /* per_opentype.c */; settings = {COMPILER_FLAGS = "-Wno-conversion -Wno-unreachable-code"; }; };
+		8A2E1C0C1D50CDBB0085A5EF /* per_support.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BEB1D50CDBB0085A5EF /* per_support.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C0D1D50CDBB0085A5EF /* ReceiptAttribute.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BED1D50CDBB0085A5EF /* ReceiptAttribute.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C0E1D50CDBB0085A5EF /* xer_decoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BEF1D50CDBB0085A5EF /* xer_decoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C0F1D50CDBB0085A5EF /* xer_encoder.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BF11D50CDBB0085A5EF /* xer_encoder.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A2E1C101D50CDBB0085A5EF /* xer_support.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A2E1BF31D50CDBB0085A5EF /* xer_support.c */; settings = {COMPILER_FLAGS = "-Wno-conversion"; }; };
+		8A32A4E81D6719730086B49D /* PurchaseCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A32A4E71D6719730086B49D /* PurchaseCheckUseCase.swift */; };
+		8A32A4EA1D675A300086B49D /* PurchaseCheckUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A32A4E91D675A300086B49D /* PurchaseCheckUseCaseTests.swift */; };
+		8A32A4EC1D675B990086B49D /* PurchaseCheckUseCaseOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A32A4EB1D675B990086B49D /* PurchaseCheckUseCaseOutputSpy.swift */; };
 		8A3865161D369A2100EDA7AB /* FailingStoreFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3865151D369A2100EDA7AB /* FailingStoreFake.swift */; };
+		8A39A1AD1D5BE42100D703AD /* PKCS7Container.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1AC1D5BE42100D703AD /* PKCS7Container.m */; };
+		8A39A1B01D5BE70000D703AD /* ASN1Payload.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1AF1D5BE70000D703AD /* ASN1Payload.m */; };
+		8A39A1B51D5C7C2700D703AD /* ASN1PayloadAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1B41D5C7C2700D703AD /* ASN1PayloadAttribute.swift */; };
+		8A39A1B81D5C7F9400D703AD /* ASN1PurchaseReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1B71D5C7F9400D703AD /* ASN1PurchaseReceipt.swift */; };
+		8A39A1BA1D5C804700D703AD /* ASN1PurchaseReceipts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1B91D5C804700D703AD /* ASN1PurchaseReceipts.swift */; };
+		8A39A1BC1D5C894500D703AD /* String+ASN1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1BB1D5C894500D703AD /* String+ASN1.swift */; };
+		8A39A1C41D5CA2B900D703AD /* ASN1ReceiptPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1C31D5CA2B900D703AD /* ASN1ReceiptPayload.swift */; };
+		8A39A1C61D5DF97B00D703AD /* ASN1Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1C51D5DF97B00D703AD /* ASN1Receipt.swift */; };
+		8A39A1C81D5E05C200D703AD /* PKCS7ContainerValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1C71D5E05C200D703AD /* PKCS7ContainerValidation.swift */; };
+		8A39A1CA1D5E176900D703AD /* PKCS7SignatureValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1C91D5E176900D703AD /* PKCS7SignatureValidation.swift */; };
+		8A39A1D21D5E315600D703AD /* CertificateFingerprintValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1D11D5E315600D703AD /* CertificateFingerprintValidation.swift */; };
+		8A39A1D41D5E36FA00D703AD /* ReceiptValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A39A1D31D5E36FA00D703AD /* ReceiptValidation.swift */; };
 		8A3D60671C734A8900D7F54C /* NullSoundEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1A43D1C67BDCC007778A2 /* NullSoundEventTarget.swift */; };
 		8A4D0AFE1C96D6A0005543A2 /* RingtoneOutputUpdateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4D0AFD1C96D6A0005543A2 /* RingtoneOutputUpdateUseCaseTests.swift */; };
 		8A4D0B001C96D6F8005543A2 /* RingtoneOutputUpdateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4D0AFF1C96D6F8005543A2 /* RingtoneOutputUpdateUseCase.swift */; };
@@ -58,10 +97,11 @@
 		8A6D96EE1D01DDA900D9C15B /* StoreViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D96ED1D01DDA900D9C15B /* StoreViewSpy.swift */; };
 		8A6D96F01D05937900D9C15B /* NullStoreViewEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A6D96EF1D05937900D9C15B /* NullStoreViewEventTarget.swift */; };
 		8A7567351CF7220400D91C04 /* ProductPurchaseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7567341CF7220400D91C04 /* ProductPurchaseUseCase.swift */; };
-		8A7567371CF7242800D91C04 /* PurchaseRestorationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7567361CF7242800D91C04 /* PurchaseRestorationUseCase.swift */; };
 		8A7567391CF75DF500D91C04 /* StoreViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7567381CF75DF500D91C04 /* StoreViewState.swift */; };
 		8A75673A1CF75F8000D91C04 /* StoreViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7567381CF75DF500D91C04 /* StoreViewState.swift */; };
 		8A779F8E1CA080F900D90391 /* UserAgentAudioDevice+PJSIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A779F8D1CA080F900D90391 /* UserAgentAudioDevice+PJSIP.swift */; };
+		8A7831BE1D636E92006D0D94 /* PurchaseRestorationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7831BD1D636E92006D0D94 /* PurchaseRestorationUseCaseTests.swift */; };
+		8A7831C01D636EDA006D0D94 /* PurchaseRestorationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7831BF1D636EDA006D0D94 /* PurchaseRestorationUseCase.swift */; };
 		8A7874F01C5A25D0002494ED /* ConditionalRingtonePlaybackUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7874EF1C5A25D0002494ED /* ConditionalRingtonePlaybackUseCaseTests.swift */; };
 		8A7874F21C5A2612002494ED /* ConditionalRingtonePlaybackUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7874F11C5A2612002494ED /* ConditionalRingtonePlaybackUseCase.swift */; };
 		8A7874F41C5A2774002494ED /* RingtonePlaybackUseCaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7874F31C5A2774002494ED /* RingtonePlaybackUseCaseSpy.swift */; };
@@ -71,7 +111,15 @@
 		8A7E212D1CC23F6B000D02C3 /* UserAgentAudioDeviceUpdateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB32A0C1BEB8A760016C8E6 /* UserAgentAudioDeviceUpdateUseCaseTests.swift */; };
 		8A7E21521CC3F6A5000D02C3 /* ServiceAddressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E21511CC3F6A5000D02C3 /* ServiceAddressTests.swift */; };
 		8A7E21541CC411F3000D02C3 /* ServiceAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A7E21531CC411F3000D02C3 /* ServiceAddress.swift */; };
-		8A859A011D2D2BCF00118A66 /* ProductPurchaseEventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A859A001D2D2BCF00118A66 /* ProductPurchaseEventSource.swift */; };
+		8A859A011D2D2BCF00118A66 /* StoreEventSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A859A001D2D2BCF00118A66 /* StoreEventSource.swift */; };
+		8A88B4E71D4A64BF0083958C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE706341D4A2E180060FF4F /* main.swift */; };
+		8A88B4E81D4A666F0083958C /* DefaultNSXPCListenerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7063A1D4A2F360060FF4F /* DefaultNSXPCListenerDelegate.swift */; };
+		8A88B4F01D4A8D470083958C /* BundleReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88B4EF1D4A8D470083958C /* BundleReceipt.swift */; };
+		8A88B4F11D4ABCCB0083958C /* InvalidReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513EF1D2A77AD0034DF2C /* InvalidReceipt.swift */; };
+		8A88B4F21D4ABCCB0083958C /* NoActivePurchasesReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE348571D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift */; };
+		8A88B4F31D4ABCCB0083958C /* ValidReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513ED1D2A76F90034DF2C /* ValidReceipt.swift */; };
+		8A88B4F51D4ABE380083958C /* LoggingReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A88B4F41D4ABE380083958C /* LoggingReceipt.swift */; };
+		8A88B5A51D4BB9D20083958C /* Certificate.crt in Resources */ = {isa = PBXBuildFile; fileRef = 8A88B5A41D4BB9D20083958C /* Certificate.crt */; };
 		8A91758F1CA1CBD600354E26 /* UserAgentAudioDeviceNameToDeviceMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A91758E1CA1CBD600354E26 /* UserAgentAudioDeviceNameToDeviceMap.swift */; };
 		8A9175911CA2BBF900354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9175901CA2BBF900354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift */; };
 		8A9175931CA2C2DC00354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9175921CA2C2DC00354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift */; };
@@ -86,23 +134,46 @@
 		8A9175AE1CABF61200354E26 /* UserAgentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9175AC1CABF61200354E26 /* UserAgentError.swift */; };
 		8A9175B01CABFCA700354E26 /* SystemAudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9175AF1CABFCA700354E26 /* SystemAudioDevice.swift */; };
 		8A9513CF1D1D7F0E0034DF2C /* ProductPurchaseUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513CE1D1D7F0E0034DF2C /* ProductPurchaseUseCaseTests.swift */; };
-		8A9513D71D22CD8A0034DF2C /* ProductPurchaseEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513D61D22CD8A0034DF2C /* ProductPurchaseEventTarget.swift */; };
-		8A9513E41D2A6CCA0034DF2C /* ReceiptValidatingProductPurchaseEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingProductPurchaseEventTarget.swift */; };
-		8A9513E61D2A6F5A0034DF2C /* ReceiptValidatingProductPurchaseEventTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingProductPurchaseEventTargetTests.swift */; };
-		8A9513E81D2A6FCE0034DF2C /* ProductPurchaseEventTargetSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E71D2A6FCE0034DF2C /* ProductPurchaseEventTargetSpy.swift */; };
-		8A9513EC1D2A735F0034DF2C /* ProductPurchaseReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513EB1D2A735F0034DF2C /* ProductPurchaseReceipt.swift */; };
-		8A9513EE1D2A76F90034DF2C /* ValidProductPurchaseReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513ED1D2A76F90034DF2C /* ValidProductPurchaseReceipt.swift */; };
-		8A9513F01D2A77AD0034DF2C /* InvalidProductPurchaseReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513EF1D2A77AD0034DF2C /* InvalidProductPurchaseReceipt.swift */; };
+		8A9513D71D22CD8A0034DF2C /* StoreEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513D61D22CD8A0034DF2C /* StoreEventTarget.swift */; };
+		8A9513E41D2A6CCA0034DF2C /* ReceiptValidatingStoreEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingStoreEventTarget.swift */; };
+		8A9513E61D2A6F5A0034DF2C /* ReceiptValidatingStoreEventTargetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingStoreEventTargetTests.swift */; };
+		8A9513E81D2A6FCE0034DF2C /* StoreEventTargetSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513E71D2A6FCE0034DF2C /* StoreEventTargetSpy.swift */; };
+		8A9513EC1D2A735F0034DF2C /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513EB1D2A735F0034DF2C /* Receipt.swift */; };
+		8A9513EE1D2A76F90034DF2C /* ValidReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513ED1D2A76F90034DF2C /* ValidReceipt.swift */; };
+		8A9513F01D2A77AD0034DF2C /* InvalidReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9513EF1D2A77AD0034DF2C /* InvalidReceipt.swift */; };
 		8A9534611D05953D00EE9084 /* AsyncFailingProductsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9534601D05953D00EE9084 /* AsyncFailingProductsFake.swift */; };
 		8A9534631D059A5300EE9084 /* LoggingProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9534621D059A5300EE9084 /* LoggingProducts.swift */; };
 		8A9D922D1D2AC9B900491D59 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D922C1D2AC9B900491D59 /* Products.swift */; };
 		8A9D922F1D2AE14A00491D59 /* SuccessfulFetchProductsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D922E1D2AE14A00491D59 /* SuccessfulFetchProductsFake.swift */; };
 		8A9D92311D2AE79300491D59 /* FailingFetchProductsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D92301D2AE79300491D59 /* FailingFetchProductsFake.swift */; };
 		8A9D92331D2BF9D000491D59 /* SimpleProductsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D92321D2BF9D000491D59 /* SimpleProductsFake.swift */; };
-		8A9D92351D2C007500491D59 /* NullStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D92341D2C007500491D59 /* NullStore.swift */; };
 		8A9D92371D2D0BD300491D59 /* SKPaymentQueueToStoreAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D92361D2D0BD300491D59 /* SKPaymentQueueToStoreAdapter.swift */; };
 		8A9D92391D2D0C6500491D59 /* StoreKitProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A9D92381D2D0C6500491D59 /* StoreKitProducts.swift */; };
 		8AA31F041C987B4700ABC4FB /* SoundPlaybackUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA31F031C987B4700ABC4FB /* SoundPlaybackUseCase.swift */; };
+		8AA7487F1D6DD775000587DC /* SimplePurchaseReminderUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA7487E1D6DD775000587DC /* SimplePurchaseReminderUserDefaults.swift */; };
+		8AA748811D6DECAB000587DC /* UserDefaultsSavedAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748801D6DECAB000587DC /* UserDefaultsSavedAccounts.swift */; };
+		8AA748831D6DEE61000587DC /* SavedAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748821D6DEE61000587DC /* SavedAccount.swift */; };
+		8AA748851D6F0D00000587DC /* UserDefaultsSavedAccountsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748841D6F0D00000587DC /* UserDefaultsSavedAccountsTests.swift */; };
+		8AA748861D6F10B6000587DC /* UserDefaultsSavedAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748801D6DECAB000587DC /* UserDefaultsSavedAccounts.swift */; };
+		8AA748871D6F10C6000587DC /* SavedAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748821D6DEE61000587DC /* SavedAccount.swift */; };
+		8AA748931D6F414E000587DC /* AppleMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748921D6F414E000587DC /* AppleMusicPlayer.m */; };
+		8AA748961D6F6D7C000587DC /* SpotifyMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748951D6F6D7C000587DC /* SpotifyMusicPlayer.m */; };
+		8AA748A21D702063000587DC /* MusicPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AA748901D6F40FD000587DC /* MusicPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8AA748A41D70220D000587DC /* ConditionalMusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748A31D70220D000587DC /* ConditionalMusicPlayer.swift */; };
+		8AA748A71D702221000587DC /* ConditionalMusicPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748A51D70221F000587DC /* ConditionalMusicPlayerTests.swift */; };
+		8AA748A91D7022BA000587DC /* MusicPlayerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748A81D7022BA000587DC /* MusicPlayerSpy.swift */; };
+		8AA748AB1D7023B5000587DC /* MusicPlayerUserDefaultsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748AA1D7023B5000587DC /* MusicPlayerUserDefaultsFake.swift */; };
+		8AA748AD1D702459000587DC /* MusicPlayerUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748AC1D702459000587DC /* MusicPlayerUserDefaults.swift */; };
+		8AA748B51D70460B000587DC /* SimpleMusicPlayerUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748B01D703ED3000587DC /* SimpleMusicPlayerUserDefaults.swift */; };
+		8AA748B61D704657000587DC /* SimpleMusicPlayerUserDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748B21D703F45000587DC /* SimpleMusicPlayerUserDefaultsTests.swift */; };
+		8AA748BC1D704962000587DC /* MusicPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748BB1D704962000587DC /* MusicPlayers.swift */; };
+		8AA748BE1D704A40000587DC /* MusicPlayersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748BD1D704A40000587DC /* MusicPlayersTests.swift */; };
+		8AA748BF1D704A44000587DC /* MusicPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748BB1D704962000587DC /* MusicPlayers.swift */; };
+		8AA748C11D704B9F000587DC /* AvailableMusicPlayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA748C01D704B9F000587DC /* AvailableMusicPlayers.swift */; };
+		8AA748F71D74986A000587DC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8AA748F91D74986A000587DC /* Localizable.strings */; };
+		8AA748FE1D749E05000587DC /* StoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AA749001D749E05000587DC /* StoreWindowController.xib */; };
+		8AA749031D749E4D000587DC /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AA749051D749E4D000587DC /* StoreViewController.xib */; };
+		8AA749321D75FF18000587DC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AA749311D75FF18000587DC /* StoreKit.framework */; };
 		8AA791FC1CE245940082E4FC /* AsyncProductsFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA791FB1CE245940082E4FC /* AsyncProductsFake.swift */; };
 		8AAACA011CAE9EE5001930C4 /* SoundIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAACA001CAE9EE5001930C4 /* SoundIO.swift */; };
 		8AAACA031CAE9F36001930C4 /* SimpleSoundIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAACA021CAE9F36001930C4 /* SimpleSoundIO.swift */; };
@@ -122,14 +193,15 @@
 		8ABB14191CEC83990056CEDC /* StoreViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB14181CEC83990056CEDC /* StoreViewStateMachine.swift */; };
 		8ABB141B1CEC86A90056CEDC /* StoreViewStateMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB141A1CEC86A90056CEDC /* StoreViewStateMachineTests.swift */; };
 		8ABB141C1CEC86B10056CEDC /* StoreViewStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABB14181CEC83990056CEDC /* StoreViewStateMachine.swift */; };
+		8ABC9A6F1D522E4D004AC220 /* ReceiptAttributesValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC9A6E1D522E4D004AC220 /* ReceiptAttributesValidation.swift */; };
 		8AC1A43C1C679DA8007778A2 /* NSSoundToSoundAdapterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1A43B1C679DA8007778A2 /* NSSoundToSoundAdapterFactory.swift */; };
 		8AC1A4411C67BFA8007778A2 /* SoundEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1A4401C67BFA8007778A2 /* SoundEventTarget.swift */; };
 		8AC1A4431C67C35D007778A2 /* DefaultSoundPlaybackUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1A4421C67C35D007778A2 /* DefaultSoundPlaybackUseCaseTests.swift */; };
 		8AC1A4451C67C390007778A2 /* DefaultSoundPlaybackUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC1A4441C67C390007778A2 /* DefaultSoundPlaybackUseCase.swift */; };
+		8AC87E891D58DD8B006952F0 /* PurchaseReceiptAttributesValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC87E881D58DD8B006952F0 /* PurchaseReceiptAttributesValidation.swift */; };
 		8AD6597C1D36A152008A1007 /* LoggingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6597B1D36A152008A1007 /* LoggingStore.swift */; };
 		8AD6597F1D37C987008A1007 /* StoreViewEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6597E1D37C987008A1007 /* StoreViewEventTarget.swift */; };
 		8AD659801D37C987008A1007 /* StoreViewEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD6597E1D37C987008A1007 /* StoreViewEventTarget.swift */; };
-		8AD659841D37CA51008A1007 /* NullProductPurchaseEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD659831D37CA51008A1007 /* NullProductPurchaseEventTarget.swift */; };
 		8ADA26F21C984E1D0066B224 /* RingtonePlaybackUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADA26F11C984E1D0066B224 /* RingtonePlaybackUseCase.swift */; };
 		8ADA26F41C986C9E0066B224 /* SoundConfigurationLoadUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADA26F31C986C9E0066B224 /* SoundConfigurationLoadUseCase.swift */; };
 		8ADD31C61CC10E50008C083C /* UserAgentSoundIOSelectionUseCaseFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD31C51CC10E50008C083C /* UserAgentSoundIOSelectionUseCaseFake.swift */; };
@@ -153,11 +225,23 @@
 		8ADD6A711CE0DECC001EDBBA /* ProductsEventTargetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6A701CE0DECC001EDBBA /* ProductsEventTargetsTests.swift */; };
 		8ADD6A771CE0E704001EDBBA /* ProductsEventTargetSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6A761CE0E704001EDBBA /* ProductsEventTargetSpy.swift */; };
 		8ADD6A801CE0F995001EDBBA /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6A7C1CE0F995001EDBBA /* StoreViewController.swift */; };
-		8ADD6A811CE0F995001EDBBA /* StoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ADD6A7D1CE0F995001EDBBA /* StoreViewController.xib */; };
 		8ADD6A821CE0F995001EDBBA /* StoreWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6A7E1CE0F995001EDBBA /* StoreWindowController.swift */; };
-		8ADD6A831CE0F995001EDBBA /* StoreWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8ADD6A7F1CE0F995001EDBBA /* StoreWindowController.xib */; };
 		8ADD6B6D1C528F720029C3D8 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6B6C1C528F720029C3D8 /* Error.swift */; };
 		8ADD6B6F1C5639520029C3D8 /* UserDefaultsRingtoneSoundConfigurationLoadUseCaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADD6B6E1C5639520029C3D8 /* UserDefaultsRingtoneSoundConfigurationLoadUseCaseSpy.swift */; };
+		8ADE59911D61D0F000B41275 /* ReceiptChecksum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE59901D61D0F000B41275 /* ReceiptChecksum.swift */; };
+		8ADE59931D61D6A200B41275 /* SHA256Fingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE59921D61D6A200B41275 /* SHA256Fingerprint.swift */; };
+		8ADE59951D61E8F700B41275 /* DeviceGUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE59941D61E8F700B41275 /* DeviceGUID.swift */; };
+		8AE348581D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE348571D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift */; };
+		8AE396CC1D6B2F3800DCFB9E /* ExpectedProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396CB1D6B2F3800DCFB9E /* ExpectedProducts.swift */; };
+		8AE396EC1D6C86E000DCFB9E /* PurchaseReminderUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396EB1D6C86E000DCFB9E /* PurchaseReminderUseCaseTests.swift */; };
+		8AE396EE1D6C873300DCFB9E /* PurchaseReminderUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396ED1D6C873300DCFB9E /* PurchaseReminderUseCase.swift */; };
+		8AE396F01D6C887F00DCFB9E /* PurchaseReminderUseCaseOutputSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396EF1D6C887F00DCFB9E /* PurchaseReminderUseCaseOutputSpy.swift */; };
+		8AE396F21D6C8ACB00DCFB9E /* EnabledSavedAccountsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396F11D6C8ACB00DCFB9E /* EnabledSavedAccountsStub.swift */; };
+		8AE396F41D6C8B3800DCFB9E /* SavedAccounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396F31D6C8B3800DCFB9E /* SavedAccounts.swift */; };
+		8AE396F71D6C8C2600DCFB9E /* DisabledSavedAccountsStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396F61D6C8C2600DCFB9E /* DisabledSavedAccountsStub.swift */; };
+		8AE396F91D6DAFFA00DCFB9E /* PurchaseReminderUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE396F81D6DAFFA00DCFB9E /* PurchaseReminderUserDefaults.swift */; };
+		8AE7062F1D491C220060FF4F /* ReceiptValidation.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 8AE706231D491C220060FF4F /* ReceiptValidation.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8AE7063D1D4A4D370060FF4F /* ReceiptXPCGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7063C1D4A4D370060FF4F /* ReceiptXPCGateway.swift */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		AA0302F20EB9F347000738F7 /* AKSIPURI.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0302F10EB9F347000738F7 /* AKSIPURI.m */; };
@@ -225,7 +309,7 @@
 		AA3905411BFFDE37005A8AA3 /* UserAgentEventTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA277A631BD542C80030ECE4 /* UserAgentEventTarget.swift */; };
 		AA3905441BFFDE75005A8AA3 /* UserAgentEventTargets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25AB511BE0F7FB00E677A4 /* UserAgentEventTargets.swift */; };
 		AA3905461BFFDE7C005A8AA3 /* UserAgentEventTargetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25AB4F1BE0F7B600E677A4 /* UserAgentEventTargetsTests.swift */; };
-		AA3905471BFFDE9A005A8AA3 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32F7FD1BC6908300FAC228 /* UserDefaults.swift */; };
+		AA3905471BFFDE9A005A8AA3 /* KeyValueUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32F7FD1BC6908300FAC228 /* KeyValueUserDefaults.swift */; };
 		AA39054A1BFFE125005A8AA3 /* DomainUserAgentAudioDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3905491BFFE125005A8AA3 /* DomainUserAgentAudioDeviceExtension.swift */; };
 		AA3A14FB0F309C7C00C45739 /* AKABAddressBook+Localizing.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3A14FA0F309C7C00C45739 /* AKABAddressBook+Localizing.m */; };
 		AA3A15400F30A49C00C45739 /* AddressBookLabels.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA3A153E0F30A49C00C45739 /* AddressBookLabels.strings */; };
@@ -316,7 +400,7 @@
 		AADAA2CD107E56FD00789F2D /* ActiveCallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AADAA2CC107E56FD00789F2D /* ActiveCallView.xib */; };
 		AADAA2D1107E572300789F2D /* EndedCallView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AADAA2D0107E572300789F2D /* EndedCallView.xib */; };
 		AAE39A381BD92DF600EFB7BC /* String+Creating.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE39A371BD92DF600EFB7BC /* String+Creating.swift */; };
-		AAE39A3B1BDA59F100EFB7BC /* NSUserDefaults+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+UserDefaults.swift */; };
+		AAE39A3B1BDA59F100EFB7BC /* NSUserDefaults+KeyValueUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+KeyValueUserDefaults.swift */; };
 		AAECDE8F0E70703100CEAE7B /* AKNSString+Scanning.m in Sources */ = {isa = PBXBuildFile; fileRef = AAECDE8E0E70703100CEAE7B /* AKNSString+Scanning.m */; };
 		AAEE7C310ECD953200A7DEB4 /* AKNSWindow+Resizing.m in Sources */ = {isa = PBXBuildFile; fileRef = AAEE7C300ECD953200A7DEB4 /* AKNSWindow+Resizing.m */; };
 		AAEF269D1BFF8835007B385B /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEF269C1BFF8835007B385B /* Error.swift */; };
@@ -336,6 +420,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8AE7062C1D491C220060FF4F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8AE706221D491C210060FF4F;
+			remoteInfo = ReceiptValidation;
+		};
 		AA078B341BFF80E30013FF8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -444,6 +535,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8AE7062E1D491C220060FF4F /* Embed XPC Services */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
+			dstSubfolderSpec = 16;
+			files = (
+				8AE7062F1D491C220060FF4F /* ReceiptValidation.xpc in Embed XPC Services */,
+			);
+			name = "Embed XPC Services";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AAF51C4D0EF6CF480098A372 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,8 +560,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8A0451E51C93308000A08012 /* SoundPlaybackUseCaseSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlaybackUseCaseSpy.swift; sourceTree = "<group>"; };
 		8A0FD6391C9B133200AB3640 /* PreferencesSoundIOUpdaterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesSoundIOUpdaterTests.swift; path = TelephoneTests/PreferencesSoundIOUpdaterTests.swift; sourceTree = SOURCE_ROOT; };
@@ -477,7 +578,77 @@
 		8A1CC6221CAD500900901BE9 /* UserAgentAudioDevice+Equality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAgentAudioDevice+Equality.swift"; sourceTree = "<group>"; };
 		8A1CC6241CAD52CD00901BE9 /* NullUserAgentAudioDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullUserAgentAudioDevice.swift; sourceTree = "<group>"; };
 		8A1CC6261CAD5AA200901BE9 /* NullSystemAudioDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullSystemAudioDevice.swift; sourceTree = "<group>"; };
+		8A2E1BBB1D50CDBB0085A5EF /* AppReceipt.asn1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppReceipt.asn1; sourceTree = "<group>"; };
+		8A2E1BBC1D50CDBB0085A5EF /* asn_application.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_application.h; sourceTree = "<group>"; };
+		8A2E1BBD1D50CDBB0085A5EF /* asn_codecs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_codecs.h; sourceTree = "<group>"; };
+		8A2E1BBE1D50CDBB0085A5EF /* asn_codecs_prim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asn_codecs_prim.c; sourceTree = "<group>"; };
+		8A2E1BBF1D50CDBB0085A5EF /* asn_codecs_prim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_codecs_prim.h; sourceTree = "<group>"; };
+		8A2E1BC01D50CDBB0085A5EF /* asn_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_internal.h; sourceTree = "<group>"; };
+		8A2E1BC11D50CDBB0085A5EF /* asn_SET_OF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asn_SET_OF.c; sourceTree = "<group>"; };
+		8A2E1BC21D50CDBB0085A5EF /* asn_SET_OF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_SET_OF.h; sourceTree = "<group>"; };
+		8A2E1BC31D50CDBB0085A5EF /* asn_system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn_system.h; sourceTree = "<group>"; };
+		8A2E1BC41D50CDBB0085A5EF /* ber_decoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ber_decoder.c; sourceTree = "<group>"; };
+		8A2E1BC51D50CDBB0085A5EF /* ber_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ber_decoder.h; sourceTree = "<group>"; };
+		8A2E1BC61D50CDBB0085A5EF /* ber_tlv_length.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ber_tlv_length.c; sourceTree = "<group>"; };
+		8A2E1BC71D50CDBB0085A5EF /* ber_tlv_length.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ber_tlv_length.h; sourceTree = "<group>"; };
+		8A2E1BC81D50CDBB0085A5EF /* ber_tlv_tag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ber_tlv_tag.c; sourceTree = "<group>"; };
+		8A2E1BC91D50CDBB0085A5EF /* ber_tlv_tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ber_tlv_tag.h; sourceTree = "<group>"; };
+		8A2E1BCA1D50CDBB0085A5EF /* BIT_STRING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BIT_STRING.c; sourceTree = "<group>"; };
+		8A2E1BCB1D50CDBB0085A5EF /* BIT_STRING.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BIT_STRING.h; sourceTree = "<group>"; };
+		8A2E1BCC1D50CDBB0085A5EF /* constr_SEQUENCE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = constr_SEQUENCE.c; sourceTree = "<group>"; };
+		8A2E1BCD1D50CDBB0085A5EF /* constr_SEQUENCE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constr_SEQUENCE.h; sourceTree = "<group>"; };
+		8A2E1BCE1D50CDBB0085A5EF /* constr_SET_OF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = constr_SET_OF.c; sourceTree = "<group>"; };
+		8A2E1BCF1D50CDBB0085A5EF /* constr_SET_OF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constr_SET_OF.h; sourceTree = "<group>"; };
+		8A2E1BD01D50CDBB0085A5EF /* constr_TYPE.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = constr_TYPE.c; sourceTree = "<group>"; };
+		8A2E1BD11D50CDBB0085A5EF /* constr_TYPE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constr_TYPE.h; sourceTree = "<group>"; };
+		8A2E1BD21D50CDBB0085A5EF /* constraints.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = constraints.c; sourceTree = "<group>"; };
+		8A2E1BD31D50CDBB0085A5EF /* constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constraints.h; sourceTree = "<group>"; };
+		8A2E1BD41D50CDBB0085A5EF /* der_encoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = der_encoder.c; sourceTree = "<group>"; };
+		8A2E1BD51D50CDBB0085A5EF /* der_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = der_encoder.h; sourceTree = "<group>"; };
+		8A2E1BDB1D50CDBB0085A5EF /* INTEGER.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INTEGER.c; sourceTree = "<group>"; };
+		8A2E1BDC1D50CDBB0085A5EF /* INTEGER.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INTEGER.h; sourceTree = "<group>"; };
+		8A2E1BDD1D50CDBB0085A5EF /* NativeEnumerated.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeEnumerated.c; sourceTree = "<group>"; };
+		8A2E1BDE1D50CDBB0085A5EF /* NativeEnumerated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeEnumerated.h; sourceTree = "<group>"; };
+		8A2E1BDF1D50CDBB0085A5EF /* NativeInteger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeInteger.c; sourceTree = "<group>"; };
+		8A2E1BE01D50CDBB0085A5EF /* NativeInteger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInteger.h; sourceTree = "<group>"; };
+		8A2E1BE11D50CDBB0085A5EF /* OCTET_STRING.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OCTET_STRING.c; sourceTree = "<group>"; };
+		8A2E1BE21D50CDBB0085A5EF /* OCTET_STRING.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTET_STRING.h; sourceTree = "<group>"; };
+		8A2E1BE31D50CDBB0085A5EF /* Payload.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Payload.c; sourceTree = "<group>"; };
+		8A2E1BE41D50CDBB0085A5EF /* Payload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Payload.h; sourceTree = "<group>"; };
+		8A2E1BE51D50CDBB0085A5EF /* per_decoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = per_decoder.c; sourceTree = "<group>"; };
+		8A2E1BE61D50CDBB0085A5EF /* per_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = per_decoder.h; sourceTree = "<group>"; };
+		8A2E1BE71D50CDBB0085A5EF /* per_encoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = per_encoder.c; sourceTree = "<group>"; };
+		8A2E1BE81D50CDBB0085A5EF /* per_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = per_encoder.h; sourceTree = "<group>"; };
+		8A2E1BE91D50CDBB0085A5EF /* per_opentype.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = per_opentype.c; sourceTree = "<group>"; };
+		8A2E1BEA1D50CDBB0085A5EF /* per_opentype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = per_opentype.h; sourceTree = "<group>"; };
+		8A2E1BEB1D50CDBB0085A5EF /* per_support.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = per_support.c; sourceTree = "<group>"; };
+		8A2E1BEC1D50CDBB0085A5EF /* per_support.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = per_support.h; sourceTree = "<group>"; };
+		8A2E1BED1D50CDBB0085A5EF /* ReceiptAttribute.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReceiptAttribute.c; sourceTree = "<group>"; };
+		8A2E1BEE1D50CDBB0085A5EF /* ReceiptAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceiptAttribute.h; sourceTree = "<group>"; };
+		8A2E1BEF1D50CDBB0085A5EF /* xer_decoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xer_decoder.c; sourceTree = "<group>"; };
+		8A2E1BF01D50CDBB0085A5EF /* xer_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xer_decoder.h; sourceTree = "<group>"; };
+		8A2E1BF11D50CDBB0085A5EF /* xer_encoder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xer_encoder.c; sourceTree = "<group>"; };
+		8A2E1BF21D50CDBB0085A5EF /* xer_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xer_encoder.h; sourceTree = "<group>"; };
+		8A2E1BF31D50CDBB0085A5EF /* xer_support.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = xer_support.c; sourceTree = "<group>"; };
+		8A2E1BF41D50CDBB0085A5EF /* xer_support.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xer_support.h; sourceTree = "<group>"; };
+		8A32A4E71D6719730086B49D /* PurchaseCheckUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseCheckUseCase.swift; sourceTree = "<group>"; };
+		8A32A4E91D675A300086B49D /* PurchaseCheckUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PurchaseCheckUseCaseTests.swift; path = UseCasesTests/PurchaseCheckUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		8A32A4EB1D675B990086B49D /* PurchaseCheckUseCaseOutputSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseCheckUseCaseOutputSpy.swift; sourceTree = "<group>"; };
 		8A3865151D369A2100EDA7AB /* FailingStoreFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingStoreFake.swift; sourceTree = "<group>"; };
+		8A39A1AB1D5BE42100D703AD /* PKCS7Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKCS7Container.h; sourceTree = "<group>"; };
+		8A39A1AC1D5BE42100D703AD /* PKCS7Container.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKCS7Container.m; sourceTree = "<group>"; };
+		8A39A1AE1D5BE70000D703AD /* ASN1Payload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ASN1Payload.h; path = ReceiptValidation/ASN1Payload.h; sourceTree = SOURCE_ROOT; };
+		8A39A1AF1D5BE70000D703AD /* ASN1Payload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ASN1Payload.m; path = ReceiptValidation/ASN1Payload.m; sourceTree = SOURCE_ROOT; };
+		8A39A1B41D5C7C2700D703AD /* ASN1PayloadAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1PayloadAttribute.swift; sourceTree = "<group>"; };
+		8A39A1B71D5C7F9400D703AD /* ASN1PurchaseReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1PurchaseReceipt.swift; sourceTree = "<group>"; };
+		8A39A1B91D5C804700D703AD /* ASN1PurchaseReceipts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1PurchaseReceipts.swift; sourceTree = "<group>"; };
+		8A39A1BB1D5C894500D703AD /* String+ASN1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ASN1.swift"; sourceTree = "<group>"; };
+		8A39A1C31D5CA2B900D703AD /* ASN1ReceiptPayload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1ReceiptPayload.swift; sourceTree = "<group>"; };
+		8A39A1C51D5DF97B00D703AD /* ASN1Receipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASN1Receipt.swift; sourceTree = "<group>"; };
+		8A39A1C71D5E05C200D703AD /* PKCS7ContainerValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS7ContainerValidation.swift; sourceTree = "<group>"; };
+		8A39A1C91D5E176900D703AD /* PKCS7SignatureValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS7SignatureValidation.swift; sourceTree = "<group>"; };
+		8A39A1D11D5E315600D703AD /* CertificateFingerprintValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateFingerprintValidation.swift; sourceTree = "<group>"; };
+		8A39A1D31D5E36FA00D703AD /* ReceiptValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptValidation.swift; sourceTree = "<group>"; };
 		8A4D0AFD1C96D6A0005543A2 /* RingtoneOutputUpdateUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RingtoneOutputUpdateUseCaseTests.swift; path = UseCasesTests/RingtoneOutputUpdateUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		8A4D0AFF1C96D6F8005543A2 /* RingtoneOutputUpdateUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingtoneOutputUpdateUseCase.swift; sourceTree = "<group>"; };
 		8A4E382F1C5BB20100816F38 /* UserDefaultsRingtoneSoundNameSaveUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsRingtoneSoundNameSaveUseCaseTests.swift; path = UseCasesTests/UserDefaultsRingtoneSoundNameSaveUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
@@ -490,9 +661,10 @@
 		8A6D96ED1D01DDA900D9C15B /* StoreViewSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewSpy.swift; sourceTree = "<group>"; };
 		8A6D96EF1D05937900D9C15B /* NullStoreViewEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullStoreViewEventTarget.swift; sourceTree = "<group>"; };
 		8A7567341CF7220400D91C04 /* ProductPurchaseUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPurchaseUseCase.swift; sourceTree = "<group>"; };
-		8A7567361CF7242800D91C04 /* PurchaseRestorationUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRestorationUseCase.swift; sourceTree = "<group>"; };
 		8A7567381CF75DF500D91C04 /* StoreViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewState.swift; sourceTree = "<group>"; };
 		8A779F8D1CA080F900D90391 /* UserAgentAudioDevice+PJSIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAgentAudioDevice+PJSIP.swift"; sourceTree = "<group>"; };
+		8A7831BD1D636E92006D0D94 /* PurchaseRestorationUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PurchaseRestorationUseCaseTests.swift; path = UseCasesTests/PurchaseRestorationUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		8A7831BF1D636EDA006D0D94 /* PurchaseRestorationUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseRestorationUseCase.swift; sourceTree = "<group>"; };
 		8A7874EF1C5A25D0002494ED /* ConditionalRingtonePlaybackUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalRingtonePlaybackUseCaseTests.swift; path = UseCasesTests/ConditionalRingtonePlaybackUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		8A7874F11C5A2612002494ED /* ConditionalRingtonePlaybackUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalRingtonePlaybackUseCase.swift; sourceTree = "<group>"; };
 		8A7874F31C5A2774002494ED /* RingtonePlaybackUseCaseSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingtonePlaybackUseCaseSpy.swift; sourceTree = "<group>"; };
@@ -504,7 +676,11 @@
 		8A7C4F781CD104E300EC7C1B /* PresentationProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationProduct.swift; sourceTree = "<group>"; };
 		8A7E21511CC3F6A5000D02C3 /* ServiceAddressTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServiceAddressTests.swift; path = UseCasesTests/ServiceAddressTests.swift; sourceTree = SOURCE_ROOT; };
 		8A7E21531CC411F3000D02C3 /* ServiceAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAddress.swift; sourceTree = "<group>"; };
-		8A859A001D2D2BCF00118A66 /* ProductPurchaseEventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPurchaseEventSource.swift; sourceTree = "<group>"; };
+		8A859A001D2D2BCF00118A66 /* StoreEventSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreEventSource.swift; sourceTree = "<group>"; };
+		8A88B4E21D4A5F7C0083958C /* ReceiptValidation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ReceiptValidation.entitlements; sourceTree = "<group>"; };
+		8A88B4EF1D4A8D470083958C /* BundleReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleReceipt.swift; sourceTree = "<group>"; };
+		8A88B4F41D4ABE380083958C /* LoggingReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingReceipt.swift; sourceTree = "<group>"; };
+		8A88B5A41D4BB9D20083958C /* Certificate.crt */ = {isa = PBXFileReference; lastKnownFileType = file; path = Certificate.crt; sourceTree = "<group>"; };
 		8A91758E1CA1CBD600354E26 /* UserAgentAudioDeviceNameToDeviceMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentAudioDeviceNameToDeviceMap.swift; sourceTree = "<group>"; };
 		8A9175901CA2BBF900354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAgentAudioDevice+SystemAudioDevice.swift"; sourceTree = "<group>"; };
 		8A9175921CA2C2DC00354E26 /* UserAgentAudioDevice+SystemAudioDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserAgentAudioDevice+SystemAudioDevice.swift"; sourceTree = "<group>"; };
@@ -519,23 +695,74 @@
 		8A9175AC1CABF61200354E26 /* UserAgentError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentError.swift; sourceTree = "<group>"; };
 		8A9175AF1CABFCA700354E26 /* SystemAudioDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioDevice.swift; sourceTree = "<group>"; };
 		8A9513CE1D1D7F0E0034DF2C /* ProductPurchaseUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductPurchaseUseCaseTests.swift; path = UseCasesTests/ProductPurchaseUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
-		8A9513D61D22CD8A0034DF2C /* ProductPurchaseEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPurchaseEventTarget.swift; sourceTree = "<group>"; };
-		8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingProductPurchaseEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptValidatingProductPurchaseEventTarget.swift; sourceTree = "<group>"; };
-		8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingProductPurchaseEventTargetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiptValidatingProductPurchaseEventTargetTests.swift; path = UseCasesTests/ReceiptValidatingProductPurchaseEventTargetTests.swift; sourceTree = SOURCE_ROOT; };
-		8A9513E71D2A6FCE0034DF2C /* ProductPurchaseEventTargetSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPurchaseEventTargetSpy.swift; sourceTree = "<group>"; };
-		8A9513EB1D2A735F0034DF2C /* ProductPurchaseReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPurchaseReceipt.swift; sourceTree = "<group>"; };
-		8A9513ED1D2A76F90034DF2C /* ValidProductPurchaseReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidProductPurchaseReceipt.swift; sourceTree = "<group>"; };
-		8A9513EF1D2A77AD0034DF2C /* InvalidProductPurchaseReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidProductPurchaseReceipt.swift; sourceTree = "<group>"; };
+		8A9513D61D22CD8A0034DF2C /* StoreEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreEventTarget.swift; sourceTree = "<group>"; };
+		8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingStoreEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptValidatingStoreEventTarget.swift; sourceTree = "<group>"; };
+		8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingStoreEventTargetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceiptValidatingStoreEventTargetTests.swift; path = UseCasesTests/ReceiptValidatingStoreEventTargetTests.swift; sourceTree = SOURCE_ROOT; };
+		8A9513E71D2A6FCE0034DF2C /* StoreEventTargetSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreEventTargetSpy.swift; sourceTree = "<group>"; };
+		8A9513EB1D2A735F0034DF2C /* Receipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		8A9513ED1D2A76F90034DF2C /* ValidReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidReceipt.swift; sourceTree = "<group>"; };
+		8A9513EF1D2A77AD0034DF2C /* InvalidReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidReceipt.swift; sourceTree = "<group>"; };
 		8A9534601D05953D00EE9084 /* AsyncFailingProductsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncFailingProductsFake.swift; sourceTree = "<group>"; };
 		8A9534621D059A5300EE9084 /* LoggingProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingProducts.swift; sourceTree = "<group>"; };
 		8A9D922C1D2AC9B900491D59 /* Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		8A9D922E1D2AE14A00491D59 /* SuccessfulFetchProductsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessfulFetchProductsFake.swift; sourceTree = "<group>"; };
 		8A9D92301D2AE79300491D59 /* FailingFetchProductsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FailingFetchProductsFake.swift; sourceTree = "<group>"; };
 		8A9D92321D2BF9D000491D59 /* SimpleProductsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleProductsFake.swift; sourceTree = "<group>"; };
-		8A9D92341D2C007500491D59 /* NullStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullStore.swift; sourceTree = "<group>"; };
 		8A9D92361D2D0BD300491D59 /* SKPaymentQueueToStoreAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPaymentQueueToStoreAdapter.swift; sourceTree = "<group>"; };
 		8A9D92381D2D0C6500491D59 /* StoreKitProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitProducts.swift; sourceTree = "<group>"; };
 		8AA31F031C987B4700ABC4FB /* SoundPlaybackUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlaybackUseCase.swift; sourceTree = "<group>"; };
+		8AA7487E1D6DD775000587DC /* SimplePurchaseReminderUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePurchaseReminderUserDefaults.swift; sourceTree = "<group>"; };
+		8AA748801D6DECAB000587DC /* UserDefaultsSavedAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSavedAccounts.swift; sourceTree = "<group>"; };
+		8AA748821D6DEE61000587DC /* SavedAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedAccount.swift; sourceTree = "<group>"; };
+		8AA748841D6F0D00000587DC /* UserDefaultsSavedAccountsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsSavedAccountsTests.swift; path = TelephoneTests/UserDefaultsSavedAccountsTests.swift; sourceTree = SOURCE_ROOT; };
+		8AA748901D6F40FD000587DC /* MusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayer.h; sourceTree = "<group>"; };
+		8AA748911D6F414E000587DC /* AppleMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleMusicPlayer.h; sourceTree = "<group>"; };
+		8AA748921D6F414E000587DC /* AppleMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleMusicPlayer.m; sourceTree = "<group>"; };
+		8AA748941D6F6D7C000587DC /* SpotifyMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyMusicPlayer.h; sourceTree = "<group>"; };
+		8AA748951D6F6D7C000587DC /* SpotifyMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyMusicPlayer.m; sourceTree = "<group>"; };
+		8AA748A31D70220D000587DC /* ConditionalMusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalMusicPlayer.swift; sourceTree = "<group>"; };
+		8AA748A51D70221F000587DC /* ConditionalMusicPlayerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConditionalMusicPlayerTests.swift; path = UseCasesTests/ConditionalMusicPlayerTests.swift; sourceTree = SOURCE_ROOT; };
+		8AA748A81D7022BA000587DC /* MusicPlayerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerSpy.swift; sourceTree = "<group>"; };
+		8AA748AA1D7023B5000587DC /* MusicPlayerUserDefaultsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerUserDefaultsFake.swift; sourceTree = "<group>"; };
+		8AA748AC1D702459000587DC /* MusicPlayerUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerUserDefaults.swift; sourceTree = "<group>"; };
+		8AA748B01D703ED3000587DC /* SimpleMusicPlayerUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMusicPlayerUserDefaults.swift; sourceTree = "<group>"; };
+		8AA748B21D703F45000587DC /* SimpleMusicPlayerUserDefaultsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleMusicPlayerUserDefaultsTests.swift; path = UseCasesTests/SimpleMusicPlayerUserDefaultsTests.swift; sourceTree = SOURCE_ROOT; };
+		8AA748BB1D704962000587DC /* MusicPlayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayers.swift; sourceTree = "<group>"; };
+		8AA748BD1D704A40000587DC /* MusicPlayersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MusicPlayersTests.swift; path = TelephoneTests/MusicPlayersTests.swift; sourceTree = SOURCE_ROOT; };
+		8AA748C01D704B9F000587DC /* AvailableMusicPlayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvailableMusicPlayers.swift; sourceTree = "<group>"; };
+		8AA748C21D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		8AA748C31D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Account.xib; sourceTree = "<group>"; };
+		8AA748C41D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
+		8AA748C51D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Call.xib; sourceTree = "<group>"; };
+		8AA748C61D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
+		8AA748C71D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
+		8AA748C81D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EndedCallView.xib; sourceTree = "<group>"; };
+		8AA748C91D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CallTransfer.xib; sourceTree = "<group>"; };
+		8AA748CA1D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
+		8AA748CB1D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
+		8AA748CC1D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
+		8AA748CD1D744FAA000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Preferences.xib; sourceTree = "<group>"; };
+		8AA748CE1D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		8AA748CF1D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
+		8AA748D01D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
+		8AA748D11D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
+		8AA748D21D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
+		8AA748D31D744FAB000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AccountSetup.xib; sourceTree = "<group>"; };
+		8AA748F81D74986A000587DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA748FA1D74987E000587DC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA748FD1D749B00000587DC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8AA748FF1D749E05000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StoreWindowController.xib; sourceTree = "<group>"; };
+		8AA749021D749E15000587DC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StoreWindowController.strings; sourceTree = "<group>"; };
+		8AA749041D749E4D000587DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StoreViewController.xib; sourceTree = "<group>"; };
+		8AA749071D749E54000587DC /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/StoreViewController.strings; sourceTree = "<group>"; };
+		8AA749081D75A7A6000587DC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8AA7490A1D75A90D000587DC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StoreWindowController.strings; sourceTree = "<group>"; };
+		8AA7490D1D75A9C1000587DC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8AA749281D75B1BA000587DC /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StoreViewController.strings; sourceTree = "<group>"; };
+		8AA7492C1D75E5D5000587DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StoreViewController.strings; sourceTree = "<group>"; };
+		8AA7492E1D75E5DF000587DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/StoreWindowController.strings; sourceTree = "<group>"; };
+		8AA749301D75E5E7000587DC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		8AA749311D75FF18000587DC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		8AA791FB1CE245940082E4FC /* AsyncProductsFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncProductsFake.swift; sourceTree = "<group>"; };
 		8AAACA001CAE9EE5001930C4 /* SoundIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundIO.swift; sourceTree = "<group>"; };
 		8AAACA021CAE9F36001930C4 /* SimpleSoundIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleSoundIO.swift; sourceTree = "<group>"; };
@@ -549,14 +776,15 @@
 		8AAACA141CAEC555001930C4 /* UserDefaultsSoundIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSoundIO.swift; sourceTree = "<group>"; };
 		8ABB14181CEC83990056CEDC /* StoreViewStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewStateMachine.swift; sourceTree = "<group>"; };
 		8ABB141A1CEC86A90056CEDC /* StoreViewStateMachineTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StoreViewStateMachineTests.swift; path = TelephoneTests/StoreViewStateMachineTests.swift; sourceTree = SOURCE_ROOT; };
+		8ABC9A6E1D522E4D004AC220 /* ReceiptAttributesValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptAttributesValidation.swift; sourceTree = "<group>"; };
 		8AC1A43B1C679DA8007778A2 /* NSSoundToSoundAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSSoundToSoundAdapterFactory.swift; sourceTree = "<group>"; };
 		8AC1A43D1C67BDCC007778A2 /* NullSoundEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullSoundEventTarget.swift; sourceTree = "<group>"; };
 		8AC1A4401C67BFA8007778A2 /* SoundEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundEventTarget.swift; sourceTree = "<group>"; };
 		8AC1A4421C67C35D007778A2 /* DefaultSoundPlaybackUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultSoundPlaybackUseCaseTests.swift; path = UseCasesTests/DefaultSoundPlaybackUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		8AC1A4441C67C390007778A2 /* DefaultSoundPlaybackUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSoundPlaybackUseCase.swift; sourceTree = "<group>"; };
+		8AC87E881D58DD8B006952F0 /* PurchaseReceiptAttributesValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseReceiptAttributesValidation.swift; sourceTree = "<group>"; };
 		8AD6597B1D36A152008A1007 /* LoggingStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingStore.swift; sourceTree = "<group>"; };
 		8AD6597E1D37C987008A1007 /* StoreViewEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewEventTarget.swift; sourceTree = "<group>"; };
-		8AD659831D37CA51008A1007 /* NullProductPurchaseEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullProductPurchaseEventTarget.swift; sourceTree = "<group>"; };
 		8ADA26F11C984E1D0066B224 /* RingtonePlaybackUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingtonePlaybackUseCase.swift; sourceTree = "<group>"; };
 		8ADA26F31C986C9E0066B224 /* SoundConfigurationLoadUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundConfigurationLoadUseCase.swift; sourceTree = "<group>"; };
 		8ADD31C51CC10E50008C083C /* UserAgentSoundIOSelectionUseCaseFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentSoundIOSelectionUseCaseFake.swift; sourceTree = "<group>"; };
@@ -574,19 +802,33 @@
 		8ADD6A701CE0DECC001EDBBA /* ProductsEventTargetsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductsEventTargetsTests.swift; path = UseCasesTests/ProductsEventTargetsTests.swift; sourceTree = SOURCE_ROOT; };
 		8ADD6A761CE0E704001EDBBA /* ProductsEventTargetSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsEventTargetSpy.swift; sourceTree = "<group>"; };
 		8ADD6A7C1CE0F995001EDBBA /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
-		8ADD6A7D1CE0F995001EDBBA /* StoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreViewController.xib; sourceTree = "<group>"; };
 		8ADD6A7E1CE0F995001EDBBA /* StoreWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreWindowController.swift; sourceTree = "<group>"; };
-		8ADD6A7F1CE0F995001EDBBA /* StoreWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreWindowController.xib; sourceTree = "<group>"; };
 		8ADD6B6C1C528F720029C3D8 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		8ADD6B6E1C5639520029C3D8 /* UserDefaultsRingtoneSoundConfigurationLoadUseCaseSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsRingtoneSoundConfigurationLoadUseCaseSpy.swift; sourceTree = "<group>"; };
+		8ADE59901D61D0F000B41275 /* ReceiptChecksum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptChecksum.swift; sourceTree = "<group>"; };
+		8ADE59921D61D6A200B41275 /* SHA256Fingerprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256Fingerprint.swift; sourceTree = "<group>"; };
+		8ADE59941D61E8F700B41275 /* DeviceGUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceGUID.swift; sourceTree = "<group>"; };
+		8AE348571D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoActivePurchasesReceipt.swift; sourceTree = "<group>"; };
+		8AE396CB1D6B2F3800DCFB9E /* ExpectedProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpectedProducts.swift; sourceTree = "<group>"; };
+		8AE396EB1D6C86E000DCFB9E /* PurchaseReminderUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PurchaseReminderUseCaseTests.swift; path = UseCasesTests/PurchaseReminderUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		8AE396ED1D6C873300DCFB9E /* PurchaseReminderUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseReminderUseCase.swift; sourceTree = "<group>"; };
+		8AE396EF1D6C887F00DCFB9E /* PurchaseReminderUseCaseOutputSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseReminderUseCaseOutputSpy.swift; sourceTree = "<group>"; };
+		8AE396F11D6C8ACB00DCFB9E /* EnabledSavedAccountsStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnabledSavedAccountsStub.swift; sourceTree = "<group>"; };
+		8AE396F31D6C8B3800DCFB9E /* SavedAccounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedAccounts.swift; sourceTree = "<group>"; };
+		8AE396F61D6C8C2600DCFB9E /* DisabledSavedAccountsStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisabledSavedAccountsStub.swift; sourceTree = "<group>"; };
+		8AE396F81D6DAFFA00DCFB9E /* PurchaseReminderUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseReminderUserDefaults.swift; sourceTree = "<group>"; };
+		8AE706231D491C220060FF4F /* ReceiptValidation.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = ReceiptValidation.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AE7062B1D491C220060FF4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AE706331D4A2E180060FF4F /* ReceiptValidation-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReceiptValidation-Bridging-Header.h"; sourceTree = "<group>"; };
+		8AE706341D4A2E180060FF4F /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8AE7063A1D4A2F360060FF4F /* DefaultNSXPCListenerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultNSXPCListenerDelegate.swift; sourceTree = "<group>"; };
+		8AE7063C1D4A4D370060FF4F /* ReceiptXPCGateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptXPCGateway.swift; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Telephone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Telephone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0302F00EB9F347000738F7 /* AKSIPURI.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKSIPURI.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA0302F10EB9F347000738F7 /* AKSIPURI.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AKSIPURI.m; sourceTree = "<group>"; tabWidth = 4; };
 		AA0693AE110228E4007EF898 /* ActiveAccountTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = ActiveAccountTransferViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA0693AF110228E4007EF898 /* ActiveAccountTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveAccountTransferViewController.m; sourceTree = "<group>"; tabWidth = 4; };
-		AA0693C411022E78007EF898 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
-		AA06941F11023628007EF898 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/CallTransfer.xib; sourceTree = "<group>"; };
 		AA078B291BFF80E20013FF8F /* UseCases.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UseCases.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA078B2B1BFF80E30013FF8F /* UseCases.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UseCases.h; sourceTree = "<group>"; };
 		AA078B2D1BFF80E30013FF8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -605,15 +847,14 @@
 		AA10198F1C49486500869D01 /* UserDefaultsSoundFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSoundFactory.swift; sourceTree = "<group>"; };
 		AA1019921C4949E600869D01 /* NSTimerToTimerAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerToTimerAdapter.swift; sourceTree = "<group>"; };
 		AA1019941C494B5700869D01 /* NSTimerToTimerAdapterFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerToTimerAdapterFactory.swift; sourceTree = "<group>"; };
-		AA167A1D0F07BF9E00AF8B71 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/SIPResponses.strings; sourceTree = "<group>"; };
-		AA167A480F0805B700AF8B71 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/SIPResponses.strings; sourceTree = "<group>"; };
+		AA167A1D0F07BF9E00AF8B71 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SIPResponses.strings; sourceTree = "<group>"; };
+		AA167A480F0805B700AF8B71 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SIPResponses.strings; sourceTree = "<group>"; };
 		AA16CBE10F856A4A000CAFD1 /* AKNSString+Creating.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKNSString+Creating.h"; sourceTree = "<group>"; tabWidth = 4; };
 		AA16CBE20F856A4A000CAFD1 /* AKNSString+Creating.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKNSString+Creating.m"; sourceTree = "<group>"; tabWidth = 4; };
 		AA16CBE40F856ACD000CAFD1 /* AKNSString+PJSUA.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKNSString+PJSUA.h"; sourceTree = "<group>"; tabWidth = 4; };
 		AA16CBE50F856ACD000CAFD1 /* AKNSString+PJSUA.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKNSString+PJSUA.m"; sourceTree = "<group>"; tabWidth = 4; };
 		AA16CC9C0F857009000CAFD1 /* AKNSString+Escaping.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKNSString+Escaping.h"; sourceTree = "<group>"; tabWidth = 4; };
 		AA16CC9D0F857009000CAFD1 /* AKNSString+Escaping.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKNSString+Escaping.m"; sourceTree = "<group>"; tabWidth = 4; };
-		AA1732170EAF8C14009023F2 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
 		AA18F5FE1C21CD2500FD8E9F /* UserDefaultsSoundIOSaveUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsSoundIOSaveUseCaseTests.swift; path = UseCasesTests/UserDefaultsSoundIOSaveUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AA18F6001C21CD9600FD8E9F /* UserDefaultsSoundIOSaveUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsSoundIOSaveUseCase.swift; sourceTree = "<group>"; };
 		AA19171B0F8EA627002BA093 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
@@ -633,13 +874,12 @@
 		AA2C03FB1BD7F670001D25F9 /* UserAgentAudioDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentAudioDevices.swift; sourceTree = "<group>"; };
 		AA2CCC820E2E4EEB00871057 /* AKSIPCall.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKSIPCall.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA2CCC830E2E4EEB00871057 /* AKSIPCall.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AKSIPCall.m; sourceTree = "<group>"; tabWidth = 4; };
-		AA2ED9930F05AD1E004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AA2ED99D0F05B36B004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/Account.xib; sourceTree = "<group>"; };
-		AA2ED9A10F05B3BD004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/Call.xib; sourceTree = "<group>"; };
-		AA2ED9A60F05B5CE004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/Preferences.xib; sourceTree = "<group>"; };
-		AA2ED9AD0F05BA16004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/AccountSetup.xib; sourceTree = "<group>"; };
-		AA2ED9B30F05BB64004A13C6 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
-		AA2ED9DF0F05C1E3004A13C6 /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA2ED99D0F05B36B004A13C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Account.xib; sourceTree = "<group>"; };
+		AA2ED9A10F05B3BD004A13C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Call.xib; sourceTree = "<group>"; };
+		AA2ED9A60F05B5CE004A13C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/Preferences.xib; sourceTree = "<group>"; };
+		AA2ED9AD0F05BA16004A13C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/AccountSetup.xib; sourceTree = "<group>"; };
+		AA2ED9B30F05BB64004A13C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
+		AA2ED9DF0F05C1E3004A13C6 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AA30D8451BF60672002F343A /* FirstSystemSoundIOTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstSystemSoundIOTests.swift; path = DomainTests/FirstSystemSoundIOTests.swift; sourceTree = SOURCE_ROOT; };
 		AA30D8471BF606C1002F343A /* FirstSystemSoundIO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstSystemSoundIO.swift; sourceTree = "<group>"; };
 		AA30D84A1BF60DDB002F343A /* FirstSystemAudioDeviceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirstSystemAudioDeviceTests.swift; path = DomainTests/FirstSystemAudioDeviceTests.swift; sourceTree = SOURCE_ROOT; };
@@ -653,14 +893,10 @@
 		AA32F7F71BC51A0500FAC228 /* SystemAudioDeviceTestFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioDeviceTestFactory.swift; sourceTree = "<group>"; };
 		AA32F7F91BC52A2A00FAC228 /* UserDefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsKeys.h; sourceTree = "<group>"; };
 		AA32F7FA1BC52A2A00FAC228 /* UserDefaultsKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsKeys.m; sourceTree = "<group>"; };
-		AA32F7FD1BC6908300FAC228 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		AA32F7FD1BC6908300FAC228 /* KeyValueUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueUserDefaults.swift; sourceTree = "<group>"; };
 		AA32F8031BC6963D00FAC228 /* SystemAudioDevicesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SystemAudioDevicesTests.swift; path = DomainTests/SystemAudioDevicesTests.swift; sourceTree = SOURCE_ROOT; };
 		AA32F8051BC6968700FAC228 /* SystemAudioDevices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioDevices.swift; sourceTree = "<group>"; };
 		AA32F8081BC69D8300FAC228 /* SystemAudioDeviceRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioDeviceRepository.swift; sourceTree = "<group>"; };
-		AA34AF281073B70900FA38F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		AA34AF361073B75600FA38F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
-		AA34AF381073B76A00FA38F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
-		AA34AF3A1073B77A00FA38F7 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
 		AA34AF3C1073B7C700FA38F7 /* AccountPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AccountPreferencesViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA34AF3D1073B7C700FA38F7 /* AccountPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPreferencesViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AA34AF461073B81500FA38F7 /* SoundPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = SoundPreferencesViewController.h; sourceTree = "<group>"; tabWidth = 4; };
@@ -669,7 +905,6 @@
 		AA34AF4A1073B84700FA38F7 /* NetworkPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkPreferencesViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AA34AF811073BF5D00FA38F7 /* GeneralPreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPreferencesViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA34AF821073BF5D00FA38F7 /* GeneralPreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPreferencesViewController.m; sourceTree = "<group>"; tabWidth = 4; };
-		AA3578680E3FD91400021989 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Call.xib; sourceTree = "<group>"; };
 		AA3578B10E40709900021989 /* AccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AccountController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA3578B20E40709900021989 /* AccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AccountController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AA3578B40E4070AD00021989 /* CallController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = CallController.h; sourceTree = "<group>"; tabWidth = 4; };
@@ -678,9 +913,9 @@
 		AA3905491BFFE125005A8AA3 /* DomainUserAgentAudioDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainUserAgentAudioDeviceExtension.swift; sourceTree = "<group>"; };
 		AA3A14F90F309C7C00C45739 /* AKABAddressBook+Localizing.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKABAddressBook+Localizing.h"; sourceTree = "<group>"; tabWidth = 4; };
 		AA3A14FA0F309C7C00C45739 /* AKABAddressBook+Localizing.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKABAddressBook+Localizing.m"; sourceTree = "<group>"; tabWidth = 4; };
-		AA3A153F0F30A49C00C45739 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
-		AA3A15470F30A4C200C45739 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
-		AA3A15480F30A4C700C45739 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
+		AA3A153F0F30A49C00C45739 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
+		AA3A15470F30A4C200C45739 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
+		AA3A15480F30A4C700C45739 /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AddressBookLabels.strings; sourceTree = "<group>"; };
 		AA3B6E7F1C46B40C0030D410 /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		AA3B6E811C46B55C0030D410 /* RepeatingSound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatingSound.swift; sourceTree = "<group>"; };
 		AA3B6E861C47AD0B0030D410 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
@@ -689,8 +924,8 @@
 		AA3B6E8C1C47C20A0030D410 /* SoundSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundSpy.swift; sourceTree = "<group>"; };
 		AA3B6E8E1C47C3C00030D410 /* TimerFactorySpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerFactorySpy.swift; sourceTree = "<group>"; };
 		AA3B6E901C47C6590030D410 /* TimerSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerSpy.swift; sourceTree = "<group>"; };
-		AA3F655C1072C66C000511E8 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
-		AA3F655D1072C674000511E8 /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
+		AA3F655C1072C66C000511E8 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
+		AA3F655D1072C674000511E8 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
 		AA3F65681072C926000511E8 /* AuthenticationFailureController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationFailureController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AA3F65691072C926000511E8 /* AuthenticationFailureController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationFailureController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AA3FAB851BBAAE630064B2C3 /* TelephoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelephoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -716,28 +951,26 @@
 		AA4C2E781BBFEEAB00C3D096 /* SystemAudioObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioObject.swift; sourceTree = "<group>"; };
 		AA4D49061BB99DBF004D1D4B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AA4D49081BB99DCC004D1D4B /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		AA5100010F1FE302003CE94C /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AA5100020F1FE32F003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AA51002A0F1FF943003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		AA51002C0F1FF956003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/Account.xib; sourceTree = "<group>"; };
-		AA5100400F200066003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/Call.xib; sourceTree = "<group>"; };
-		AA5100590F200E2F003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/Preferences.xib; sourceTree = "<group>"; };
-		AA51005C0F20117F003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
-		AA5100970F20CD11003CE94C /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/AccountSetup.xib; sourceTree = "<group>"; };
+		AA5100010F1FE302003CE94C /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AA5100020F1FE32F003CE94C /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA51002C0F1FF956003CE94C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Account.xib; sourceTree = "<group>"; };
+		AA5100400F200066003CE94C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Call.xib; sourceTree = "<group>"; };
+		AA5100590F200E2F003CE94C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/Preferences.xib; sourceTree = "<group>"; };
+		AA51005C0F20117F003CE94C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AuthenticationFailure.xib; sourceTree = "<group>"; };
+		AA5100970F20CD11003CE94C /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AccountSetup.xib; sourceTree = "<group>"; };
 		AA53434612ADBAD200B47767 /* Sound.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Sound.tiff; sourceTree = "<group>"; };
-		AA584A690F06CFD2003C4992 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AA584A6B0F06D007003C4992 /* Russian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AA6089D512E25DDD00DC44DC /* Russian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Russian; path = Russian.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AA6089D612E25DE200DC44DC /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA584A690F06CFD2003C4992 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA584A6B0F06D007003C4992 /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6089D512E25DDD00DC44DC /* ru */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6089D612E25DE200DC44DC /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA6989A21C19AF150067BFB1 /* DefaultSoundPreferencesViewEventTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSoundPreferencesViewEventTarget.swift; sourceTree = "<group>"; };
 		AA6989A51C19AF2E0067BFB1 /* DefaultSoundPreferencesViewEventTargetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultSoundPreferencesViewEventTargetTests.swift; path = TelephoneTests/DefaultSoundPreferencesViewEventTargetTests.swift; sourceTree = SOURCE_ROOT; };
-		AA69ADD90E89578900CF54B3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AccountSetup.xib; sourceTree = "<group>"; };
-		AA7CB52211442300004D79DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
-		AA7CB52311442304004D79DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
-		AA7CB529114423AA004D79DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
-		AA7CB52A114423AE004D79DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
-		AA7CB53111442434004D79DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
-		AA7CB53211442437004D79DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
+		AA7CB52211442300004D79DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
+		AA7CB52311442304004D79DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ActiveAccountTransferView.xib; sourceTree = "<group>"; };
+		AA7CB529114423AA004D79DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
+		AA7CB52A114423AE004D79DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
+		AA7CB53111442434004D79DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
+		AA7CB53211442437004D79DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
 		AA7F6D3B1C034B700064DA3A /* UserDefaultsKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsKeys.h; sourceTree = "<group>"; };
 		AA7F6D3C1C034B700064DA3A /* UserDefaultsKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsKeys.m; sourceTree = "<group>"; };
 		AA7F6D441C0381650064DA3A /* UserDefaultsSoundIOLoadUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsSoundIOLoadUseCaseTests.swift; path = UseCasesTests/UserDefaultsSoundIOLoadUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
@@ -759,14 +992,11 @@
 		AA9D08071BFF7E6F0000F618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9D080C1BFF7E6F0000F618 /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9D08131BFF7E6F0000F618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AAA628C5110C6281008466C3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActiveCallTransferView.xib; sourceTree = "<group>"; };
-		AAA628E9110C76B3008466C3 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/EndedCallTransferView.xib; sourceTree = "<group>"; };
 		AAA7CFFC1825BE1900D53FB9 /* Telephone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Telephone.entitlements; sourceTree = "<group>"; };
 		AAA810B21115D7F9008CA945 /* EndedCallTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = EndedCallTransferViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAA810B31115D7F9008CA945 /* EndedCallTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = EndedCallTransferViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AAAC618A0FE6A42900FBE053 /* AKNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKNetworkReachability.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAAC618B0FE6A42900FBE053 /* AKNetworkReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AKNetworkReachability.m; sourceTree = "<group>"; tabWidth = 4; };
-		AAAE4A230E3F4DAA00110597 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Account.xib; sourceTree = "<group>"; };
 		AAB32A0C1BEB8A760016C8E6 /* UserAgentAudioDeviceUpdateUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserAgentAudioDeviceUpdateUseCaseTests.swift; path = UseCasesTests/UserAgentAudioDeviceUpdateUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AAB32A0E1BEB8AC40016C8E6 /* UserAgentAudioDeviceUpdateUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAgentAudioDeviceUpdateUseCase.swift; sourceTree = "<group>"; };
 		AAB32A111BEBA4BA0016C8E6 /* UseCaseFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
@@ -777,7 +1007,6 @@
 		AAB5AAC10F2E7A7D00A57531 /* AKABRecord+Querying.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKABRecord+Querying.m"; sourceTree = "<group>"; tabWidth = 4; };
 		AABAD7EB0E0C171A00CB5930 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AABAD7EC0E0C171A00CB5930 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; tabWidth = 4; };
-		AABAD7EF0E0C184200CB5930 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		AABBB39A1BFA1ABC004A65B5 /* UseCaseSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseSpy.swift; sourceTree = "<group>"; };
 		AAC0FFB41BE28C7600A5C7E5 /* SystemAudioDevicesChangeEventTargetsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SystemAudioDevicesChangeEventTargetsTests.swift; path = UseCasesTests/SystemAudioDevicesChangeEventTargetsTests.swift; sourceTree = SOURCE_ROOT; };
 		AAC0FFB61BE28CAD00A5C7E5 /* SystemAudioDevicesChangeEventTargets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemAudioDevicesChangeEventTargets.swift; sourceTree = "<group>"; };
@@ -806,22 +1035,19 @@
 		AAD92135107A607C00F142A4 /* IncomingCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = IncomingCallViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AAD92137107A608B00F142A4 /* EndedCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = EndedCallViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAD92138107A608B00F142A4 /* EndedCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = EndedCallViewController.m; sourceTree = "<group>"; tabWidth = 4; };
-		AADAA1A0107CE9D000789F2D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
-		AADAA1A9107CEAD800789F2D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
-		AADAA1AB107CEB5A00789F2D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/EndedCallView.xib; sourceTree = "<group>"; };
-		AADAA2C4107E569900789F2D /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
-		AADAA2C5107E569C00789F2D /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
-		AADAA2CE107E570400789F2D /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
-		AADAA2CF107E570800789F2D /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
-		AADAA2D2107E572800789F2D /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/EndedCallView.xib; sourceTree = "<group>"; };
-		AADAA2D3107E572B00789F2D /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/EndedCallView.xib; sourceTree = "<group>"; };
+		AADAA2C4107E569900789F2D /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
+		AADAA2C5107E569C00789F2D /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/IncomingCallView.xib; sourceTree = "<group>"; };
+		AADAA2CE107E570400789F2D /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
+		AADAA2CF107E570800789F2D /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/ActiveCallView.xib; sourceTree = "<group>"; };
+		AADAA2D2107E572800789F2D /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/EndedCallView.xib; sourceTree = "<group>"; };
+		AADAA2D3107E572B00789F2D /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/EndedCallView.xib; sourceTree = "<group>"; };
 		AAE33B0B1BA71E6900C6E48B /* Telephone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Telephone-Bridging-Header.h"; sourceTree = "<group>"; };
 		AAE33B0E1BA7205A00C6E48B /* PreferencesControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesControllerDelegate.h; sourceTree = "<group>"; };
 		AAE33B0F1BA7217C00C6E48B /* AKSIPUserAgentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSIPUserAgentDelegate.h; sourceTree = "<group>"; };
 		AAE33B101BA7269600C6E48B /* AKSIPCallDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSIPCallDelegate.h; sourceTree = "<group>"; };
 		AAE33B111BA72A1800C6E48B /* CallControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallControllerDelegate.h; sourceTree = "<group>"; };
 		AAE39A371BD92DF600EFB7BC /* String+Creating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Creating.swift"; sourceTree = "<group>"; };
-		AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+UserDefaults.swift"; sourceTree = "<group>"; };
+		AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+KeyValueUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+KeyValueUserDefaults.swift"; sourceTree = "<group>"; };
 		AAECDE8D0E70703100CEAE7B /* AKNSString+Scanning.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKNSString+Scanning.h"; sourceTree = "<group>"; tabWidth = 4; };
 		AAECDE8E0E70703100CEAE7B /* AKNSString+Scanning.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = "AKNSString+Scanning.m"; sourceTree = "<group>"; tabWidth = 4; };
 		AAEE7C2F0ECD953200A7DEB4 /* AKNSWindow+Resizing.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = "AKNSWindow+Resizing.h"; sourceTree = "<group>"; tabWidth = 4; };
@@ -835,8 +1061,7 @@
 		AAF2998D0F575549007B5036 /* AKAddressBookSIPAddressPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKAddressBookSIPAddressPlugIn.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAF299970F57566B007B5036 /* TelephoneAddressBookSIPAddressPlugIn.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelephoneAddressBookSIPAddressPlugIn.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAF299980F57566B007B5036 /* TelephoneAddressBookSIPAddressPlugIn-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TelephoneAddressBookSIPAddressPlugIn-Info.plist"; sourceTree = "<group>"; };
-		AAF29A430F5759F7007B5036 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		AAF633591056FD3000CF6C3B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ActiveAccountView.xib; sourceTree = "<group>"; };
+		AAF29A430F5759F7007B5036 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AAF633681056FEA600CF6C3B /* ActiveAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = ActiveAccountViewController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAF633691056FEA600CF6C3B /* ActiveAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveAccountViewController.m; sourceTree = "<group>"; tabWidth = 4; };
 		AAF639F40FEFF13A0089DA3A /* AKResponsiveProgressIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKResponsiveProgressIndicator.h; sourceTree = "<group>"; tabWidth = 4; };
@@ -849,25 +1074,33 @@
 		AAFA9B1C0EE1D8FC009A45CB /* AKSIPURIFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AKSIPURIFormatter.m; sourceTree = "<group>"; tabWidth = 4; };
 		AAFA9C3B0EE411BA009A45CB /* AKTelephoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AKTelephoneNumberFormatter.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAFA9C3C0EE411BA009A45CB /* AKTelephoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AKTelephoneNumberFormatter.m; sourceTree = "<group>"; tabWidth = 4; };
-		AAFC002D1074D0EB0018C7DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC00351074D1700018C7DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC00361074D17F0018C7DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC00371074D1820018C7DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC00381074D18C0018C7DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC00391074D18F0018C7DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC003A1074D1980018C7DA /* Russian */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Russian; path = Russian.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
-		AAFC003B1074D19A0018C7DA /* German */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = German; path = German.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC002D1074D0EB0018C7DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC00351074D1700018C7DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/GeneralPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC00361074D17F0018C7DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC00371074D1820018C7DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/AccountPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC00381074D18C0018C7DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC00391074D18F0018C7DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/SoundPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC003A1074D1980018C7DA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
+		AAFC003B1074D19A0018C7DA /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/NetworkPreferencesView.xib; sourceTree = "<group>"; };
 		AAFCFFBB1074BFCA0018C7DA /* AccountSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.h; path = AccountSetupController.h; sourceTree = "<group>"; tabWidth = 4; };
 		AAFCFFBC1074BFCA0018C7DA /* AccountSetupController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSetupController.m; sourceTree = "<group>"; tabWidth = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8AE706201D491C210060FF4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AA4D49091BB99DCC004D1D4B /* AudioUnit.framework in Frameworks */,
 				AA4D49071BB99DBF004D1D4B /* AudioToolbox.framework in Frameworks */,
+				8AA749321D75FF18000587DC /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +1179,7 @@
 				AADAA2FF107E59FC00789F2D /* Call */,
 				AA86C8B6110339E200EF4E8A /* Call Transfer */,
 				AAECDE8C0E70700B00CEAE7B /* Categories */,
+				8AA748881D6F3A76000587DC /* MusicPlayer */,
 				AADAA303107E5AD400789F2D /* Preferences */,
 				AA1019821C490BB900869D01 /* Ringtone */,
 				AAF9CBC60E685A2D005DD9C6 /* SIP User Agent */,
@@ -965,10 +1199,13 @@
 				AAFA9C3C0EE411BA009A45CB /* AKTelephoneNumberFormatter.m */,
 				AA19CFF41BED148A00991CAA /* DefaultUseCaseFactory.swift */,
 				8ADD6A691CE0C8CF001EDBBA /* PresenterFactory.swift */,
+				8AA748821D6DEE61000587DC /* SavedAccount.swift */,
 				AA32F7F91BC52A2A00FAC228 /* UserDefaultsKeys.h */,
 				AA32F7FA1BC52A2A00FAC228 /* UserDefaultsKeys.m */,
+				8AA748801D6DECAB000587DC /* UserDefaultsSavedAccounts.swift */,
+				8AA748841D6F0D00000587DC /* UserDefaultsSavedAccountsTests.swift */,
 				AA3FABAF1BBC1CCE0064B2C3 /* TelephoneError.swift */,
-				AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+UserDefaults.swift */,
+				AAE39A3A1BDA59F100EFB7BC /* NSUserDefaults+KeyValueUserDefaults.swift */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				AA4D490A1BB99DD6004D1D4B /* Frameworks */,
@@ -989,6 +1226,7 @@
 				AA078B321BFF80E30013FF8F /* UseCasesTests.xctest */,
 				AAC4FF811C0214110060B186 /* DomainTestDoubles.framework */,
 				AAC4FF951C0215B90060B186 /* UseCasesTestDoubles.framework */,
+				8AE706231D491C220060FF4F /* ReceiptValidation.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1005,6 +1243,7 @@
 				AA9D08101BFF7E6F0000F618 /* DomainTests */,
 				AAC4FF821C0214120060B186 /* DomainTestDoubles */,
 				AAF298D70F57477C007B5036 /* AddressBookPlugIns */,
+				8AE706241D491C220060FF4F /* ReceiptValidation */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = Telephone;
@@ -1060,17 +1299,97 @@
 				8A9D922C1D2AC9B900491D59 /* Products.swift */,
 				8ADD6A6E1CE0DCF8001EDBBA /* ProductsEventTargets.swift */,
 				8ADD6A701CE0DECC001EDBBA /* ProductsEventTargetsTests.swift */,
-				8A859A0E1D2EC8F700118A66 /* ProductPurchaseEventTarget */,
-				8A9513EB1D2A735F0034DF2C /* ProductPurchaseReceipt.swift */,
 				8A7567341CF7220400D91C04 /* ProductPurchaseUseCase.swift */,
 				8A9513CE1D1D7F0E0034DF2C /* ProductPurchaseUseCaseTests.swift */,
 				8A11A0C81CCF9DDD007BFC7F /* ProductsFetchUseCase.swift */,
 				8A11A0C61CCF9D68007BFC7F /* ProductsFetchUseCaseTests.swift */,
-				8A7567361CF7242800D91C04 /* PurchaseRestorationUseCase.swift */,
+				8A32A4E71D6719730086B49D /* PurchaseCheckUseCase.swift */,
+				8A32A4E91D675A300086B49D /* PurchaseCheckUseCaseTests.swift */,
+				8AE396ED1D6C873300DCFB9E /* PurchaseReminderUseCase.swift */,
+				8AE396EB1D6C86E000DCFB9E /* PurchaseReminderUseCaseTests.swift */,
+				8AE396F81D6DAFFA00DCFB9E /* PurchaseReminderUserDefaults.swift */,
+				8A7831BF1D636EDA006D0D94 /* PurchaseRestorationUseCase.swift */,
+				8A7831BD1D636E92006D0D94 /* PurchaseRestorationUseCaseTests.swift */,
+				8A9513EB1D2A735F0034DF2C /* Receipt.swift */,
+				8AE396F31D6C8B3800DCFB9E /* SavedAccounts.swift */,
 				8A11A0CC1CCFA29A007BFC7F /* Store.swift */,
+				8A859A0E1D2EC8F700118A66 /* StoreEventTarget */,
 				8ADD6A4A1CDCF75D001EDBBA /* StoreUseCaseFactory.swift */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		8A1A79301D4E25750031A0DD /* ReceiptValidation */ = {
+			isa = PBXGroup;
+			children = (
+				8A39A1D11D5E315600D703AD /* CertificateFingerprintValidation.swift */,
+				8A39A1C71D5E05C200D703AD /* PKCS7ContainerValidation.swift */,
+				8A39A1C91D5E176900D703AD /* PKCS7SignatureValidation.swift */,
+				8AC87E881D58DD8B006952F0 /* PurchaseReceiptAttributesValidation.swift */,
+				8ABC9A6E1D522E4D004AC220 /* ReceiptAttributesValidation.swift */,
+				8A39A1D31D5E36FA00D703AD /* ReceiptValidation.swift */,
+			);
+			name = ReceiptValidation;
+			sourceTree = "<group>";
+		};
+		8A2E1BBA1D50CDBB0085A5EF /* ASN1 */ = {
+			isa = PBXGroup;
+			children = (
+				8A2E1BBB1D50CDBB0085A5EF /* AppReceipt.asn1 */,
+				8A2E1BBC1D50CDBB0085A5EF /* asn_application.h */,
+				8A2E1BBD1D50CDBB0085A5EF /* asn_codecs.h */,
+				8A2E1BBE1D50CDBB0085A5EF /* asn_codecs_prim.c */,
+				8A2E1BBF1D50CDBB0085A5EF /* asn_codecs_prim.h */,
+				8A2E1BC01D50CDBB0085A5EF /* asn_internal.h */,
+				8A2E1BC11D50CDBB0085A5EF /* asn_SET_OF.c */,
+				8A2E1BC21D50CDBB0085A5EF /* asn_SET_OF.h */,
+				8A2E1BC31D50CDBB0085A5EF /* asn_system.h */,
+				8A2E1BC41D50CDBB0085A5EF /* ber_decoder.c */,
+				8A2E1BC51D50CDBB0085A5EF /* ber_decoder.h */,
+				8A2E1BC61D50CDBB0085A5EF /* ber_tlv_length.c */,
+				8A2E1BC71D50CDBB0085A5EF /* ber_tlv_length.h */,
+				8A2E1BC81D50CDBB0085A5EF /* ber_tlv_tag.c */,
+				8A2E1BC91D50CDBB0085A5EF /* ber_tlv_tag.h */,
+				8A2E1BCA1D50CDBB0085A5EF /* BIT_STRING.c */,
+				8A2E1BCB1D50CDBB0085A5EF /* BIT_STRING.h */,
+				8A2E1BCC1D50CDBB0085A5EF /* constr_SEQUENCE.c */,
+				8A2E1BCD1D50CDBB0085A5EF /* constr_SEQUENCE.h */,
+				8A2E1BCE1D50CDBB0085A5EF /* constr_SET_OF.c */,
+				8A2E1BCF1D50CDBB0085A5EF /* constr_SET_OF.h */,
+				8A2E1BD01D50CDBB0085A5EF /* constr_TYPE.c */,
+				8A2E1BD11D50CDBB0085A5EF /* constr_TYPE.h */,
+				8A2E1BD21D50CDBB0085A5EF /* constraints.c */,
+				8A2E1BD31D50CDBB0085A5EF /* constraints.h */,
+				8A2E1BD41D50CDBB0085A5EF /* der_encoder.c */,
+				8A2E1BD51D50CDBB0085A5EF /* der_encoder.h */,
+				8A2E1BDB1D50CDBB0085A5EF /* INTEGER.c */,
+				8A2E1BDC1D50CDBB0085A5EF /* INTEGER.h */,
+				8A2E1BDD1D50CDBB0085A5EF /* NativeEnumerated.c */,
+				8A2E1BDE1D50CDBB0085A5EF /* NativeEnumerated.h */,
+				8A2E1BDF1D50CDBB0085A5EF /* NativeInteger.c */,
+				8A2E1BE01D50CDBB0085A5EF /* NativeInteger.h */,
+				8A2E1BE11D50CDBB0085A5EF /* OCTET_STRING.c */,
+				8A2E1BE21D50CDBB0085A5EF /* OCTET_STRING.h */,
+				8A2E1BE31D50CDBB0085A5EF /* Payload.c */,
+				8A2E1BE41D50CDBB0085A5EF /* Payload.h */,
+				8A2E1BE51D50CDBB0085A5EF /* per_decoder.c */,
+				8A2E1BE61D50CDBB0085A5EF /* per_decoder.h */,
+				8A2E1BE71D50CDBB0085A5EF /* per_encoder.c */,
+				8A2E1BE81D50CDBB0085A5EF /* per_encoder.h */,
+				8A2E1BE91D50CDBB0085A5EF /* per_opentype.c */,
+				8A2E1BEA1D50CDBB0085A5EF /* per_opentype.h */,
+				8A2E1BEB1D50CDBB0085A5EF /* per_support.c */,
+				8A2E1BEC1D50CDBB0085A5EF /* per_support.h */,
+				8A2E1BED1D50CDBB0085A5EF /* ReceiptAttribute.c */,
+				8A2E1BEE1D50CDBB0085A5EF /* ReceiptAttribute.h */,
+				8A2E1BEF1D50CDBB0085A5EF /* xer_decoder.c */,
+				8A2E1BF01D50CDBB0085A5EF /* xer_decoder.h */,
+				8A2E1BF11D50CDBB0085A5EF /* xer_encoder.c */,
+				8A2E1BF21D50CDBB0085A5EF /* xer_encoder.h */,
+				8A2E1BF31D50CDBB0085A5EF /* xer_support.c */,
+				8A2E1BF41D50CDBB0085A5EF /* xer_support.h */,
+			);
+			path = ASN1;
 			sourceTree = "<group>";
 		};
 		8A5EADB21D3550B500C53415 /* StoreViewPresenter */ = {
@@ -1087,23 +1406,25 @@
 			isa = PBXGroup;
 			children = (
 				8ADD6A4C1CDCF805001EDBBA /* DefaultStoreUseCaseFactory.swift */,
-				8AD659831D37CA51008A1007 /* NullProductPurchaseEventTarget.swift */,
+				8AE396CB1D6B2F3800DCFB9E /* ExpectedProducts.swift */,
 				8A7C4F781CD104E300EC7C1B /* PresentationProduct.swift */,
 				8A7C4F701CCFC69F00EC7C1B /* Product+SKProduct.swift */,
-				8A859A001D2D2BCF00118A66 /* ProductPurchaseEventSource.swift */,
 				8A859A061D2EC66500118A66 /* Products */,
+				8A88B4EE1D4A8D310083958C /* Receipt */,
+				8AA7487E1D6DD775000587DC /* SimplePurchaseReminderUserDefaults.swift */,
 				8A859A071D2EC69200118A66 /* Store */,
+				8A859A001D2D2BCF00118A66 /* StoreEventSource.swift */,
 				8A9D92381D2D0C6500491D59 /* StoreKitProducts.swift */,
 				8ADD6A631CE0C591001EDBBA /* StoreView.swift */,
 				8ADD6A7C1CE0F995001EDBBA /* StoreViewController.swift */,
-				8ADD6A7D1CE0F995001EDBBA /* StoreViewController.xib */,
+				8AA749051D749E4D000587DC /* StoreViewController.xib */,
 				8AD6597D1D37C95E008A1007 /* StoreViewEventTarget */,
 				8A5EADB21D3550B500C53415 /* StoreViewPresenter */,
 				8A7567381CF75DF500D91C04 /* StoreViewState.swift */,
 				8ABB14181CEC83990056CEDC /* StoreViewStateMachine.swift */,
 				8ABB141A1CEC86A90056CEDC /* StoreViewStateMachineTests.swift */,
 				8ADD6A7E1CE0F995001EDBBA /* StoreWindowController.swift */,
-				8ADD6A7F1CE0F995001EDBBA /* StoreWindowController.xib */,
+				8AA749001D749E05000587DC /* StoreWindowController.xib */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -1124,19 +1445,19 @@
 			children = (
 				8A3865151D369A2100EDA7AB /* FailingStoreFake.swift */,
 				8AD6597B1D36A152008A1007 /* LoggingStore.swift */,
-				8A9D92341D2C007500491D59 /* NullStore.swift */,
 				8A9D92361D2D0BD300491D59 /* SKPaymentQueueToStoreAdapter.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
 		};
-		8A859A081D2EC70700118A66 /* ProductPurchaseReceipt */ = {
+		8A859A081D2EC70700118A66 /* Receipt */ = {
 			isa = PBXGroup;
 			children = (
-				8A9513EF1D2A77AD0034DF2C /* InvalidProductPurchaseReceipt.swift */,
-				8A9513ED1D2A76F90034DF2C /* ValidProductPurchaseReceipt.swift */,
+				8A9513EF1D2A77AD0034DF2C /* InvalidReceipt.swift */,
+				8AE348571D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift */,
+				8A9513ED1D2A76F90034DF2C /* ValidReceipt.swift */,
 			);
-			name = ProductPurchaseReceipt;
+			name = Receipt;
 			sourceTree = "<group>";
 		};
 		8A859A091D2EC71900118A66 /* Products */ = {
@@ -1191,14 +1512,14 @@
 			name = SoundEventTarget;
 			sourceTree = "<group>";
 		};
-		8A859A0E1D2EC8F700118A66 /* ProductPurchaseEventTarget */ = {
+		8A859A0E1D2EC8F700118A66 /* StoreEventTarget */ = {
 			isa = PBXGroup;
 			children = (
-				8A9513D61D22CD8A0034DF2C /* ProductPurchaseEventTarget.swift */,
-				8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingProductPurchaseEventTarget.swift */,
-				8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingProductPurchaseEventTargetTests.swift */,
+				8A9513D61D22CD8A0034DF2C /* StoreEventTarget.swift */,
+				8A9513E31D2A6CCA0034DF2C /* ReceiptValidatingStoreEventTarget.swift */,
+				8A9513E51D2A6F5A0034DF2C /* ReceiptValidatingStoreEventTargetTests.swift */,
 			);
-			name = ProductPurchaseEventTarget;
+			name = StoreEventTarget;
 			sourceTree = "<group>";
 		};
 		8A859A0F1D2EC93800118A66 /* ThrowingUseCase */ = {
@@ -1250,6 +1571,59 @@
 			name = SystemSoundIO;
 			sourceTree = "<group>";
 		};
+		8A88B4EE1D4A8D310083958C /* Receipt */ = {
+			isa = PBXGroup;
+			children = (
+				8A88B4EF1D4A8D470083958C /* BundleReceipt.swift */,
+				8A88B4F41D4ABE380083958C /* LoggingReceipt.swift */,
+				8AE7063C1D4A4D370060FF4F /* ReceiptXPCGateway.swift */,
+			);
+			name = Receipt;
+			sourceTree = "<group>";
+		};
+		8AA748881D6F3A76000587DC /* MusicPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				8AA748911D6F414E000587DC /* AppleMusicPlayer.h */,
+				8AA748921D6F414E000587DC /* AppleMusicPlayer.m */,
+				8AA748C01D704B9F000587DC /* AvailableMusicPlayers.swift */,
+				8AA748BB1D704962000587DC /* MusicPlayers.swift */,
+				8AA748BD1D704A40000587DC /* MusicPlayersTests.swift */,
+				8AA748941D6F6D7C000587DC /* SpotifyMusicPlayer.h */,
+				8AA748951D6F6D7C000587DC /* SpotifyMusicPlayer.m */,
+			);
+			name = MusicPlayer;
+			sourceTree = "<group>";
+		};
+		8AA7489F1D701DEC000587DC /* Music Player */ = {
+			isa = PBXGroup;
+			children = (
+				8AA748B71D70472E000587DC /* MusicPlayer */,
+				8AA748B81D704742000587DC /* MusicPlayerUserDefaults */,
+			);
+			name = "Music Player";
+			sourceTree = "<group>";
+		};
+		8AA748B71D70472E000587DC /* MusicPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				8AA748A31D70220D000587DC /* ConditionalMusicPlayer.swift */,
+				8AA748A51D70221F000587DC /* ConditionalMusicPlayerTests.swift */,
+				8AA748901D6F40FD000587DC /* MusicPlayer.h */,
+			);
+			name = MusicPlayer;
+			sourceTree = "<group>";
+		};
+		8AA748B81D704742000587DC /* MusicPlayerUserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				8AA748B01D703ED3000587DC /* SimpleMusicPlayerUserDefaults.swift */,
+				8AA748B21D703F45000587DC /* SimpleMusicPlayerUserDefaultsTests.swift */,
+				8AA748AC1D702459000587DC /* MusicPlayerUserDefaults.swift */,
+			);
+			name = MusicPlayerUserDefaults;
+			sourceTree = "<group>";
+		};
 		8AD6597D1D37C95E008A1007 /* StoreViewEventTarget */ = {
 			isa = PBXGroup;
 			children = (
@@ -1261,24 +1635,63 @@
 			name = StoreViewEventTarget;
 			sourceTree = "<group>";
 		};
+		8AE396F51D6C8BFF00DCFB9E /* SavedAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				8AE396F11D6C8ACB00DCFB9E /* EnabledSavedAccountsStub.swift */,
+				8AE396F61D6C8C2600DCFB9E /* DisabledSavedAccountsStub.swift */,
+			);
+			name = SavedAccounts;
+			sourceTree = "<group>";
+		};
+		8AE706241D491C220060FF4F /* ReceiptValidation */ = {
+			isa = PBXGroup;
+			children = (
+				8A2E1BBA1D50CDBB0085A5EF /* ASN1 */,
+				8A39A1AE1D5BE70000D703AD /* ASN1Payload.h */,
+				8A39A1AF1D5BE70000D703AD /* ASN1Payload.m */,
+				8A39A1B41D5C7C2700D703AD /* ASN1PayloadAttribute.swift */,
+				8A39A1B71D5C7F9400D703AD /* ASN1PurchaseReceipt.swift */,
+				8A39A1B91D5C804700D703AD /* ASN1PurchaseReceipts.swift */,
+				8A39A1C51D5DF97B00D703AD /* ASN1Receipt.swift */,
+				8A39A1C31D5CA2B900D703AD /* ASN1ReceiptPayload.swift */,
+				8AE7063A1D4A2F360060FF4F /* DefaultNSXPCListenerDelegate.swift */,
+				8ADE59941D61E8F700B41275 /* DeviceGUID.swift */,
+				8A39A1AB1D5BE42100D703AD /* PKCS7Container.h */,
+				8A39A1AC1D5BE42100D703AD /* PKCS7Container.m */,
+				8ADE59901D61D0F000B41275 /* ReceiptChecksum.swift */,
+				8A1A79301D4E25750031A0DD /* ReceiptValidation */,
+				8ADE59921D61D6A200B41275 /* SHA256Fingerprint.swift */,
+				8A39A1BB1D5C894500D703AD /* String+ASN1.swift */,
+				8AE706341D4A2E180060FF4F /* main.swift */,
+				8AE7062B1D491C220060FF4F /* Info.plist */,
+				8A88B4E21D4A5F7C0083958C /* ReceiptValidation.entitlements */,
+				8AE706331D4A2E180060FF4F /* ReceiptValidation-Bridging-Header.h */,
+				8A88B5A41D4BB9D20083958C /* Certificate.crt */,
+			);
+			path = ReceiptValidation;
+			sourceTree = "<group>";
+		};
 		AA078B2A1BFF80E30013FF8F /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
 				AA39055F1C007799005A8AA3 /* Audio Devices */,
 				AA92F89B1C2AF90000C378B6 /* Ringtone */,
+				8AA7489F1D701DEC000587DC /* Music Player */,
 				8A11A0C51CCF9D31007BFC7F /* Store */,
 				AA3B6E851C47ACFA0030D410 /* Timer */,
 				AA3905601C0077B7005A8AA3 /* User Agent */,
 				8ADD6B6C1C528F720029C3D8 /* Error.swift */,
+				AA32F7FD1BC6908300FAC228 /* KeyValueUserDefaults.swift */,
 				8A7E21531CC411F3000D02C3 /* ServiceAddress.swift */,
 				8A7E21511CC3F6A5000D02C3 /* ServiceAddressTests.swift */,
 				8A859A0F1D2EC93800118A66 /* ThrowingUseCase */,
 				AA404AC61BFC8E5D00D00A3E /* UseCase.swift */,
 				AAB32A111BEBA4BA0016C8E6 /* UseCaseFactory.swift */,
-				AA32F7FD1BC6908300FAC228 /* UserDefaults.swift */,
 				AA7F6D3B1C034B700064DA3A /* UserDefaultsKeys.h */,
 				AA7F6D3C1C034B700064DA3A /* UserDefaultsKeys.m */,
 				AA078B2B1BFF80E30013FF8F /* UseCases.h */,
+				8AA748F91D74986A000587DC /* Localizable.strings */,
 				AA078B2D1BFF80E30013FF8F /* Info.plist */,
 			);
 			path = UseCases;
@@ -1392,6 +1805,7 @@
 			children = (
 				AA4D49081BB99DCC004D1D4B /* AudioUnit.framework */,
 				AA4D49061BB99DBF004D1D4B /* AudioToolbox.framework */,
+				8AA749311D75FF18000587DC /* StoreKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1510,17 +1924,22 @@
 			isa = PBXGroup;
 			children = (
 				8A7874F51C5A29EE002494ED /* ConditionalRingtonePlaybackUseCaseTestDelegate.swift */,
-				8A859A081D2EC70700118A66 /* ProductPurchaseReceipt */,
+				8AA748A81D7022BA000587DC /* MusicPlayerSpy.swift */,
+				8AA748AA1D7023B5000587DC /* MusicPlayerUserDefaultsFake.swift */,
 				8A859A091D2EC71900118A66 /* Products */,
 				8ADD6A761CE0E704001EDBBA /* ProductsEventTargetSpy.swift */,
 				8A11A0D01CCFA8B5007BFC7F /* ProductsFetchUseCaseOutputSpy.swift */,
-				8A9513E71D2A6FCE0034DF2C /* ProductPurchaseEventTargetSpy.swift */,
+				8A32A4EB1D675B990086B49D /* PurchaseCheckUseCaseOutputSpy.swift */,
+				8AE396EF1D6C887F00DCFB9E /* PurchaseReminderUseCaseOutputSpy.swift */,
+				8A859A081D2EC70700118A66 /* Receipt */,
 				AA1019781C48078900869D01 /* RingtoneFactorySpy.swift */,
 				8A7874F31C5A2774002494ED /* RingtonePlaybackUseCaseSpy.swift */,
 				AA1019741C48065700869D01 /* RingtoneSpy.swift */,
+				8AE396F51D6C8BFF00DCFB9E /* SavedAccounts */,
 				AA1019801C48F08A00869D01 /* SoundFactorySpy.swift */,
 				8A0451E51C93308000A08012 /* SoundPlaybackUseCaseSpy.swift */,
 				AA3B6E8C1C47C20A0030D410 /* SoundSpy.swift */,
+				8A9513E71D2A6FCE0034DF2C /* StoreEventTargetSpy.swift */,
 				8A11A0CA1CCFA258007BFC7F /* StoreSpy.swift */,
 				8ADD6A5E1CDCFFC4001EDBBA /* StoreUseCaseFactorySpy.swift */,
 				AAC0FFB91BE28D2500A5C7E5 /* SystemAudioDevicesChangeEventTargetSpy.swift */,
@@ -1671,6 +2090,7 @@
 			files = (
 				AA078B2C1BFF80E30013FF8F /* UseCases.h in Headers */,
 				AA7F6D3D1C034B700064DA3A /* UserDefaultsKeys.h in Headers */,
+				8AA748A21D702063000587DC /* MusicPlayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1701,6 +2121,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8AE706221D491C210060FF4F /* ReceiptValidation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8AE706301D491C220060FF4F /* Build configuration list for PBXNativeTarget "ReceiptValidation" */;
+			buildPhases = (
+				8AE7061F1D491C210060FF4F /* Sources */,
+				8AE706201D491C210060FF4F /* Frameworks */,
+				8AE706211D491C210060FF4F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReceiptValidation;
+			productName = ReceiptValidation;
+			productReference = 8AE706231D491C220060FF4F /* ReceiptValidation.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		8D1107260486CEB800E47090 /* Telephone */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Telephone" */;
@@ -1709,11 +2146,13 @@
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				AAF51C4D0EF6CF480098A372 /* CopyFiles */,
+				8AE7062E1D491C220060FF4F /* Embed XPC Services */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				AA76E0151BFF82F500CC5C07 /* PBXTargetDependency */,
+				8AE7062D1D491C220060FF4F /* PBXTargetDependency */,
 			);
 			name = Telephone;
 			productInstallPath = "$(HOME)/Applications";
@@ -1896,11 +2335,28 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
 				TargetAttributes = {
-					8D1107260486CEB800E47090 = {
+					8AE706221D491C210060FF4F = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = B5WSA37RY8;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					8D1107260486CEB800E47090 = {
+						DevelopmentTeam = B5WSA37RY8;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -1908,24 +2364,44 @@
 					};
 					AA078B281BFF80E20013FF8F = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					AA078B311BFF80E30013FF8F = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
 					};
 					AA3FAB841BBAAE630064B2C3 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 					};
 					AA9D08021BFF7E6F0000F618 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					AA9D080B1BFF7E6F0000F618 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					AAC4FF801C0214110060B186 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					AAC4FF941C0215B90060B186 = {
 						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
+					};
+					AAF2990F0F575044007B5036 = {
+						DevelopmentTeam = B5WSA37RY8;
+						ProvisioningStyle = Automatic;
+					};
+					AAF299960F57566B007B5036 = {
+						DevelopmentTeam = B5WSA37RY8;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1934,9 +2410,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				German,
-				Russian,
+				en,
+				de,
+				ru,
+				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Telephone */;
 			projectDirPath = "";
@@ -1953,11 +2430,20 @@
 				AAF99B2C14A2577D00D087DC /* Address Book Plug-Ins */,
 				AAF2990F0F575044007B5036 /* TelephoneAddressBookPhonePlugIn */,
 				AAF299960F57566B007B5036 /* TelephoneAddressBookSIPAddressPlugIn */,
+				8AE706221D491C210060FF4F /* ReceiptValidation */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8AE706211D491C210060FF4F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A88B5A51D4BB9D20083958C /* Certificate.crt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1966,7 +2452,7 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				AA2ED9A50F05B5C6004A13C6 /* Preferences.xib in Resources */,
 				AA2ED99C0F05B362004A13C6 /* Account.xib in Resources */,
-				8ADD6A811CE0F995001EDBBA /* StoreViewController.xib in Resources */,
+				8AA749031D749E4D000587DC /* StoreViewController.xib in Resources */,
 				AA2ED9A00F05B3B5004A13C6 /* Call.xib in Resources */,
 				AA2ED9AC0F05BA11004A13C6 /* AccountSetup.xib in Resources */,
 				AA2ED9B20F05BB5D004A13C6 /* AuthenticationFailure.xib in Resources */,
@@ -1985,7 +2471,7 @@
 				AA7CB51F11442249004D79DA /* ActiveAccountTransferView.xib in Resources */,
 				AA7CB51D11442241004D79DA /* CallTransfer.xib in Resources */,
 				AA7CB528114423A4004D79DA /* ActiveCallTransferView.xib in Resources */,
-				8ADD6A831CE0F995001EDBBA /* StoreWindowController.xib in Resources */,
+				8AA748FE1D749E05000587DC /* StoreWindowController.xib in Resources */,
 				AA7CB5301144242F004D79DA /* EndedCallTransferView.xib in Resources */,
 				AA53434712ADBAD200B47767 /* Sound.tiff in Resources */,
 			);
@@ -1995,6 +2481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AA748F71D74986A000587DC /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2059,11 +2546,62 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8AE7061F1D491C210060FF4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A88B4E81D4A666F0083958C /* DefaultNSXPCListenerDelegate.swift in Sources */,
+				8A39A1AD1D5BE42100D703AD /* PKCS7Container.m in Sources */,
+				8A39A1B01D5BE70000D703AD /* ASN1Payload.m in Sources */,
+				8A88B4E71D4A64BF0083958C /* main.swift in Sources */,
+				8A39A1D41D5E36FA00D703AD /* ReceiptValidation.swift in Sources */,
+				8A2E1C0D1D50CDBB0085A5EF /* ReceiptAttribute.c in Sources */,
+				8A2E1BFC1D50CDBB0085A5EF /* constr_SEQUENCE.c in Sources */,
+				8A2E1BFB1D50CDBB0085A5EF /* BIT_STRING.c in Sources */,
+				8A39A1C81D5E05C200D703AD /* PKCS7ContainerValidation.swift in Sources */,
+				8A2E1C0C1D50CDBB0085A5EF /* per_support.c in Sources */,
+				8A39A1B51D5C7C2700D703AD /* ASN1PayloadAttribute.swift in Sources */,
+				8A39A1BA1D5C804700D703AD /* ASN1PurchaseReceipts.swift in Sources */,
+				8A2E1C091D50CDBB0085A5EF /* per_decoder.c in Sources */,
+				8A2E1BF61D50CDBB0085A5EF /* asn_codecs_prim.c in Sources */,
+				8A2E1BFF1D50CDBB0085A5EF /* constraints.c in Sources */,
+				8A2E1C0F1D50CDBB0085A5EF /* xer_encoder.c in Sources */,
+				8A2E1BF81D50CDBB0085A5EF /* ber_decoder.c in Sources */,
+				8A2E1BFE1D50CDBB0085A5EF /* constr_TYPE.c in Sources */,
+				8ADE59911D61D0F000B41275 /* ReceiptChecksum.swift in Sources */,
+				8A2E1BF71D50CDBB0085A5EF /* asn_SET_OF.c in Sources */,
+				8A2E1C081D50CDBB0085A5EF /* Payload.c in Sources */,
+				8A2E1C041D50CDBB0085A5EF /* INTEGER.c in Sources */,
+				8AC87E891D58DD8B006952F0 /* PurchaseReceiptAttributesValidation.swift in Sources */,
+				8A2E1BFA1D50CDBB0085A5EF /* ber_tlv_tag.c in Sources */,
+				8A2E1C001D50CDBB0085A5EF /* der_encoder.c in Sources */,
+				8A2E1C061D50CDBB0085A5EF /* NativeInteger.c in Sources */,
+				8A2E1C051D50CDBB0085A5EF /* NativeEnumerated.c in Sources */,
+				8A39A1D21D5E315600D703AD /* CertificateFingerprintValidation.swift in Sources */,
+				8A39A1C61D5DF97B00D703AD /* ASN1Receipt.swift in Sources */,
+				8A39A1BC1D5C894500D703AD /* String+ASN1.swift in Sources */,
+				8A39A1CA1D5E176900D703AD /* PKCS7SignatureValidation.swift in Sources */,
+				8ADE59931D61D6A200B41275 /* SHA256Fingerprint.swift in Sources */,
+				8ADE59951D61E8F700B41275 /* DeviceGUID.swift in Sources */,
+				8A2E1BFD1D50CDBB0085A5EF /* constr_SET_OF.c in Sources */,
+				8A39A1C41D5CA2B900D703AD /* ASN1ReceiptPayload.swift in Sources */,
+				8A2E1C0B1D50CDBB0085A5EF /* per_opentype.c in Sources */,
+				8A2E1C0A1D50CDBB0085A5EF /* per_encoder.c in Sources */,
+				8A2E1C101D50CDBB0085A5EF /* xer_support.c in Sources */,
+				8A2E1C0E1D50CDBB0085A5EF /* xer_decoder.c in Sources */,
+				8A2E1C071D50CDBB0085A5EF /* OCTET_STRING.c in Sources */,
+				8ABC9A6F1D522E4D004AC220 /* ReceiptAttributesValidation.swift in Sources */,
+				8A39A1B81D5C7F9400D703AD /* ASN1PurchaseReceipt.swift in Sources */,
+				8A2E1BF91D50CDBB0085A5EF /* ber_tlv_length.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				8AA748961D6F6D7C000587DC /* SpotifyMusicPlayer.m in Sources */,
 				8A63ECD41CCFBEC400AEC485 /* SKProductsRequestToProductsAdapter.swift in Sources */,
 				AA4BD4C80E07C28E005A71B2 /* AKSIPUserAgent.m in Sources */,
 				AA10198E1C4946EE00869D01 /* NSSoundToSoundAdapter.swift in Sources */,
@@ -2073,13 +2611,12 @@
 				AABAD7ED0E0C171A00CB5930 /* PreferencesController.m in Sources */,
 				AA2CCC840E2E4EEB00871057 /* AKSIPCall.m in Sources */,
 				8AB5A0CB1D084E4F00579CE8 /* PresentationProduct.swift in Sources */,
-				8A9D92351D2C007500491D59 /* NullStore.swift in Sources */,
 				8A91759F1CA59F1100354E26 /* PJSUAOnCallMediaState.m in Sources */,
 				8A779F8E1CA080F900D90391 /* UserAgentAudioDevice+PJSIP.swift in Sources */,
 				AA3578B30E40709900021989 /* AccountController.m in Sources */,
 				8ADD6A6A1CE0C8CF001EDBBA /* PresenterFactory.swift in Sources */,
-				8AD659841D37CA51008A1007 /* NullProductPurchaseEventTarget.swift in Sources */,
 				AA3578B60E4070AD00021989 /* CallController.m in Sources */,
+				8AA748C11D704B9F000587DC /* AvailableMusicPlayers.swift in Sources */,
 				AACC029E1C15DCB100913D7B /* SoundIOPresenter.swift in Sources */,
 				AA6989A31C19AF150067BFB1 /* DefaultSoundPreferencesViewEventTarget.swift in Sources */,
 				AAECDE8F0E70703100CEAE7B /* AKNSString+Scanning.m in Sources */,
@@ -2087,14 +2624,18 @@
 				AA3FABA71BBC0A0D0064B2C3 /* SystemAudioDevicesChangeEventSource.swift in Sources */,
 				AAC0FFC21BE38CEE00A5C7E5 /* AKSIPUserAgentNotifications.m in Sources */,
 				AA2C03FC1BD7F670001D25F9 /* UserAgentAudioDevices.swift in Sources */,
+				8A88B4F31D4ABCCB0083958C /* ValidReceipt.swift in Sources */,
+				8AA7487F1D6DD775000587DC /* SimplePurchaseReminderUserDefaults.swift in Sources */,
 				AA0302F20EB9F347000738F7 /* AKSIPURI.m in Sources */,
 				AAEE7C310ECD953200A7DEB4 /* AKNSWindow+Resizing.m in Sources */,
 				8AC1A43C1C679DA8007778A2 /* NSSoundToSoundAdapterFactory.swift in Sources */,
 				8A9175AD1CABF61200354E26 /* UserAgentError.swift in Sources */,
+				8AE396CC1D6B2F3800DCFB9E /* ExpectedProducts.swift in Sources */,
 				AACD92D00ED434DD00AF8D17 /* AKActiveCallView.m in Sources */,
 				AA2C03F51BD7D827001D25F9 /* AKSIPUserAgent+UserAgent.swift in Sources */,
 				8A7874F81C5A2F4D002494ED /* AppController+ConditionalRingtonePlaybackUseCaseDelegate.swift in Sources */,
 				AAFA9B1D0EE1D8FC009A45CB /* AKSIPURIFormatter.m in Sources */,
+				8AE7063D1D4A4D370060FF4F /* ReceiptXPCGateway.swift in Sources */,
 				8A6D96F01D05937900D9C15B /* NullStoreViewEventTarget.swift in Sources */,
 				8A9175A21CA5A02500354E26 /* PJSUAOnCallTransferStatus.m in Sources */,
 				AA1019841C490BD300869D01 /* RepeatingSoundFactory.swift in Sources */,
@@ -2108,13 +2649,15 @@
 				8ADD6A5A1CDCFE7C001EDBBA /* DefaultStoreViewEventTarget.swift in Sources */,
 				8A9175A51CA5A10800354E26 /* PJSUAOnCallReplaced.m in Sources */,
 				AA16CC9E0F857009000CAFD1 /* AKNSString+Escaping.m in Sources */,
-				8A859A011D2D2BCF00118A66 /* ProductPurchaseEventSource.swift in Sources */,
+				8A859A011D2D2BCF00118A66 /* StoreEventSource.swift in Sources */,
 				AABA3A740F8A2B93009E1005 /* AKSIPAccount.m in Sources */,
 				AAAC618C0FE6A42900FBE053 /* AKNetworkReachability.m in Sources */,
 				8AD6597C1D36A152008A1007 /* LoggingStore.swift in Sources */,
 				AA3FABAE1BBC19C10064B2C3 /* SystemAudioDeviceIDs.swift in Sources */,
 				AAF639F60FEFF13A0089DA3A /* AKResponsiveProgressIndicator.m in Sources */,
+				8A88B4F01D4A8D470083958C /* BundleReceipt.swift in Sources */,
 				8A9534611D05953D00EE9084 /* AsyncFailingProductsFake.swift in Sources */,
+				8AA748931D6F414E000587DC /* AppleMusicPlayer.m in Sources */,
 				AA1019901C49486500869D01 /* UserDefaultsSoundFactory.swift in Sources */,
 				8AD6597F1D37C987008A1007 /* StoreViewEventTarget.swift in Sources */,
 				AAF6336A1056FEA600CF6C3B /* ActiveAccountViewController.m in Sources */,
@@ -2127,21 +2670,26 @@
 				AA4C2E791BBFEEAB00C3D096 /* SystemAudioObject.swift in Sources */,
 				AA34AF4B1073B84700FA38F7 /* NetworkPreferencesViewController.m in Sources */,
 				8A0FD63C1C9B137900AB3640 /* PreferencesSoundIOUpdater.swift in Sources */,
-				AAE39A3B1BDA59F100EFB7BC /* NSUserDefaults+UserDefaults.swift in Sources */,
+				AAE39A3B1BDA59F100EFB7BC /* NSUserDefaults+KeyValueUserDefaults.swift in Sources */,
 				8A7567391CF75DF500D91C04 /* StoreViewState.swift in Sources */,
 				8ADD6A4D1CDCF805001EDBBA /* DefaultStoreUseCaseFactory.swift in Sources */,
+				8A88B4F51D4ABE380083958C /* LoggingReceipt.swift in Sources */,
 				AA34AF831073BF5D00FA38F7 /* GeneralPreferencesViewController.m in Sources */,
 				8A9175AB1CA5A92500354E26 /* PJSUAOnNATDetect.m in Sources */,
 				AAFCFFBD1074BFCA0018C7DA /* AccountSetupController.m in Sources */,
 				AAD92132107A5E9F00F142A4 /* ActiveCallViewController.m in Sources */,
+				8AA748BC1D704962000587DC /* MusicPlayers.swift in Sources */,
 				8AB5A0C71D084DD300579CE8 /* DefaultStoreViewPresenter.swift in Sources */,
 				8A9D92371D2D0BD300491D59 /* SKPaymentQueueToStoreAdapter.swift in Sources */,
+				8AA748811D6DECAB000587DC /* UserDefaultsSavedAccounts.swift in Sources */,
 				8ADD6A821CE0F995001EDBBA /* StoreWindowController.swift in Sources */,
 				8ABB14191CEC83990056CEDC /* StoreViewStateMachine.swift in Sources */,
 				AAD92136107A607C00F142A4 /* IncomingCallViewController.m in Sources */,
 				AAD92139107A608B00F142A4 /* EndedCallViewController.m in Sources */,
 				AA32F7FB1BC52A2A00FAC228 /* UserDefaultsKeys.m in Sources */,
 				8AA791FC1CE245940082E4FC /* AsyncProductsFake.swift in Sources */,
+				8A88B4F11D4ABCCB0083958C /* InvalidReceipt.swift in Sources */,
+				8AA748831D6DEE61000587DC /* SavedAccount.swift in Sources */,
 				AA3FABAB1BBC183B0064B2C3 /* SystemAudioDevices.swift in Sources */,
 				8A9175991CA59D5C00354E26 /* PJSUAOnIncomingCall.m in Sources */,
 				AA97B47610D3A2CA00FC65DA /* CallTransferController.m in Sources */,
@@ -2156,6 +2704,7 @@
 				AAE39A381BD92DF600EFB7BC /* String+Creating.swift in Sources */,
 				AAA810B41115D7F9008CA945 /* EndedCallTransferViewController.m in Sources */,
 				8A9175A81CA5A53E00354E26 /* PJSUAOnAccountRegistrationState.m in Sources */,
+				8A88B4F21D4ABCCB0083958C /* NoActivePurchasesReceipt.swift in Sources */,
 				AAC0FFBE1BE38B3800A5C7E5 /* UserAgentNotificationsToEventTargetAdapter.swift in Sources */,
 				8A9534631D059A5300EE9084 /* LoggingProducts.swift in Sources */,
 				AA3FABB01BBC1CCE0064B2C3 /* TelephoneError.swift in Sources */,
@@ -2167,17 +2716,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1019731C48046D00869D01 /* DefaultRingtonePlaybackUseCase.swift in Sources */,
+				8A7831C01D636EDA006D0D94 /* PurchaseRestorationUseCase.swift in Sources */,
 				AA3B6E891C47AD150030D410 /* TimerFactory.swift in Sources */,
 				8A3D60671C734A8900D7F54C /* NullSoundEventTarget.swift in Sources */,
 				8A7874F21C5A2612002494ED /* ConditionalRingtonePlaybackUseCase.swift in Sources */,
+				8AA748A41D70220D000587DC /* ConditionalMusicPlayer.swift in Sources */,
 				AA3B6E801C46B40C0030D410 /* Sound.swift in Sources */,
 				8ADA26F41C986C9E0066B224 /* SoundConfigurationLoadUseCase.swift in Sources */,
 				8A7E21541CC411F3000D02C3 /* ServiceAddress.swift in Sources */,
 				8ADD31CD1CC165C3008C083C /* DelayingUserAgentSoundIOSelectionUseCase.swift in Sources */,
-				8A7567371CF7242800D91C04 /* PurchaseRestorationUseCase.swift in Sources */,
 				8A61363C1CC23AB900A087A4 /* SystemAudioDevicesChangeEventTargets.swift in Sources */,
 				AA1019771C48071700869D01 /* RingtoneFactory.swift in Sources */,
 				AA3905321BFFDDDA005A8AA3 /* UserAgentAudioDeviceUpdateUseCase.swift in Sources */,
+				8A32A4E81D6719730086B49D /* PurchaseCheckUseCase.swift in Sources */,
+				8AE396F91D6DAFFA00DCFB9E /* PurchaseReminderUserDefaults.swift in Sources */,
 				AA3905411BFFDE37005A8AA3 /* UserAgentEventTarget.swift in Sources */,
 				AA92F8A41C2B02E700C378B6 /* Ringtone.swift in Sources */,
 				AA10197D1C4821C400869D01 /* SoundFactory.swift in Sources */,
@@ -2186,16 +2738,18 @@
 				8AAACA151CAEC555001930C4 /* UserDefaultsSoundIO.swift in Sources */,
 				8ADD31CA1CC112A2008C083C /* NullThrowingUseCase.swift in Sources */,
 				8A61363B1CC23AA000A087A4 /* SystemAudioDevicesChangeEventTarget.swift in Sources */,
-				8A9513E41D2A6CCA0034DF2C /* ReceiptValidatingProductPurchaseEventTarget.swift in Sources */,
-				8A9513D71D22CD8A0034DF2C /* ProductPurchaseEventTarget.swift in Sources */,
+				8A9513E41D2A6CCA0034DF2C /* ReceiptValidatingStoreEventTarget.swift in Sources */,
+				8A9513D71D22CD8A0034DF2C /* StoreEventTarget.swift in Sources */,
 				AA39052C1BFFDDC4005A8AA3 /* UseCase.swift in Sources */,
 				8ADD6B6D1C528F720029C3D8 /* Error.swift in Sources */,
 				8A11A0C91CCF9DDD007BFC7F /* ProductsFetchUseCase.swift in Sources */,
-				8A9513EC1D2A735F0034DF2C /* ProductPurchaseReceipt.swift in Sources */,
+				8A9513EC1D2A735F0034DF2C /* Receipt.swift in Sources */,
 				AA6989B21C19CAF60067BFB1 /* UseCaseFactory.swift in Sources */,
 				8ADD6A4B1CDCF75D001EDBBA /* StoreUseCaseFactory.swift in Sources */,
 				8AC1A4411C67BFA8007778A2 /* SoundEventTarget.swift in Sources */,
-				AA3905471BFFDE9A005A8AA3 /* UserDefaults.swift in Sources */,
+				8AE396EE1D6C873300DCFB9E /* PurchaseReminderUseCase.swift in Sources */,
+				8AA748B51D70460B000587DC /* SimpleMusicPlayerUserDefaults.swift in Sources */,
+				AA3905471BFFDE9A005A8AA3 /* KeyValueUserDefaults.swift in Sources */,
 				AA3905441BFFDE75005A8AA3 /* UserAgentEventTargets.swift in Sources */,
 				AA7F6D471C0381C00064DA3A /* UserDefaultsSoundIOLoadUseCase.swift in Sources */,
 				AA31663B1C4FB30800E7ECA5 /* UserDefaultsRingtoneSoundConfigurationLoadUseCase.swift in Sources */,
@@ -2215,9 +2769,11 @@
 				AA39052F1BFFDDDA005A8AA3 /* PreferredSoundIO.swift in Sources */,
 				8A11A0CF1CCFA74F007BFC7F /* Product.swift in Sources */,
 				8A4E38321C5BB25F00816F38 /* UserDefaultsRingtoneSoundNameSaveUseCase.swift in Sources */,
+				8AE396F41D6C8B3800DCFB9E /* SavedAccounts.swift in Sources */,
 				AA3B6E821C46B55C0030D410 /* RepeatingSound.swift in Sources */,
 				AA3905301BFFDDDA005A8AA3 /* SystemAudioDeviceRepository.swift in Sources */,
 				8ADD6A6F1CE0DCF8001EDBBA /* ProductsEventTargets.swift in Sources */,
+				8AA748AD1D702459000587DC /* MusicPlayerUserDefaults.swift in Sources */,
 				AA3B6E871C47AD0B0030D410 /* Timer.swift in Sources */,
 				8ADA26F21C984E1D0066B224 /* RingtonePlaybackUseCase.swift in Sources */,
 				AA39053A1BFFDDE2005A8AA3 /* UserAgentAudioDevice.swift in Sources */,
@@ -2230,19 +2786,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				8ADD31CC1CC165B5008C083C /* DelayingUserAgentSoundIOSelectionUseCaseTests.swift in Sources */,
+				8AA748B61D704657000587DC /* SimpleMusicPlayerUserDefaultsTests.swift in Sources */,
+				8A32A4EA1D675A300086B49D /* PurchaseCheckUseCaseTests.swift in Sources */,
+				8AE396EC1D6C86E000DCFB9E /* PurchaseReminderUseCaseTests.swift in Sources */,
 				AA39053C1BFFDDED005A8AA3 /* PreferredSoundIOTests.swift in Sources */,
 				AA3905461BFFDE7C005A8AA3 /* UserAgentEventTargetsTests.swift in Sources */,
 				8A4D0AFE1C96D6A0005543A2 /* RingtoneOutputUpdateUseCaseTests.swift in Sources */,
 				8A9513CF1D1D7F0E0034DF2C /* ProductPurchaseUseCaseTests.swift in Sources */,
+				8AA748A71D702221000587DC /* ConditionalMusicPlayerTests.swift in Sources */,
 				AA7F6D451C0381650064DA3A /* UserDefaultsSoundIOLoadUseCaseTests.swift in Sources */,
 				AA39053D1BFFDDED005A8AA3 /* UserAgentSoundIOSelectionUseCaseTests.swift in Sources */,
 				8ADD6A711CE0DECC001EDBBA /* ProductsEventTargetsTests.swift in Sources */,
 				8A61363D1CC23ABC00A087A4 /* SystemAudioDevicesChangeEventTargetsTests.swift in Sources */,
 				8A7874F01C5A25D0002494ED /* ConditionalRingtonePlaybackUseCaseTests.swift in Sources */,
-				8A9513E61D2A6F5A0034DF2C /* ReceiptValidatingProductPurchaseEventTargetTests.swift in Sources */,
+				8A9513E61D2A6F5A0034DF2C /* ReceiptValidatingStoreEventTargetTests.swift in Sources */,
 				AA1019711C48044900869D01 /* DefaultRingtonePlaybackUseCaseTests.swift in Sources */,
 				8A11A0C71CCF9D68007BFC7F /* ProductsFetchUseCaseTests.swift in Sources */,
 				AA18F5FF1C21CD2500FD8E9F /* UserDefaultsSoundIOSaveUseCaseTests.swift in Sources */,
+				8A7831BE1D636E92006D0D94 /* PurchaseRestorationUseCaseTests.swift in Sources */,
 				8A4E38301C5BB20100816F38 /* UserDefaultsRingtoneSoundNameSaveUseCaseTests.swift in Sources */,
 				AA3166391C4FB21500E7ECA5 /* UserDefaultsRingtoneSoundConfigurationLoadUseCaseTests.swift in Sources */,
 				AA3B6E8B1C47BFDF0030D410 /* RepeatingSoundTests.swift in Sources */,
@@ -2270,14 +2831,17 @@
 				8A57AEA71CBEAF1200A36200 /* AKSIPCallNotifications.m in Sources */,
 				8ABB141C1CEC86B10056CEDC /* StoreViewStateMachine.swift in Sources */,
 				AA1019881C490BF100869D01 /* RepeatingSoundFactory.swift in Sources */,
+				8AA748BE1D704A40000587DC /* MusicPlayersTests.swift in Sources */,
 				8ADD6A6B1CE0C8CF001EDBBA /* PresenterFactory.swift in Sources */,
 				AAC0FFC31BE38CEE00A5C7E5 /* AKSIPUserAgentNotifications.m in Sources */,
 				AA6989AE1C19B13F0067BFB1 /* SoundPreferencesViewEventTarget.swift in Sources */,
 				8ABB141B1CEC86A90056CEDC /* StoreViewStateMachineTests.swift in Sources */,
+				8AA748871D6F10C6000587DC /* SavedAccount.swift in Sources */,
 				AA32F7FC1BC52A2A00FAC228 /* UserDefaultsKeys.m in Sources */,
 				AA19CFF91BED149C00991CAA /* DefaultUseCaseFactory.swift in Sources */,
 				AA6989A71C19AF310067BFB1 /* DefaultSoundPreferencesViewEventTargetTests.swift in Sources */,
 				8AB5A0C91D084DD800579CE8 /* DefaultStoreViewPresenterTests.swift in Sources */,
+				8AA748861D6F10B6000587DC /* UserDefaultsSavedAccounts.swift in Sources */,
 				AAC0FFBC1BE38ADE00A5C7E5 /* UserAgentNotificationsToEventTargetAdapterTests.swift in Sources */,
 				8ADD6A661CE0C5E9001EDBBA /* StoreView.swift in Sources */,
 				8A0FD63D1C9B13B100AB3640 /* PreferencesSoundIOUpdater.swift in Sources */,
@@ -2285,12 +2849,14 @@
 				AA277A4A1BCFDD030030ECE4 /* TelephoneError.swift in Sources */,
 				AACC029F1C15DCE300913D7B /* SoundIOPresenter.swift in Sources */,
 				8A0FD63A1C9B133200AB3640 /* PreferencesSoundIOUpdaterTests.swift in Sources */,
+				8AA748851D6F0D00000587DC /* UserDefaultsSavedAccountsTests.swift in Sources */,
 				8A9175AE1CABF61200354E26 /* UserAgentError.swift in Sources */,
 				8A6D96EE1D01DDA900D9C15B /* StoreViewSpy.swift in Sources */,
 				8ADD6A5B1CDCFEB9001EDBBA /* DefaultStoreViewEventTarget.swift in Sources */,
 				AA6989A41C19AF1C0067BFB1 /* DefaultSoundPreferencesViewEventTarget.swift in Sources */,
 				AACC02A11C15E17E00913D7B /* SoundPreferencesViewSpy.swift in Sources */,
 				8A5EADB11D35508D00C53415 /* StoreViewPresenter.swift in Sources */,
+				8AA748BF1D704A44000587DC /* MusicPlayers.swift in Sources */,
 				AACC029C1C15DC7600913D7B /* SoundIOPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2364,24 +2930,31 @@
 				8ADD31C61CC10E50008C083C /* UserAgentSoundIOSelectionUseCaseFake.swift in Sources */,
 				AA3B6E8D1C47C20A0030D410 /* SoundSpy.swift in Sources */,
 				AA7F6D321C0217020064DA3A /* UserDefaultsFake.swift in Sources */,
+				8AA748A91D7022BA000587DC /* MusicPlayerSpy.swift in Sources */,
 				AA7F6D311C0217020064DA3A /* UserAgentSpy.swift in Sources */,
+				8AE396F21D6C8ACB00DCFB9E /* EnabledSavedAccountsStub.swift in Sources */,
+				8AA748AB1D7023B5000587DC /* MusicPlayerUserDefaultsFake.swift in Sources */,
+				8AE396F71D6C8C2600DCFB9E /* DisabledSavedAccountsStub.swift in Sources */,
 				AA1019751C48065700869D01 /* RingtoneSpy.swift in Sources */,
 				8A9D92311D2AE79300491D59 /* FailingFetchProductsFake.swift in Sources */,
 				8A61363E1CC23AFF00A087A4 /* SystemAudioDevicesChangeEventTargetSpy.swift in Sources */,
 				8ADD31C81CC10FA6008C083C /* UseCaseFactoryFake.swift in Sources */,
-				8A9513EE1D2A76F90034DF2C /* ValidProductPurchaseReceipt.swift in Sources */,
+				8AE348581D3FC5E0005F9981 /* NoActivePurchasesReceipt.swift in Sources */,
+				8A9513EE1D2A76F90034DF2C /* ValidReceipt.swift in Sources */,
 				8A7874F61C5A29EE002494ED /* ConditionalRingtonePlaybackUseCaseTestDelegate.swift in Sources */,
-				8A9513E81D2A6FCE0034DF2C /* ProductPurchaseEventTargetSpy.swift in Sources */,
+				8A9513E81D2A6FCE0034DF2C /* StoreEventTargetSpy.swift in Sources */,
 				AA7F6D2E1C0217020064DA3A /* SystemAudioDeviceRepositoryStub.swift in Sources */,
 				AA7F6D301C0217020064DA3A /* UserAgentEventTargetSpy.swift in Sources */,
 				8A9D922F1D2AE14A00491D59 /* SuccessfulFetchProductsFake.swift in Sources */,
 				8A11A0D11CCFA8B5007BFC7F /* ProductsFetchUseCaseOutputSpy.swift in Sources */,
+				8AE396F01D6C887F00DCFB9E /* PurchaseReminderUseCaseOutputSpy.swift in Sources */,
 				8A11A0CB1CCFA258007BFC7F /* StoreSpy.swift in Sources */,
 				AA6989B11C19CAED0067BFB1 /* UseCaseFactorySpy.swift in Sources */,
 				AA1019811C48F08A00869D01 /* SoundFactorySpy.swift in Sources */,
+				8A32A4EC1D675B990086B49D /* PurchaseCheckUseCaseOutputSpy.swift in Sources */,
 				AA3B6E8F1C47C3C00030D410 /* TimerFactorySpy.swift in Sources */,
 				AA3B6E911C47C6590030D410 /* TimerSpy.swift in Sources */,
-				8A9513F01D2A77AD0034DF2C /* InvalidProductPurchaseReceipt.swift in Sources */,
+				8A9513F01D2A77AD0034DF2C /* InvalidReceipt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2406,6 +2979,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8AE7062D1D491C220060FF4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8AE706221D491C210060FF4F /* ReceiptValidation */;
+			targetProxy = 8AE7062C1D491C220060FF4F /* PBXContainerItemProxy */;
+		};
 		AA078B351BFF80E30013FF8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AA078B281BFF80E20013FF8F /* UseCases */;
@@ -2487,9 +3065,9 @@
 		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				089C165DFE840E0CC02AAC07 /* English */,
-				AA2ED9DF0F05C1E3004A13C6 /* Russian */,
-				AA5100010F1FE302003CE94C /* German */,
+				089C165DFE840E0CC02AAC07 /* en */,
+				AA2ED9DF0F05C1E3004A13C6 /* ru */,
+				AA5100010F1FE302003CE94C /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2497,18 +3075,51 @@
 		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1DDD58150DA1D0A300B32029 /* English */,
-				AA2ED9930F05AD1E004A13C6 /* Russian */,
-				AA51002A0F1FF943003CE94C /* German */,
+				8AA748C21D744FAA000587DC /* Base */,
+				8AA748FD1D749B00000587DC /* ru */,
+				8AA7490D1D75A9C1000587DC /* de */,
+				8AA749301D75E5E7000587DC /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		8AA748F91D74986A000587DC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AA748F81D74986A000587DC /* en */,
+				8AA748FA1D74987E000587DC /* ru */,
+				8AA749081D75A7A6000587DC /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		8AA749001D749E05000587DC /* StoreWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AA748FF1D749E05000587DC /* Base */,
+				8AA749021D749E15000587DC /* ru */,
+				8AA7490A1D75A90D000587DC /* de */,
+				8AA7492E1D75E5DF000587DC /* en */,
+			);
+			name = StoreWindowController.xib;
+			sourceTree = "<group>";
+		};
+		8AA749051D749E4D000587DC /* StoreViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8AA749041D749E4D000587DC /* Base */,
+				8AA749071D749E54000587DC /* ru */,
+				8AA749281D75B1BA000587DC /* de */,
+				8AA7492C1D75E5D5000587DC /* en */,
+			);
+			name = StoreViewController.xib;
 			sourceTree = "<group>";
 		};
 		AA167A1C0F07BF9E00AF8B71 /* SIPResponses.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA167A1D0F07BF9E00AF8B71 /* English */,
-				AA167A480F0805B700AF8B71 /* Russian */,
+				AA167A1D0F07BF9E00AF8B71 /* en */,
+				AA167A480F0805B700AF8B71 /* ru */,
 			);
 			name = SIPResponses.strings;
 			sourceTree = "<group>";
@@ -2516,9 +3127,9 @@
 		AA2ED99B0F05B362004A13C6 /* Account.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AAAE4A230E3F4DAA00110597 /* English */,
-				AA2ED99D0F05B36B004A13C6 /* Russian */,
-				AA51002C0F1FF956003CE94C /* German */,
+				AA2ED99D0F05B36B004A13C6 /* ru */,
+				AA51002C0F1FF956003CE94C /* de */,
+				8AA748C31D744FAA000587DC /* Base */,
 			);
 			name = Account.xib;
 			sourceTree = "<group>";
@@ -2526,9 +3137,9 @@
 		AA2ED99F0F05B3B5004A13C6 /* Call.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA3578680E3FD91400021989 /* English */,
-				AA2ED9A10F05B3BD004A13C6 /* Russian */,
-				AA5100400F200066003CE94C /* German */,
+				AA2ED9A10F05B3BD004A13C6 /* ru */,
+				AA5100400F200066003CE94C /* de */,
+				8AA748C51D744FAA000587DC /* Base */,
 			);
 			name = Call.xib;
 			sourceTree = "<group>";
@@ -2536,9 +3147,9 @@
 		AA2ED9A40F05B5C6004A13C6 /* Preferences.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AABAD7EF0E0C184200CB5930 /* English */,
-				AA2ED9A60F05B5CE004A13C6 /* Russian */,
-				AA5100590F200E2F003CE94C /* German */,
+				AA2ED9A60F05B5CE004A13C6 /* ru */,
+				AA5100590F200E2F003CE94C /* de */,
+				8AA748CD1D744FAA000587DC /* Base */,
 			);
 			name = Preferences.xib;
 			sourceTree = "<group>";
@@ -2546,9 +3157,9 @@
 		AA2ED9AB0F05BA11004A13C6 /* AccountSetup.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA69ADD90E89578900CF54B3 /* English */,
-				AA2ED9AD0F05BA16004A13C6 /* Russian */,
-				AA5100970F20CD11003CE94C /* German */,
+				AA2ED9AD0F05BA16004A13C6 /* ru */,
+				AA5100970F20CD11003CE94C /* de */,
+				8AA748D31D744FAB000587DC /* Base */,
 			);
 			name = AccountSetup.xib;
 			sourceTree = "<group>";
@@ -2556,9 +3167,9 @@
 		AA2ED9B10F05BB5D004A13C6 /* AuthenticationFailure.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA1732170EAF8C14009023F2 /* English */,
-				AA2ED9B30F05BB64004A13C6 /* Russian */,
-				AA51005C0F20117F003CE94C /* German */,
+				AA2ED9B30F05BB64004A13C6 /* ru */,
+				AA51005C0F20117F003CE94C /* de */,
+				8AA748D21D744FAB000587DC /* Base */,
 			);
 			name = AuthenticationFailure.xib;
 			sourceTree = "<group>";
@@ -2566,9 +3177,9 @@
 		AA34ACC2106E229A00FA38F7 /* ActiveAccountView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AAF633591056FD3000CF6C3B /* English */,
-				AA3F655C1072C66C000511E8 /* Russian */,
-				AA3F655D1072C674000511E8 /* German */,
+				AA3F655C1072C66C000511E8 /* ru */,
+				AA3F655D1072C674000511E8 /* de */,
+				8AA748C41D744FAA000587DC /* Base */,
 			);
 			name = ActiveAccountView.xib;
 			sourceTree = "<group>";
@@ -2576,9 +3187,9 @@
 		AA3A153E0F30A49C00C45739 /* AddressBookLabels.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA3A153F0F30A49C00C45739 /* English */,
-				AA3A15470F30A4C200C45739 /* Russian */,
-				AA3A15480F30A4C700C45739 /* German */,
+				AA3A153F0F30A49C00C45739 /* en */,
+				AA3A15470F30A4C200C45739 /* ru */,
+				AA3A15480F30A4C700C45739 /* de */,
 			);
 			name = AddressBookLabels.strings;
 			sourceTree = "<group>";
@@ -2586,9 +3197,9 @@
 		AA584A680F06CFD2003C4992 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA584A690F06CFD2003C4992 /* English */,
-				AA584A6B0F06D007003C4992 /* Russian */,
-				AA5100020F1FE32F003CE94C /* German */,
+				AA584A690F06CFD2003C4992 /* en */,
+				AA584A6B0F06D007003C4992 /* ru */,
+				AA5100020F1FE32F003CE94C /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2596,9 +3207,9 @@
 		AA6089D212E25DD200DC44DC /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AAF29A430F5759F7007B5036 /* English */,
-				AA6089D512E25DDD00DC44DC /* Russian */,
-				AA6089D612E25DE200DC44DC /* German */,
+				AAF29A430F5759F7007B5036 /* en */,
+				AA6089D512E25DDD00DC44DC /* ru */,
+				AA6089D612E25DE200DC44DC /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2606,7 +3217,7 @@
 		AA7CB51C11442241004D79DA /* CallTransfer.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA06941F11023628007EF898 /* English */,
+				8AA748C91D744FAA000587DC /* Base */,
 			);
 			name = CallTransfer.xib;
 			sourceTree = "<group>";
@@ -2614,9 +3225,9 @@
 		AA7CB51E11442249004D79DA /* ActiveAccountTransferView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA0693C411022E78007EF898 /* English */,
-				AA7CB52211442300004D79DA /* Russian */,
-				AA7CB52311442304004D79DA /* German */,
+				AA7CB52211442300004D79DA /* ru */,
+				AA7CB52311442304004D79DA /* de */,
+				8AA748CA1D744FAA000587DC /* Base */,
 			);
 			name = ActiveAccountTransferView.xib;
 			sourceTree = "<group>";
@@ -2624,9 +3235,9 @@
 		AA7CB527114423A4004D79DA /* ActiveCallTransferView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AAA628C5110C6281008466C3 /* English */,
-				AA7CB529114423AA004D79DA /* Russian */,
-				AA7CB52A114423AE004D79DA /* German */,
+				AA7CB529114423AA004D79DA /* ru */,
+				AA7CB52A114423AE004D79DA /* de */,
+				8AA748CB1D744FAA000587DC /* Base */,
 			);
 			name = ActiveCallTransferView.xib;
 			sourceTree = "<group>";
@@ -2634,9 +3245,9 @@
 		AA7CB52F1144242F004D79DA /* EndedCallTransferView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AAA628E9110C76B3008466C3 /* English */,
-				AA7CB53111442434004D79DA /* Russian */,
-				AA7CB53211442437004D79DA /* German */,
+				AA7CB53111442434004D79DA /* ru */,
+				AA7CB53211442437004D79DA /* de */,
+				8AA748CC1D744FAA000587DC /* Base */,
 			);
 			name = EndedCallTransferView.xib;
 			sourceTree = "<group>";
@@ -2644,9 +3255,9 @@
 		AADAA2C2107E569200789F2D /* IncomingCallView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AADAA1A0107CE9D000789F2D /* English */,
-				AADAA2C4107E569900789F2D /* Russian */,
-				AADAA2C5107E569C00789F2D /* German */,
+				AADAA2C4107E569900789F2D /* ru */,
+				AADAA2C5107E569C00789F2D /* de */,
+				8AA748C61D744FAA000587DC /* Base */,
 			);
 			name = IncomingCallView.xib;
 			sourceTree = "<group>";
@@ -2654,9 +3265,9 @@
 		AADAA2CC107E56FD00789F2D /* ActiveCallView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AADAA1A9107CEAD800789F2D /* English */,
-				AADAA2CE107E570400789F2D /* Russian */,
-				AADAA2CF107E570800789F2D /* German */,
+				AADAA2CE107E570400789F2D /* ru */,
+				AADAA2CF107E570800789F2D /* de */,
+				8AA748C71D744FAA000587DC /* Base */,
 			);
 			name = ActiveCallView.xib;
 			sourceTree = "<group>";
@@ -2664,9 +3275,9 @@
 		AADAA2D0107E572300789F2D /* EndedCallView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AADAA1AB107CEB5A00789F2D /* English */,
-				AADAA2D2107E572800789F2D /* Russian */,
-				AADAA2D3107E572B00789F2D /* German */,
+				AADAA2D2107E572800789F2D /* ru */,
+				AADAA2D3107E572B00789F2D /* de */,
+				8AA748C81D744FAA000587DC /* Base */,
 			);
 			name = EndedCallView.xib;
 			sourceTree = "<group>";
@@ -2674,9 +3285,9 @@
 		AAFC00251074D0B50018C7DA /* NetworkPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA34AF3A1073B77A00FA38F7 /* English */,
-				AAFC003A1074D1980018C7DA /* Russian */,
-				AAFC003B1074D19A0018C7DA /* German */,
+				AAFC003A1074D1980018C7DA /* ru */,
+				AAFC003B1074D19A0018C7DA /* de */,
+				8AA748D11D744FAB000587DC /* Base */,
 			);
 			name = NetworkPreferencesView.xib;
 			sourceTree = "<group>";
@@ -2684,9 +3295,9 @@
 		AAFC00271074D0B50018C7DA /* AccountPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA34AF361073B75600FA38F7 /* English */,
-				AAFC00361074D17F0018C7DA /* Russian */,
-				AAFC00371074D1820018C7DA /* German */,
+				AAFC00361074D17F0018C7DA /* ru */,
+				AAFC00371074D1820018C7DA /* de */,
+				8AA748CF1D744FAB000587DC /* Base */,
 			);
 			name = AccountPreferencesView.xib;
 			sourceTree = "<group>";
@@ -2694,9 +3305,9 @@
 		AAFC00291074D0B50018C7DA /* SoundPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA34AF381073B76A00FA38F7 /* English */,
-				AAFC00381074D18C0018C7DA /* Russian */,
-				AAFC00391074D18F0018C7DA /* German */,
+				AAFC00381074D18C0018C7DA /* ru */,
+				AAFC00391074D18F0018C7DA /* de */,
+				8AA748D01D744FAB000587DC /* Base */,
 			);
 			name = SoundPreferencesView.xib;
 			sourceTree = "<group>";
@@ -2704,9 +3315,9 @@
 		AAFC002B1074D0B50018C7DA /* GeneralPreferencesView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AA34AF281073B70900FA38F7 /* English */,
-				AAFC002D1074D0EB0018C7DA /* Russian */,
-				AAFC00351074D1700018C7DA /* German */,
+				AAFC002D1074D0EB0018C7DA /* ru */,
+				AAFC00351074D1700018C7DA /* de */,
+				8AA748CE1D744FAB000587DC /* Base */,
 			);
 			name = GeneralPreferencesView.xib;
 			sourceTree = "<group>";
@@ -2714,6 +3325,65 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8AE706311D491C220060FF4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReceiptValidation/ReceiptValidation.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/ThirdParty/LibreSSL/include\"",
+					"\"$(SRCROOT)/ReceiptValidation/ASN1\"",
+				);
+				INFOPLIST_FILE = ReceiptValidation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/../../../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ThirdParty/LibreSSL/lib\"",
+				);
+				OTHER_LDFLAGS = "-lcrypto";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.ReceiptValidation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ReceiptValidation/ReceiptValidation-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		8AE706321D491C220060FF4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ReceiptValidation/ReceiptValidation.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/ThirdParty/LibreSSL/include\"",
+					"\"$(SRCROOT)/ReceiptValidation/ASN1\"",
+				);
+				INFOPLIST_FILE = ReceiptValidation/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks @loader_path/../../../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ThirdParty/LibreSSL/lib\"",
+				);
+				OTHER_LDFLAGS = "-lcrypto";
+				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.ReceiptValidation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ReceiptValidation/ReceiptValidation-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
 		AA078B3A1BFF80E30013FF8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2731,6 +3401,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCases;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2753,6 +3424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCases;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2767,6 +3439,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -2779,6 +3452,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -2792,6 +3466,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.TelephoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TelephoneTests/TelephoneTests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -2805,6 +3480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.TelephoneTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TelephoneTests/TelephoneTests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -2824,6 +3500,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2844,6 +3521,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2856,6 +3534,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -2867,6 +3546,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -2886,6 +3566,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2907,6 +3588,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2928,6 +3610,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2949,6 +3632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2957,8 +3641,10 @@
 		AAF299130F575045007B5036 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookPhonePlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
@@ -2970,8 +3656,10 @@
 		AAF299140F575045007B5036 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookPhonePlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
@@ -2985,8 +3673,10 @@
 		AAF2999A0F57566C007B5036 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookSIPAddressPlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
@@ -2999,8 +3689,10 @@
 		AAF2999B0F57566C007B5036 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookSIPAddressPlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
@@ -3028,28 +3720,21 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Telephone/Telephone.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"PJ_AUTOCONF=1",
 				);
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../pjproject/pjlib/include\"",
-					"\"$(SRCROOT)/../pjproject/pjlib-util/include\"",
-					"\"$(SRCROOT)/../pjproject/pjmedia/include\"",
-					"\"$(SRCROOT)/../pjproject/pjnath/include\"",
-					"\"$(SRCROOT)/../pjproject/pjsip/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/ThirdParty/PJSIP/include\"";
 				INFOPLIST_FILE = Telephone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../pjproject/pjlib/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjlib-util/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjmedia/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjnath/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjsip/lib\"",
-					"\"$(SRCROOT)/../pjproject/third_party/lib\"",
+					"\"$(SRCROOT)/ThirdParty/PJSIP/lib\"",
+					"\"$(SRCROOT)/ThirdParty/Opus/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lpjsua-x86_64-apple-darwin",
@@ -3067,35 +3752,30 @@
 					"-lspeex-x86_64-apple-darwin",
 					"-lilbccodec-x86_64-apple-darwin",
 					"-lpj-x86_64-apple-darwin",
+					"-lopus",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
 				PRODUCT_NAME = Telephone;
 				SWIFT_OBJC_BRIDGING_HEADER = "Telephone/Telephone-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_ENTITLEMENTS = Telephone/Telephone.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = B5WSA37RY8;
 				GCC_PREPROCESSOR_DEFINITIONS = "PJ_AUTOCONF=1";
-				HEADER_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../pjproject/pjlib/include\"",
-					"\"$(SRCROOT)/../pjproject/pjlib-util/include\"",
-					"\"$(SRCROOT)/../pjproject/pjmedia/include\"",
-					"\"$(SRCROOT)/../pjproject/pjnath/include\"",
-					"\"$(SRCROOT)/../pjproject/pjsip/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/ThirdParty/PJSIP/include\"";
 				INFOPLIST_FILE = Telephone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../pjproject/pjlib/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjlib-util/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjmedia/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjnath/lib\"",
-					"\"$(SRCROOT)/../pjproject/pjsip/lib\"",
-					"\"$(SRCROOT)/../pjproject/third_party/lib\"",
+					"\"$(SRCROOT)/ThirdParty/PJSIP/lib\"",
+					"\"$(SRCROOT)/ThirdParty/Opus/lib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lpjsua-x86_64-apple-darwin",
@@ -3113,10 +3793,12 @@
 					"-lspeex-x86_64-apple-darwin",
 					"-lilbccodec-x86_64-apple-darwin",
 					"-lpj-x86_64-apple-darwin",
+					"-lopus",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
 				PRODUCT_NAME = Telephone;
 				SWIFT_OBJC_BRIDGING_HEADER = "Telephone/Telephone-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -3124,6 +3806,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3134,11 +3817,12 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -3166,6 +3850,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -3176,11 +3861,12 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3197,12 +3883,22 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8AE706301D491C220060FF4F /* Build configuration list for PBXNativeTarget "ReceiptValidation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8AE706311D491C220060FF4F /* Debug */,
+				8AE706321D491C220060FF4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AA078B3E1BFF80E30013FF8F /* Build configuration list for PBXNativeTarget "UseCases" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

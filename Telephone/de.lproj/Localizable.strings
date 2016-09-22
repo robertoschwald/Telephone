@@ -1,0 +1,180 @@
+﻿/* Accounts preferences window title. */
+"Accounts" = "Accounts";
+
+/* Address not found. */
+"Address Not Found" = "Adresse nicht gefunden";
+
+/* Telephone quit confirmation informative text. */
+"All active calls will be disconnected." = "Alle aktiven Gespräche werden beendet.";
+
+/* Telephone quit confirmation. */
+"Are you sure you want to quit Telephone?" = "Wollen Sie Telefon wirklich beenden?";
+
+/* Account registration Available menu item. */
+"Available" = "Verfügbar";
+
+/* Busy. */
+"busy" = "Besetzt";
+
+/* Call declined. */
+"call declined" = "Anruf abgelehnt";
+
+/* Call ended. */
+"call ended" = "Anruf beendet";
+
+/* Call failed. */
+"Call Failed" = "Anruf fehlgeschlagen";
+
+/* Call transferred. */
+"call transferred" = "Anruf weitergeleitet";
+
+/* John Smith calling. Somebody is calling us right now. User notification description. Deliberately in lower case, translators should do the same, if possible.
+   John Smith calling. Somebody is calling us right now. Call status string. Deliberately in lower case, translators should do the same, if possible. */
+"calling" = "ruft an";
+
+/* Outgoing call in progress. Calling specific phone type (mobile, home, etc). */
+"calling %@..." = "%@ ...";
+
+/* John Smith calling from 1234567. Somebody is calling us right now from some source. User notification description. Deliberately in lower case, translators should do the same, if possible. */
+"calling from %@" = "%@";
+
+/* Outgoing call in progress. */
+"calling..." = "Anrufen ...";
+
+/* Cancel button. */
+"Cancel" = "Abbrechen";
+
+/* Account registration Connecting... menu item. */
+"Connecting..." = "Verbinden ...";
+
+/* Products fetch error. */
+"Could not fetch products." = "Die Produkte konnten nicht heruntergeladen werden.";
+
+/* Address Book plug-ins install error, alert message text. */
+"Could not install Address Book plug-ins." = "Die Adressbuch-Plugins konnten nicht installiert werden.";
+
+/* Product purchase error. */
+"Could not make purchase." = "Der Kauf konnte nicht abgeschlossen werden.";
+
+/* Registrar connection error. */
+"Could not register with %@." = "Konnte nicht bei %@ registrieren.";
+
+/* Purchase restoration error. */
+"Could not restore purchases." = "Die Käufe konnten nicht wiederhergestellt werden.";
+
+/* SIP user agent start error. */
+"Could not start SIP user agent." = "Konnte SIP user agent nicht starten.";
+
+/* Decline. Call menu item. */
+"Decline" = "Ablehnen";
+
+/* Delete button. */
+"Delete" = "Löschen";
+
+/* Account removal confirmation. */
+"Delete “%@”?" = "Wollen Sie „%@“ wirklich löschen?";
+
+/* Don't save button. */
+"Don't Save" = "Nicht Sichern";
+
+/* End Call. Call menu item. */
+"End Call" = "Anruf beenden";
+
+/* Error #. */
+"Error %d" = "Fehler %d";
+
+/* Failed to communicate with STUN server. */
+"Failed to communicate with STUN server." = "Kommunikationsfehler mit STUN-Server.";
+
+/* General preferences window title. */
+"General" = "Allgemein";
+
+/* Hold. Call menu item. */
+"Hold" = "Halten";
+
+/* Address Book plug-ins install error, alert informative text. */
+"Make sure you have write permission to “%@”." = "Stellen Sie sicher, dass Sie Schreibrechte in „%@“ haben.";
+
+/* Microphone muted status text. */
+"mic muted" = "Mikrofon stumm";
+
+/* Microphone unmuted status text. */
+"mic unmuted" = "Mikrofon aktiv";
+
+/* Product name. */
+"Monthly optional patronage" = "Monatliche freiwillige Unterstützung";
+
+/* Mute. Call menu item. */
+"Mute" = "Mikrofon aus";
+
+/* Network preferences window title. */
+"Network" = "Netzwerk";
+
+/* Network settings change confirmation informative text. */
+"New network settings will be applied immediately, all accounts will be reconnected." = "Die neuen Netzwerkeinstellungen werden sofort aktiv, alle Accounts werden neu verbunden.";
+
+/* Call has been taken off hold status text. */
+"off hold" = "Anruf wiederaufgenommen";
+
+/* Account registration Offline menu item. */
+"Offline" = "Offline";
+
+/* Call on local hold status text. */
+"on hold" = "Anruf gehalten";
+
+/* Call on remote hold status text. */
+"on remote hold" = "Anruf vom Gesprächspartner gehalten";
+
+/* Registrar connection error informative text. */
+"Please check network connection and Registry Server settings." = "Bitte überprüfen Sie Ihre Netzwerkverbindung und die Registrierungsserver-Einstellungen.";
+
+/* SIP user agent start error informative text. */
+"Please check your network connection and STUN server settings." = "Bitte überprüfen Sie Ihre Netzwerkverbindung und die STUN-Server-Einstellungen.";
+
+/* Quit button. */
+"Quit" = "Beenden";
+
+/* Resume. Call menu item. */
+"Resume" = "Fortsetzen";
+
+/* Remote party ringing. */
+"ringing" = "Es klingelt";
+
+/* Save button. */
+"Save" = "Sichern";
+
+/* Network settings change confirmation. */
+"Save changes to the network settings?" = "Änderungen an den Netzwerkeinstellungen sichern?";
+
+/* Sound preferences window title. */
+"Sound" = "Ton";
+
+/* Preferences default window title. */
+"Telephone Preferences" = "Telefon Einstellungen";
+
+/* Registrar authentication failed. */
+"Telephone was unable to login to %@. Change user name or password and try again." = "Telefon konnte sich nicht in %@ anmelden. Ändern Sie Benutzername oder Passwort und versuchen Sie es erneut.";
+
+/* Error description. */
+"The error was: “%d %@”." = "Fehlerbeschreibung: „%1$d %2$@“.";
+
+/* Account removal confirmation informative text. */
+"This will delete your currently set up account “%@”." = "Ihr Account „%@“ wird gelöscht.";
+
+/* Failed to communicate with STUN server informative text. */
+"UDP packets are probably blocked. It is impossible to make or receive calls without that. Make sure that your local firewall and the firewall at your router allow UDP protocol." = "UDP-Pakete werden anscheinend blockiert. Sie können weder Anrufe tätigen noch empfangen. Stellen Sie sicher, daß Ihre lokale Firewall und die Firewall Ihres Routers das UDP-Protokoll erlaubt.";
+
+/* Account registration Unavailable menu item. */
+"Unavailable" = "Nicht verfügbar";
+
+/* Unknown error. */
+"Unknown error" = "Unbekannter Fehler";
+
+/* Unknown product name. */
+"Unknown product" = "Unbekanntes Produkt";
+
+/* Unmute. Call menu item. */
+"Unmute" = "Mikrofon an";
+
+/* Product name. */
+"Yearly optional patronage" = "Jährliche freiwillige Unterstützung";

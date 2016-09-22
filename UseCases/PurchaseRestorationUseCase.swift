@@ -16,7 +16,16 @@
 //  GNU General Public License for more details.
 //
 
-public protocol PurchaseRestorationUseCaseOutput {
-    func didRestorePurchases()
-    func didFailRestoringPurchases(error error: String)
+public final class PurchaseRestorationUseCase {
+    private let store: Store
+
+    public init(store: Store) {
+        self.store = store
+    }
+}
+
+extension PurchaseRestorationUseCase: UseCase {
+    public func execute() {
+        store.restorePurchases()
+    }
 }
