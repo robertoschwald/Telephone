@@ -17,5 +17,5 @@
 //
 
 public protocol SoundFactory {
-    func createSound(eventTarget eventTarget: SoundEventTarget) throws -> Sound
+    func makeSound(target: SoundEventTarget) throws -> Sound
 }

@@ -5,12 +5,14 @@
 #import <pjsua-lib/pjsua.h>
 
 #import "AppController.h"
-#import "AppleMusicPlayer.h"
+#import "AKSIPAccount.h"
+#import "AKSIPCall.h"
 #import "AKSIPCallNotifications.h"
+#import "AKSIPURI.h"
 #import "AKSIPUserAgent.h"
+#import "MusicPlayerFactory.h"
 #import "PreferencesController.h"
 #import "SoundIOPreferences.h"
 #import "SoundIOPresenterOutput.h"
 #import "SoundPreferencesView.h"
-#import "SpotifyMusicPlayer.h"
 #import "UserDefaultsKeys.h"

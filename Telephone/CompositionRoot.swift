@@ -27,31 +27,35 @@ final class CompositionRoot: NSObject {
     let storeWindowController: StoreWindowController
     let purchaseReminder: PurchaseReminderUseCase
     let musicPlayer: MusicPlayer
-    private let defaults: NSUserDefaults
-    private let queue: dispatch_queue_t
+    let settingsMigration: ProgressiveSettingsMigration
+    let applicationDataLocations: ApplicationDataLocations
+    let workstationSleepStatus: WorkspaceSleepStatus
+    private let defaults: UserDefaults
+    private let queue: DispatchQueue
 
     private let storeEventSource: StoreEventSource
     private let userAgentNotificationsToEventTargetAdapter: UserAgentNotificationsToEventTargetAdapter
     private let devicesChangeEventSource: SystemAudioDevicesChangeEventSource!
+    private let callNotificationsToEventTargetAdapter: CallNotificationsToEventTargetAdapter
 
     init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
-        userAgent = AKSIPUserAgent.sharedUserAgent()
-        defaults = NSUserDefaults.standardUserDefaults()
-        queue = createQueue()
+        userAgent = AKSIPUserAgent.shared()
+        defaults = UserDefaults.standard
+        queue = makeQueue()
 
         let audioDevices = SystemAudioDevices()
-        let useCaseFactory = DefaultUseCaseFactory(repository: audioDevices, defaults: defaults)
+        let useCaseFactory = DefaultUseCaseFactory(repository: audioDevices, settings: defaults)
 
-        let userDefaultsSoundFactory = UserDefaultsSoundFactory(
-            load: UserDefaultsRingtoneSoundConfigurationLoadUseCase(defaults: defaults, repository: audioDevices),
+        let soundFactory = SimpleSoundFactory(
+            load: SettingsRingtoneSoundConfigurationLoadUseCase(settings: defaults, repository: audioDevices),
             factory: NSSoundToSoundAdapterFactory()
         )
 
         ringtonePlayback = ConditionalRingtonePlaybackUseCase(
             origin: DefaultRingtonePlaybackUseCase(
                 factory: RepeatingSoundFactory(
-                    soundFactory: userDefaultsSoundFactory,
-                    timerFactory: NSTimerToTimerAdapterFactory()
+                    soundFactory: soundFactory,
+                    timerFactory: FoundationToUseCasesTimerAdapterFactory()
                 )
             ),
             delegate: conditionalRingtonePlaybackUseCaseDelegate
@@ -60,11 +64,11 @@ final class CompositionRoot: NSObject {
         let productsEventTargets = ProductsEventTargets()
 
         let storeViewController = StoreViewController(
-            target: NullStoreViewEventTarget(), workspace: NSWorkspace.sharedWorkspace()
+            target: NullStoreViewEventTarget(), workspace: NSWorkspace.shared()
         )
         let products = SKProductsRequestToProductsAdapter(expected: ExpectedProducts(), target: productsEventTargets)
-        let store = SKPaymentQueueToStoreAdapter(queue: SKPaymentQueue.defaultQueue(), products: products)
-        let receipt = BundleReceipt(bundle: NSBundle.mainBundle(), gateway: ReceiptXPCGateway())
+        let store = SKPaymentQueueToStoreAdapter(queue: SKPaymentQueue.default(), products: products)
+        let receipt = BundleReceipt(bundle: Bundle.main, gateway: ReceiptXPCGateway())
         let storeViewEventTarget = DefaultStoreViewEventTarget(
             factory: DefaultStoreUseCaseFactory(
                 products: products,
@@ -73,6 +77,7 @@ final class CompositionRoot: NSObject {
                 targets: productsEventTargets
             ),
             purchaseRestoration: PurchaseRestorationUseCase(store: store),
+            receiptRefresh: ReceiptRefreshUseCase(),
             presenter: DefaultStoreViewPresenter(output: storeViewController)
         )
         storeViewController.updateTarget(storeViewEventTarget)
@@ -80,21 +85,21 @@ final class CompositionRoot: NSObject {
         storeWindowController = StoreWindowController(contentViewController: storeViewController)
 
         purchaseReminder = PurchaseReminderUseCase(
-            accounts: UserDefaultsSavedAccounts(defaults: defaults),
+            accounts: SettingsAccounts(settings: defaults),
             receipt: receipt,
-            defaults: SimplePurchaseReminderUserDefaults(defaults: defaults),
-            now: NSDate(),
-            version: NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String,
+            settings: UserDefaultsPurchaseReminderSettings(defaults: defaults),
+            now: Date(),
+            version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
             output: storeWindowController
         )
 
         storeEventSource = StoreEventSource(
-            queue: SKPaymentQueue.defaultQueue(),
+            queue: SKPaymentQueue.default(),
             target: ReceiptValidatingStoreEventTarget(origin: storeViewEventTarget, receipt: receipt)
         )
 
         let userAgentSoundIOSelection = DelayingUserAgentSoundIOSelectionUseCase(
-            useCase: UserAgentSoundIOSelectionUseCase(repository: audioDevices, userAgent: userAgent, defaults: defaults),
+            useCase: UserAgentSoundIOSelectionUseCase(repository: audioDevices, userAgent: userAgent, settings: defaults),
             userAgent: userAgent
         )
 
@@ -106,18 +111,27 @@ final class CompositionRoot: NSObject {
                 presenterFactory: PresenterFactory(),
                 userAgentSoundIOSelection: userAgentSoundIOSelection,
                 ringtoneOutputUpdate: RingtoneOutputUpdateUseCase(playback: ringtonePlayback),
-                ringtoneSoundPlayback: DefaultSoundPlaybackUseCase(factory: userDefaultsSoundFactory)
+                ringtoneSoundPlayback: DefaultSoundPlaybackUseCase(factory: soundFactory)
             )
         )
 
         musicPlayer = ConditionalMusicPlayer(
-            origin: AvailableMusicPlayers(),
-            defaults: SimpleMusicPlayerUserDefaults(defaults: defaults)
+            origin: AvailableMusicPlayers(factory: MusicPlayerFactory()),
+            settings: SimpleMusicPlayerSettings(settings: defaults)
         )
+
+        settingsMigration = ProgressiveSettingsMigration(settings: defaults, factory: DefaultSettingsMigrationFactory())
+
+        applicationDataLocations = DirectoryCreatingApplicationDataLocations(
+            origin: SimpleApplicationDataLocations(manager: FileManager.default, bundle: Bundle.main),
+            manager: FileManager.default
+        )
+
+        workstationSleepStatus = WorkspaceSleepStatus(workspace: NSWorkspace.shared())
 
         userAgentNotificationsToEventTargetAdapter = UserAgentNotificationsToEventTargetAdapter(
             target: userAgentSoundIOSelection,
-            userAgent: userAgent
+            agent: userAgent
         )
         devicesChangeEventSource = SystemAudioDevicesChangeEventSource(
             target: SystemAudioDevicesChangeEventTargets(
@@ -130,6 +144,25 @@ final class CompositionRoot: NSObject {
             queue: queue
         )
 
+        let callHistories = DefaultCallHistories(
+            factory: NotifyingCallHistoryFactory(
+                factory: PersistentCallHistoryFactory(
+                    history: TruncatingCallHistoryFactory(limit: 1000),
+                    storage: SimplePropertyListStorageFactory(),
+                    locations: applicationDataLocations
+                )
+            )
+        )
+
+        userAgent.updateAccountEventTarget(callHistories)
+
+        callNotificationsToEventTargetAdapter = CallNotificationsToEventTargetAdapter(
+            center: NotificationCenter.default,
+            target: CallHistoryCallEventTarget(
+                histories: callHistories, factory: DefaultCallHistoryRecordAddUseCaseFactory()
+            )
+        )
+
         super.init()
 
         devicesChangeEventSource.start()
@@ -140,7 +173,7 @@ final class CompositionRoot: NSObject {
     }
 }
 
-private func createQueue() -> dispatch_queue_t {
-    let label = NSBundle.mainBundle().bundleIdentifier! + ".background-queue"
-    return dispatch_queue_create(label, DISPATCH_QUEUE_SERIAL)
+private func makeQueue() -> DispatchQueue {
+    let label = Bundle.main.bundleIdentifier! + ".background-queue"
+    return DispatchQueue(label: label, attributes: [])
 }

@@ -7,6 +7,9 @@
 /* Telephone quit confirmation informative text. */
 "All active calls will be disconnected." = "All active calls will be disconnected.";
 
+/* Call answer button. */
+"Answer" = "Answer";
+
 /* Telephone quit confirmation. */
 "Are you sure you want to quit Telephone?" = "Are you sure you want to quit Telephone?";
 
@@ -50,9 +53,6 @@
 /* Products fetch error. */
 "Could not fetch products." = "Could not fetch products.";
 
-/* Address Book plug-ins install error, alert message text. */
-"Could not install Address Book plug-ins." = "Could not install Address Book plug-ins.";
-
 /* Product purchase error. */
 "Could not make purchase." = "Could not make purchase.";
 
@@ -65,7 +65,8 @@
 /* SIP user agent start error. */
 "Could not start SIP user agent." = "Could not start SIP user agent.";
 
-/* Decline. Call menu item. */
+/* Call decline button.
+   Decline. Call menu item. */
 "Decline" = "Decline";
 
 /* Delete button. */
@@ -91,9 +92,6 @@
 
 /* Hold. Call menu item. */
 "Hold" = "Hold";
-
-/* Address Book plug-ins install error, alert informative text. */
-"Make sure you have write permission to “%@”." = "Make sure you have write permission to “%@”.";
 
 /* Microphone muted status text. */
 "mic muted" = "mic muted";
@@ -134,6 +132,12 @@
 /* Quit button. */
 "Quit" = "Quit";
 
+/* Receipt refresh alert button. */
+"Quit and Refresh" = "Quit and Refresh";
+
+/* Receipt refresh alert message text. */
+"Refresh receipt?" = "Refresh receipt?";
+
 /* Resume. Call menu item. */
 "Resume" = "Resume";
 
@@ -155,6 +159,9 @@
 /* Registrar authentication failed. */
 "Telephone was unable to login to %@. Change user name or password and try again." = "Telephone was unable to login to %@. Change user name or password and try again.";
 
+/* Receipt refresh alert informative text. */
+"Telepohne will quit and the system will attempt to refresh the application receipt. After that, Telephone will be started again. You may be asked to enter your App Store credentials." = "Telepohne will quit and the system will attempt to refresh the application receipt. After that, Telephone will be started again. You may be asked to enter your App Store credentials.";
+
 /* Error description. */
 "The error was: “%d %@”." = "The error was: “%1$d %2$@”.";
 
@@ -166,6 +173,9 @@
 
 /* Account registration Unavailable menu item. */
 "Unavailable" = "Unavailable";
+
+/* Audio device name is unknown. */
+"Unknown device" = "Unknown device";
 
 /* Unknown error. */
 "Unknown error" = "Unknown error";

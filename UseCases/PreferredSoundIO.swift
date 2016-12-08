@@ -19,15 +19,11 @@
 import Domain
 
 struct PreferredSoundIO {
-    private let devices: SystemAudioDevices
-    private let defaults: KeyValueUserDefaults
-    private let soundIO: SoundIO
+    fileprivate let soundIO: SoundIO
 
-    init(devices: SystemAudioDevices, defaults: KeyValueUserDefaults) {
-        self.devices = devices
-        self.defaults = defaults
+    init(devices: SystemAudioDevices, settings: KeyValueSettings) {
         soundIO = FallingBackSoundIO(
-            origin: UserDefaultsSoundIO(devices: devices, defaults: defaults),
+            origin: SettingsSoundIO(devices: devices, settings: settings),
             fallback: Domain.PreferredSoundIO(devices: devices.all)
         )
     }

@@ -23,19 +23,12 @@
 #import "CallController.h"
 
 
-// Account states.
-enum {
-    kSIPAccountOffline     = 1,
-    kSIPAccountUnavailable = 2,
-    kSIPAccountAvailable   = 3
-};
-
 // Address Book label for SIP address in the email field.
 extern NSString * const kEmailSIPLabel;
 
 @class AKSIPURI, AKNetworkReachability;
 @class ActiveAccountViewController, AuthenticationFailureController;
-@class CallTransferController;
+@class CallTransferController, WorkspaceSleepStatus;
 @protocol MusicPlayer, RingtonePlaybackUseCase;
 
 // A SIP account controller.
@@ -48,6 +41,7 @@ extern NSString * const kEmailSIPLabel;
 @property(nonatomic, readonly) AKSIPUserAgent *userAgent;
 @property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
 @property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
+@property(nonatomic, readonly) WorkspaceSleepStatus *sleepStatus;
 
 // A Boolean value indicating whether account is registered.
 @property(nonatomic, readonly, getter=isAccountRegistered) BOOL accountRegistered;
@@ -87,9 +81,6 @@ extern NSString * const kEmailSIPLabel;
 // An authentication failure controller.
 @property(nonatomic, readonly) AuthenticationFailureController *authenticationFailureController;
 
-// Account state pop-up button outlet.
-@property(nonatomic, weak) IBOutlet NSPopUpButton *accountStatePopUp;
-
 // A Boolean value indicating if call windows should display account name.
 @property(nonatomic, assign) BOOL callsShouldDisplayAccountInfo;
 
@@ -97,7 +88,8 @@ extern NSString * const kEmailSIPLabel;
 - (instancetype)initWithSIPAccount:(AKSIPAccount *)account
                          userAgent:(AKSIPUserAgent *)userAgent
                   ringtonePlayback:(id<RingtonePlaybackUseCase>)ringtonePlayback
-                       musicPlayer:(id<MusicPlayer>)musicPlayer;
+                       musicPlayer:(id<MusicPlayer>)musicPlayer
+                       sleepStatus:(WorkspaceSleepStatus *)sleepStatus;
 
 // Registers the account adding it to the user agent, if needed. The user agent will be started, if it hasn't been yet.
 - (void)registerAccount;

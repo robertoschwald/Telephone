@@ -28,10 +28,10 @@ final class RepeatingSoundTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sound = SoundSpy(eventTarget: NullSoundEventTarget())
+        sound = SoundSpy(target: NullSoundEventTarget())
         factory = TimerFactorySpy()
         timer = TimerSpy()
-        factory.stubWith(timer)
+        factory.stub(with: timer)
         sut = RepeatingSound(sound: sound, interval: 1, factory: factory)
     }
 
@@ -53,7 +53,7 @@ final class RepeatingSoundTests: XCTestCase {
         sut.startPlaying()
         sut.startPlaying()
 
-        XCTAssertEqual(factory.createRepeatingTimerCallCount, 1)
+        XCTAssertEqual(factory.makeRepeatingTimerCallCount, 1)
     }
 
     func testInvalidatesTimerOnceOnTwoConsecutiveCallsToStopPlaying() {

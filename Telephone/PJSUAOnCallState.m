@@ -84,20 +84,16 @@ void PJSUAOnCallState(pjsua_call_id callID, pjsip_event *event) {
     NSString *stateText = [NSString stringWithPJString:callInfo.state_text];
     NSInteger lastStatus = callInfo.last_status;
     NSString *lastStatusText = [NSString stringWithPJString:callInfo.last_status_text];
+    NSInteger duration = callInfo.connect_duration.sec;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         AKSIPUserAgent *userAgent = [AKSIPUserAgent sharedUserAgent];
-        AKSIPCall *call = [userAgent SIPCallByIdentifier:callID];
+        AKSIPCall *call = [userAgent callWithIdentifier:callID];
         if (call == nil) {
             if (state == kAKSIPCallCallingState) {
-                // As a convenience, AKSIPCall objects for normal outgoing calls are created
-                // in -[AKSIPAccount makeCallTo:]. Outgoing calls for other situations like call transfer are first
-                // seen here, and created on the spot.
-                PJ_LOG(3, (THIS_FILE, "Creating AKSIPCall for call %d when handling call state", callID));
-                AKSIPAccount *account = [userAgent accountByIdentifier:accountIdentifier];
+                AKSIPAccount *account = [userAgent accountWithIdentifier:accountIdentifier];
                 if (account != nil) {
-                    call = [[AKSIPCall alloc] initWithSIPAccount:account identifier:callID];
-                    [account.calls addObject:call];
+                    call = [account addCallWithIdentifier:callID];
                 } else {
                     PJ_LOG(3, (THIS_FILE,
                                "Did not create AKSIPCall for call %d during call state change. Could not find account",
@@ -117,10 +113,11 @@ void PJSUAOnCallState(pjsua_call_id callID, pjsip_event *event) {
         call.stateText = stateText;
         call.lastStatus = lastStatus;
         call.lastStatusText = lastStatusText;
+        call.duration = duration;
 
         if (state == kAKSIPCallDisconnectedState) {
             [userAgent stopRingbackForCall:call];
-            [call.account.calls removeObject:call];
+            [call.account removeCall:call];
             [nc postNotificationName:AKSIPCallDidDisconnectNotification object:call];
 
         } else if (state == kAKSIPCallEarlyState) {

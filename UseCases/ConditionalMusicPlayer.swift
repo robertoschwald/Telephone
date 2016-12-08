@@ -17,24 +17,24 @@
 //
 
 public final class ConditionalMusicPlayer {
-    private let origin: MusicPlayer
-    private let defaults: MusicPlayerUserDefaults
+    fileprivate let origin: MusicPlayer
+    fileprivate let settings: MusicPlayerSettings
 
-    public init(origin: MusicPlayer, defaults: MusicPlayerUserDefaults) {
+    public init(origin: MusicPlayer, settings: MusicPlayerSettings) {
         self.origin = origin
-        self.defaults = defaults
+        self.settings = settings
     }
 }
 
 extension ConditionalMusicPlayer: MusicPlayer {
     @objc public func pause() {
-        if defaults.shouldPause {
+        if settings.shouldPause {
             origin.pause()
         }
     }
 
     @objc public func resume() {
-        if defaults.shouldPause {
+        if settings.shouldPause {
             origin.resume()
         }
     }

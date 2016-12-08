@@ -7,6 +7,9 @@
 /* Telephone quit confirmation informative text. */
 "All active calls will be disconnected." = "Будут прекращены все незавершенные звонки.";
 
+/* Call answer button. */
+"Answer" = "Ответить";
+
 /* Telephone quit confirmation. */
 "Are you sure you want to quit Telephone?" = "Вы действительно хотите выйти из Телефона?";
 
@@ -50,9 +53,6 @@
 /* Products fetch error. */
 "Could not fetch products." = "Не удалось получить список продуктов.";
 
-/* Address Book plug-ins install error, alert message text. */
-"Could not install Address Book plug-ins." = "Не удалось установить плагины к «Адресной книге».";
-
 /* Product purchase error. */
 "Could not make purchase." = "Покупка не удалась.";
 
@@ -65,7 +65,8 @@
 /* SIP user agent start error. */
 "Could not start SIP user agent." = "Не удалось запустить SIP-подсистему.";
 
-/* Decline. Call menu item. */
+/* Call decline button.
+ Decline. Call menu item. */
 "Decline" = "Отклонить";
 
 /* Delete button. */
@@ -91,9 +92,6 @@
 
 /* Hold. Call menu item. */
 "Hold" = "Поставить на ожидание";
-
-/* Address Book plug-ins install error, alert informative text. */
-"Make sure you have write permission to “%@”." = "Проверьте права на запись в «%@».";
 
 /* Microphone muted status text. */
 "mic muted" = "микрофон выключен";
@@ -134,6 +132,12 @@
 /* Quit button. */
 "Quit" = "Выйти";
 
+/* Receipt refresh alert button. */
+"Quit and Refresh" = "Выйти и обновить";
+
+/* Receipt refresh alert message text. */
+"Refresh receipt?" = "Обновить электронный чек?";
+
 /* Resume. Call menu item. */
 "Resume" = "Продолжить разговор";
 
@@ -155,6 +159,9 @@
 /* Registrar authentication failed. */
 "Telephone was unable to login to %@. Change user name or password and try again." = "Телефон не смог зарегистрироваться на сервере %@. Проверьте имя пользователя и пароль.";
 
+/* Receipt refresh alert informative text. */
+"Telepohne will quit and the system will attempt to refresh the application receipt. After that, Telephone will be started again. You may be asked to enter your App Store credentials." = "Работа Телефона будет завершена, и система предпримет попытку обновить электронный чек приложения. После этого Телефон будет снова запущен. В процессе система может вас попросить залогиниться в Аппстор.";
+
 /* Error description. */
 "The error was: “%d %@”." = "%2$@, ошибка %1$d.";
 
@@ -166,6 +173,9 @@
 
 /* Account registration Unavailable menu item. */
 "Unavailable" = "Недоступен";
+
+/* Audio device name is unknown. */
+"Unknown device" = "Неизвестное устройство";
 
 /* Unknown error. */
 "Unknown error" = "Неизвестная ошибка";

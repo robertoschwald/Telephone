@@ -34,7 +34,11 @@ NSString * const AKAccountSetupControllerDidAddAccountNotification = @"AKAccount
 }
 
 - (IBAction)closeSheet:(id)sender {
-    [self.window.sheetParent endSheet:self.window];
+    if (self.window.sheetParent) {
+        [self.window.sheetParent endSheet:self.window];
+    } else {
+        [self.window orderOut:sender];
+    }
 }
 
 - (IBAction)addAccount:(id)sender {
@@ -77,6 +81,7 @@ NSString * const AKAccountSetupControllerDidAddAccountNotification = @"AKAccount
     
     NSMutableDictionary *accountDict = [NSMutableDictionary dictionary];
     accountDict[kAccountEnabled] = @YES;
+    accountDict[kUUID] = [NSUUID UUID].UUIDString;
     accountDict[kFullName] = fullName;
     accountDict[kDomain] = domain;
     accountDict[kRealm] = @"*";
@@ -93,9 +98,9 @@ NSString * const AKAccountSetupControllerDidAddAccountNotification = @"AKAccount
     [savedAccounts addObject:accountDict];
     [defaults setObject:savedAccounts forKey:kAccounts];
     
-    [AKKeychain addItemWithServiceName:[NSString stringWithFormat:@"SIP: %@", domain]
-                           accountName:username
-                              password:[[self passwordField] stringValue]];
+    [AKKeychain addItemWithService:[NSString stringWithFormat:@"SIP: %@", domain]
+                           account:username
+                          password:[[self passwordField] stringValue]];
     
     [self closeSheet:sender];
     

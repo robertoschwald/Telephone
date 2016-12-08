@@ -24,10 +24,11 @@
 
 
 // User agent states.
-typedef NS_ENUM(NSUInteger, AKSIPUserAgentState) {
-    kAKSIPUserAgentStopped,
-    kAKSIPUserAgentStarting,
-    kAKSIPUserAgentStarted
+typedef NS_ENUM(NSInteger, AKSIPUserAgentState) {
+    AKSIPUserAgentStateStopped,
+    AKSIPUserAgentStateStarting,
+    AKSIPUserAgentStateStarted,
+    AKSIPUserAgentStateStopping
 };
 
 // NAT types, as specified by RFC 3489.
@@ -53,6 +54,7 @@ typedef struct _AKSIPUserAgentCallData {
 extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 
 @class AKSIPAccount, AKSIPCall;
+@protocol UserAgentAccountEventTarget;
 
 // The AKSIPUserAgent class implements SIP User Agent functionality. You can use it to create, configure, and start user
 // agent, add and remove accounts, and set sound devices for input and output. You need to restart the user agent after
@@ -60,6 +62,7 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 @interface AKSIPUserAgent : NSObject {
   @private
     AKSIPUserAgentCallData _callData[PJSUA_MAX_CALLS];
+    pj_thread_desc _descriptor;
 }
 
 // The receiver's delegate.
@@ -77,9 +80,6 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 // NAT type that has been detected by the receiver.
 @property(nonatomic, assign) AKNATType detectedNATType;
 
-// A lock that is used to start and stop the receiver.
-@property(strong) NSLock *pjsuaLock;
-
 // The number of acitve calls controlled by the receiver.
 @property(nonatomic, readonly, assign) NSUInteger activeCallsCount;
 
@@ -87,7 +87,7 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 @property(nonatomic, readonly, assign) AKSIPUserAgentCallData *callData;
 
 // A pool used by the underlying PJSUA library of the receiver.
-@property(readonly, assign) pj_pool_t *pjPool;
+@property(readonly, assign) pj_pool_t *pool;
 
 // An array of DNS servers to use by the receiver. If set, DNS SRV will be
 // enabled. Only first kAKSIPUserAgentNameserversMax are used.
@@ -154,6 +154,7 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 
 // Stops user agent.
 - (void)stop;
+- (void)stopAndWait;
 
 // Adds an account to the user agent.
 - (BOOL)addAccount:(AKSIPAccount *)anAccount withPassword:(NSString *)aPassword;
@@ -162,10 +163,10 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 - (BOOL)removeAccount:(AKSIPAccount *)account;
 
 // Returns a SIP account with a given identifier.
-- (AKSIPAccount *)accountByIdentifier:(NSInteger)anIdentifier;
+- (AKSIPAccount *)accountWithIdentifier:(NSInteger)identifier;
 
 // Returns a SIP call with a given identifier.
-- (AKSIPCall *)SIPCallByIdentifier:(NSInteger)anIdentifier;
+- (AKSIPCall *)callWithIdentifier:(NSInteger)identifier;
 
 // Hangs up all calls controlled by the receiver.
 - (void)hangUpAllCalls;
@@ -186,6 +187,8 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 // You might want to call this method when system audio devices are changed. After calling this method,
 // |setSoundInputDevice:soundOutputDevice:| must be called to set appropriate sound IO.
 - (void)updateAudioDevices;
+
+- (void)updateAccountEventTarget:(id<UserAgentAccountEventTarget>)target NS_SWIFT_NAME(updateAccountEventTarget(_:));
 
 // Returns a string that describes given SIP response code from RFC 3261.
 - (NSString *)stringForSIPResponseCode:(NSInteger)responseCode;

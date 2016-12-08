@@ -58,26 +58,27 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AppController () <AKSIPUserAgentDelegate, NSUserNotificationCenterDelegate, PreferencesControllerDelegate>
 
+@property(nonatomic, readonly) AKSIPUserAgent *userAgent;
+@property(nonatomic, readonly) NSMutableArray *accountControllers;
+@property(nonatomic, readonly) AccountSetupController *accountSetupController;
+@property(nonatomic) BOOL shouldRegisterAllAccounts;
+@property(nonatomic) BOOL shouldRestartUserAgentASAP;
+@property(nonatomic, getter=isTerminating) BOOL terminating;
+@property(nonatomic) BOOL shouldPresentUserAgentLaunchError;
+@property(nonatomic, nullable) NSTimer *userAttentionTimer;
+@property(nonatomic) NSArray *accountsMenuItems;
+@property(nonatomic, weak) IBOutlet NSMenu *windowMenu;
+@property(nonatomic, weak) IBOutlet NSMenuItem *preferencesMenuItem;
+
 @property(nonatomic, readonly) CompositionRoot *compositionRoot;
 @property(nonatomic, readonly) PreferencesController *preferencesController;
 @property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
 @property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
+@property(nonatomic, readonly) id<ApplicationDataLocations> locations;
+@property(nonatomic, readonly) WorkspaceSleepStatus *sleepStatus;
 @property(nonatomic, getter=isFinishedLaunching) BOOL finishedLaunching;
 @property(nonatomic, copy) NSString *destinationToCall;
 @property(nonatomic, getter=isUserSessionActive) BOOL userSessionActive;
-
-// Installs Address Book plug-ins.
-- (void)installAddressBookPlugIns;
-
-// Installs a callback to monitor system DNS servers changes.
-- (void)installDNSChangesCallback;
-
-// Creates directory for file at the specified path.  Also creates intermediate
-// directories.
-- (void)createDirectoryForFileAtPath:(NSString *)path;
-
-// Updates callsShouldDisplayAccountInfo on account controllers.
-- (void)updateCallsShouldDisplayAccountInfo;
 
 @end
 
@@ -175,20 +176,6 @@ NS_ASSUME_NONNULL_END
         defaultsDict[kSTUNServerPort] = @0;
         defaultsDict[kVoiceActivityDetection] = @NO;
         defaultsDict[kUseICE] = @NO;
-        
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSArray *applicationSupportURLs = [fileManager URLsForDirectory:NSApplicationSupportDirectory
-                                                              inDomains:NSUserDomainMask];
-        
-        if ([applicationSupportURLs count] > 0) {
-            NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-            NSURL *applicationSupportURL = applicationSupportURLs[0];
-            NSURL *logURL = [applicationSupportURL URLByAppendingPathComponent:bundleIdentifier];
-            logURL = [logURL URLByAppendingPathComponent:@"Telephone.log"];
-            
-            defaultsDict[kLogFileName] = [logURL path];
-        }
-        
         defaultsDict[kLogLevel] = @3;
         defaultsDict[kConsoleLogLevel] = @0;
         defaultsDict[kTransportPort] = @0;
@@ -235,9 +222,12 @@ NS_ASSUME_NONNULL_END
     _preferencesController = _compositionRoot.preferencesController;
     _ringtonePlayback = _compositionRoot.ringtonePlayback;
     _musicPlayer = _compositionRoot.musicPlayer;
+    _locations = _compositionRoot.applicationDataLocations;
+    _sleepStatus = _compositionRoot.workstationSleepStatus;
     _destinationToCall = @"";
     _userSessionActive = YES;
     _accountControllers = [[NSMutableArray alloc] init];
+    _accountsMenuItems = @[];
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
@@ -246,8 +236,16 @@ NS_ASSUME_NONNULL_END
                                name:AKAccountSetupControllerDidAddAccountNotification
                              object:nil];
     [notificationCenter addObserver:self
+                           selector:@selector(SIPCallCalling:)
+                               name:AKSIPCallCallingNotification
+                             object:nil];
+    [notificationCenter addObserver:self
                            selector:@selector(SIPCallIncoming:)
                                name:AKSIPCallIncomingNotification
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(SIPCallConnecting:)
+                               name:AKSIPCallConnectingNotification
                              object:nil];
     [notificationCenter addObserver:self
                            selector:@selector(SIPCallDidDisconnect:)
@@ -305,20 +303,26 @@ NS_ASSUME_NONNULL_END
 }
 
 - (void)stopUserAgent {
-    // Force ended state for all calls and remove accounts from the user agent.
-    for (AccountController *accountController in [self enabledAccountControllers]) {
-        for (CallController *callController in [accountController callControllers]) {
+    [self hangUpCallsAndRemoveAccountsFromUserAgent];
+    [self.userAgent stop];
+}
+
+- (void)stopUserAgentAndWait {
+    [self hangUpCallsAndRemoveAccountsFromUserAgent];
+    [self.userAgent stopAndWait];
+}
+
+- (void)hangUpCallsAndRemoveAccountsFromUserAgent {
+    for (AccountController *accountController in self.enabledAccountControllers) {
+        for (CallController *callController in accountController.callControllers) {
             [callController hangUpCall];
         }
-        
         [accountController removeAccountFromUserAgent];
     }
-    
-    [[self userAgent] stop];
 }
 
 - (void)restartUserAgent {
-    if ([[self userAgent] state] > kAKSIPUserAgentStopped) {
+    if ([[self userAgent] isStarted]) {
         [self setShouldRegisterAllAccounts:YES];
         [self stopUserAgent];
     }
@@ -351,10 +355,6 @@ NS_ASSUME_NONNULL_END
         [[[self accountSetupController] defaultButton] setAction:@selector(addAccount:)];
         [[[self accountSetupController] otherButton] setTarget:[self accountSetupController]];
         [[[self accountSetupController] otherButton] setAction:@selector(closeSheet:)];
-        
-        // If we want to be in Mac App Store, we can't write to |~/Library/ Address Book Plug-Ins| any more.
-        //
-        // [self installAddressBookPlugIns];
         
         [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
         [self installDNSChangesCallback];
@@ -424,10 +424,8 @@ NS_ASSUME_NONNULL_END
     }
     if ([itemsArray count] > 0) {
         [itemsArray insertObject:[NSMenuItem separatorItem] atIndex:0];
-        [self setAccountsMenuItems:itemsArray];
-    } else {
-        [self setAccountsMenuItems:nil];
     }
+    [self setAccountsMenuItems:itemsArray];
     
     // Add menu items to the Window menu.
     NSUInteger itemTag = 4;
@@ -458,34 +456,6 @@ NS_ASSUME_NONNULL_END
     [[NSApp dockTile] setBadgeLabel:badgeString];
 }
 
-- (void)installAddressBookPlugIns {
-    NSError *error = nil;
-    BOOL installed = [self installAddressBookPlugInsAndReturnError:&error];
-    if (!installed && error != nil) {
-        NSLog(@"%@", error);
-        
-        NSString *libraryPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, NO)[0];
-        
-        if ([libraryPath length] > 0) {
-            NSString *addressBookPlugInsInstallPath
-              = [libraryPath stringByAppendingPathComponent:@"Address Book Plug-Ins"];
-            
-            NSAlert *alert = [[NSAlert alloc] init];
-            [alert addButtonWithTitle:@"OK"];
-            [alert setMessageText:NSLocalizedString(@"Could not install Address Book plug-ins.",
-                                                    @"Address Book plug-ins install error, alert "
-                                                     "message text.")];
-            [alert setInformativeText:[NSString stringWithFormat:
-                                       NSLocalizedString(@"Make sure you have write permission to “%@”.",
-                                                         @"Address Book plug-ins install error, alert "
-                                                          "informative text."),
-                                       addressBookPlugInsInstallPath]];
-            
-            [alert runModal];
-        }
-    }
-}
-
 - (void)installDNSChangesCallback {
     NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     SCDynamicStoreRef dynamicStore = SCDynamicStoreCreate(kCFAllocatorDefault,
@@ -503,24 +473,6 @@ NS_ASSUME_NONNULL_END
     CFRelease(dynamicStore);
 }
 
-- (void)createDirectoryForFileAtPath:(NSString *)path {
-    NSString *directoryPath = [path stringByDeletingLastPathComponent];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL exists = [fileManager fileExistsAtPath:directoryPath
-                                    isDirectory:NULL];
-    if (!exists) {
-        NSError *error = nil;
-        BOOL created = [fileManager createDirectoryAtPath:directoryPath
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:&error];
-        if (!created) {
-            NSLog(@"Error creating directory %@. %@",
-                  directoryPath, [error localizedDescription]);
-        }
-    }
-}
-
 - (void)updateCallsShouldDisplayAccountInfo {
     NSUInteger enabledCount = [self.enabledAccountControllers count];
     BOOL shouldDisplay = enabledCount > 1;
@@ -535,101 +487,10 @@ NS_ASSUME_NONNULL_END
     });
 }
 
-- (BOOL)installAddressBookPlugInsAndReturnError:(NSError **)error {
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *plugInsPath = [mainBundle builtInPlugInsPath];
-    
-    NSString *phonePlugInPath = [plugInsPath stringByAppendingPathComponent:@"TelephoneAddressBookPhonePlugIn.bundle"];
-    NSString *SIPAddressPlugInPath = [plugInsPath stringByAppendingPathComponent:
-                                      @"TelephoneAddressBookSIPAddressPlugIn.bundle"];
-    
-    NSArray *libraryPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    if ([libraryPaths count] == 0) {
-        return NO;
+- (void)optOutOfAutomaticWindowTabbing {
+    if ([NSWindow respondsToSelector:@selector(allowsAutomaticWindowTabbing)]) {
+        NSWindow.allowsAutomaticWindowTabbing = NO;
     }
-    
-    NSString *installPath = [libraryPaths[0] stringByAppendingPathComponent:@"Address Book Plug-Ins"];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    // Create |~/Library/Address Book Plug-Ins| if needed.
-    BOOL isDir;
-    BOOL pathExists = [fileManager fileExistsAtPath:installPath isDirectory:&isDir];
-    if (!pathExists) {
-        BOOL created = [fileManager createDirectoryAtPath:installPath
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:error];
-        if (!created) {
-            return NO;
-        }
-        
-    } else if (!isDir) {
-        NSLog(@"%@ is not a directory", installPath);
-        return NO;
-    }
-    
-    
-    NSBundle *phonePlugInBundle = [NSBundle bundleWithPath:phonePlugInPath];
-    NSInteger phonePlugInVersion = [[phonePlugInBundle infoDictionary][@"CFBundleVersion"] integerValue];
-    NSString *phonePlugInInstallPath = [installPath stringByAppendingPathComponent:[phonePlugInPath lastPathComponent]];
-    NSBundle *installedPhonePlugInBundle = [NSBundle bundleWithPath:phonePlugInInstallPath];
-    
-    BOOL shouldInstallPhonePlugIn = YES;
-    if (installedPhonePlugInBundle != nil) {
-        NSInteger installedPhonePlugInVersion = [[installedPhonePlugInBundle infoDictionary][@"CFBundleVersion"] integerValue];
-        
-        // Remove the old plug-in version if it needs updating.
-        if (installedPhonePlugInVersion < phonePlugInVersion) {
-            BOOL removed = [fileManager removeItemAtPath:phonePlugInInstallPath error:error];
-            if (!removed) {
-                return NO;
-            }
-        } else {
-            // Don't copy the new version if it's not newer.
-            shouldInstallPhonePlugIn = NO;
-        }
-    }
-    
-    NSBundle *SIPAddressPlugInBundle = [NSBundle bundleWithPath:SIPAddressPlugInPath];
-    NSInteger SIPAddressPlugInVersion = [[SIPAddressPlugInBundle infoDictionary][@"CFBundleVersion"] integerValue];
-    NSString *SIPAddressPlugInInstallPath = [installPath stringByAppendingPathComponent:
-                                             [SIPAddressPlugInPath lastPathComponent]];
-    NSBundle *installedSIPAddressPlugInBundle = [NSBundle bundleWithPath:SIPAddressPlugInInstallPath];
-    
-    BOOL shouldInstallSIPAddressPlugIn = YES;
-    if (installedSIPAddressPlugInBundle != nil) {
-        NSInteger installedSIPAddressPlugInVersion = [[installedSIPAddressPlugInBundle infoDictionary][@"CFBundleVersion"] integerValue];
-        
-        // Remove the old plug-in version if it needs updating.
-        if (installedSIPAddressPlugInVersion < SIPAddressPlugInVersion) {
-            BOOL removed = [fileManager removeItemAtPath:SIPAddressPlugInInstallPath error:error];
-            if (!removed) {
-                return NO;
-            }
-        } else {
-            // Don't copy the new version if it's not newer.
-            shouldInstallSIPAddressPlugIn = NO;
-        }
-    }
-    
-    BOOL installed;
-    
-    if (shouldInstallPhonePlugIn) {
-        installed = [fileManager copyItemAtPath:phonePlugInPath toPath:phonePlugInInstallPath error:error];
-        if (!installed) {
-            return NO;
-        }
-    }
-    
-    if (shouldInstallSIPAddressPlugIn) {
-        installed = [fileManager copyItemAtPath:SIPAddressPlugInPath toPath:SIPAddressPlugInInstallPath error:error];
-        if (!installed) {
-            return NO;
-        }
-    }
-    
-    return YES;
 }
 
 - (NSString *)localizedStringForSIPResponseCode:(NSInteger)responseCode {
@@ -901,18 +762,19 @@ NS_ASSUME_NONNULL_END
 - (void)accountSetupControllerDidAddAccount:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
     
-    NSString *SIPAddress = [NSString stringWithFormat:@"%@@%@", dict[kUsername], dict[kDomain]];
-    
-    AKSIPAccount *account = [AKSIPAccount SIPAccountWithFullName:dict[kFullName]
-                                                      SIPAddress:SIPAddress
-                                                       registrar:dict[kDomain]
-                                                           realm:dict[kRealm]
-                                                        username:dict[kUsername]];
+    AKSIPAccount *account = [[AKSIPAccount alloc] initWithUUID:dict[kUUID]
+                                                      fullName:dict[kFullName]
+                                                    SIPAddress:dict[kSIPAddress]
+                                                     registrar:dict[kDomain]
+                                                         realm:dict[kRealm]
+                                                      username:dict[kUsername]
+                                                        domain:dict[kDomain]];
     
     AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                         userAgent:self.userAgent
                                                                  ringtonePlayback:self.ringtonePlayback
-                                                                      musicPlayer:self.musicPlayer];
+                                                                      musicPlayer:self.musicPlayer
+                                                                      sleepStatus:self.sleepStatus];
     
     [controller setAccountDescription:[[controller account] SIPAddress]];
     [[controller window] setExcludedFromWindowsMenu:YES];
@@ -953,26 +815,14 @@ NS_ASSUME_NONNULL_END
     
     BOOL isEnabled = [accountDict[kAccountEnabled] boolValue];
     if (isEnabled) {
-        NSString *SIPAddress;
-        if ([accountDict[kSIPAddress] length] > 0) {
-            SIPAddress = accountDict[kSIPAddress];
-        } else {
-            SIPAddress = [NSString stringWithFormat:@"%@@%@", accountDict[kUsername], accountDict[kDomain]];
-        }
-        
-        NSString *registrar;
-        if ([accountDict[kRegistrar] length] > 0) {
-            registrar = accountDict[kRegistrar];
-        } else {
-            registrar = accountDict[kDomain];
-        }
-        
-        AKSIPAccount *account = [AKSIPAccount SIPAccountWithFullName:accountDict[kFullName]
-                                                          SIPAddress:SIPAddress
-                                                           registrar:registrar
-                                                               realm:accountDict[kRealm]
-                                                            username:accountDict[kUsername]];
-        
+        AKSIPAccount *account = [[AKSIPAccount alloc] initWithUUID:accountDict[kUUID]
+                                                          fullName:accountDict[kFullName]
+                                                        SIPAddress:accountDict[kSIPAddress]
+                                                         registrar:accountDict[kRegistrar]
+                                                             realm:accountDict[kRealm]
+                                                          username:accountDict[kUsername]
+                                                            domain:accountDict[kDomain]];
+
         account.reregistrationTime = [accountDict[kReregistrationTime] integerValue];
         if ([accountDict[kUseProxy] boolValue]) {
             account.proxyHost = accountDict[kProxyHost];
@@ -984,13 +834,14 @@ NS_ASSUME_NONNULL_END
         AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer];
+                                                                          musicPlayer:self.musicPlayer
+                                                                          sleepStatus:self.sleepStatus];
         
         [[controller window] setExcludedFromWindowsMenu:YES];
         
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
-            description = SIPAddress;
+            description = account.SIPAddress;
         }
         [controller setAccountDescription:description];
         
@@ -1073,22 +924,15 @@ NS_ASSUME_NONNULL_END
 #pragma mark -
 #pragma mark AKSIPUserAgentDelegate
 
-// Decides whether AKSIPUserAgent should add an account. User agent is started in this method if needed.
 - (BOOL)SIPUserAgentShouldAddAccount:(AKSIPAccount *)account {
-    if ([[self userAgent] state] < kAKSIPUserAgentStarting) {
-        [[self userAgent] start];
-        
-        // Don't add the account right now, let user agent start first.
-        // The account should be added later, from the callback.
-        return NO;
-        
-    } else if ([[self userAgent] state] < kAKSIPUserAgentStarted) {
-        // User agent is starting, don't add account right now.
-        // The account should be added later, from the callback.
+    if (self.userAgent.isStarted) {
+        return YES;
+    } else {
+        if (self.userAgent.state == AKSIPUserAgentStateStopped) {
+            [self.userAgent start];
+        }
         return NO;
     }
-    
-    return YES;
 }
 
 - (void)SIPUserAgentDidFinishStarting:(NSNotification *)notification {
@@ -1194,6 +1038,10 @@ NS_ASSUME_NONNULL_END
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    [self optOutOfAutomaticWindowTabbing];
+
+    [self.compositionRoot.settingsMigration execute];
     
     // Read main settings from defaults.
     if ([defaults boolForKey:kUseDNSSRV]) {
@@ -1212,13 +1060,7 @@ NS_ASSUME_NONNULL_END
     NSString *bundleShortVersion = [mainBundle infoDictionary][@"CFBundleShortVersionString"];
     
     [[self userAgent] setUserAgentString:[NSString stringWithFormat:@"%@ %@", bundleName, bundleShortVersion]];
-    
-    NSString *logFileName = [defaults stringForKey:kLogFileName];
-    if ([logFileName length] > 0) {
-        [self createDirectoryForFileAtPath:logFileName];
-        [[self userAgent] setLogFileName:logFileName];
-    }
-    
+    [[self userAgent] setLogFileName:[[self.locations logs] URLByAppendingPathComponent:@"Telephone.log"].path];
     [[self userAgent] setLogLevel:[defaults integerForKey:kLogLevel]];
     [[self userAgent] setConsoleLogLevel:[defaults integerForKey:kConsoleLogLevel]];
     [[self userAgent] setDetectsVoiceActivity:[defaults boolForKey:kVoiceActivityDetection]];
@@ -1258,33 +1100,15 @@ NS_ASSUME_NONNULL_END
     // There are saved accounts, open account windows.
     for (NSUInteger i = 0; i < [savedAccounts count]; ++i) {
         NSDictionary *accountDict = savedAccounts[i];
-        
-        NSString *fullName = accountDict[kFullName];
-        
-        NSString *SIPAddress;
-        if ([accountDict[kSIPAddress] length] > 0) {
-            SIPAddress = accountDict[kSIPAddress];
-        } else {
-            SIPAddress = [NSString stringWithFormat:@"%@@%@",
-                          accountDict[kUsername], accountDict[kDomain]];
-        }
-        
-        NSString *registrar;
-        if ([accountDict[kRegistrar] length] > 0) {
-            registrar = accountDict[kRegistrar];
-        } else {
-            registrar = accountDict[kDomain];
-        }
-        
-        NSString *realm = accountDict[kRealm];
-        NSString *username = accountDict[kUsername];
-        
-        AKSIPAccount *account = [AKSIPAccount SIPAccountWithFullName:fullName
-                                                          SIPAddress:SIPAddress
-                                                           registrar:registrar
-                                                               realm:realm
-                                                            username:username];
-        
+
+        AKSIPAccount *account = [[AKSIPAccount alloc] initWithUUID:accountDict[kUUID]
+                                                          fullName:accountDict[kFullName]
+                                                        SIPAddress:accountDict[kSIPAddress]
+                                                         registrar:accountDict[kRegistrar]
+                                                             realm:accountDict[kRealm]
+                                                          username:accountDict[kUsername]
+                                                            domain:accountDict[kDomain]];
+
         account.reregistrationTime = [accountDict[kReregistrationTime] integerValue];
         if ([accountDict[kUseProxy] boolValue]) {
             account.proxyHost = accountDict[kProxyHost];
@@ -1296,13 +1120,14 @@ NS_ASSUME_NONNULL_END
         AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer];
+                                                                          musicPlayer:self.musicPlayer
+                                                                          sleepStatus:self.sleepStatus];
         
         [[controller window] setExcludedFromWindowsMenu:YES];
         
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
-            description = SIPAddress;
+            description = account.SIPAddress;
         }
         [controller setAccountDescription:description];
         
@@ -1334,10 +1159,6 @@ NS_ASSUME_NONNULL_END
     
     // Update account menu items.
     [self updateAccountsMenuItems];
-    
-    // If we want to be in Mac App Store, we can't write to |~/Library/ Address Book Plug-Ins| any more.
-    //
-    // [self installAddressBookPlugIns];
     
     [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
     [self installDNSChangesCallback];
@@ -1426,11 +1247,27 @@ NS_ASSUME_NONNULL_END
 #pragma mark -
 #pragma mark AKSIPCall notifications
 
+- (void)SIPCallCalling:(NSNotification *)notification {
+    [self updateDockTileBadgeLabel];
+}
+
 - (void)SIPCallIncoming:(NSNotification *)notification {
+    [self updateDockTileBadgeLabel];
+    if (![NSApp isActive]) {
+        [NSApp requestUserAttention:NSInformationalRequest];
+        [self startUserAttentionTimer];
+    }
+}
+
+- (void)SIPCallConnecting:(NSNotification *)notification {
     [self updateDockTileBadgeLabel];
 }
 
 - (void)SIPCallDidDisconnect:(NSNotification *)notification {
+    [self updateDockTileBadgeLabel];
+    if ([[notification object] isIncoming]) {
+        [self stopUserAttentionTimerIfNeeded];
+    }
     if ([self shouldRestartUserAgentASAP] && ![self hasActiveCallControllers]) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(restartUserAgent) object:nil];
         [self setShouldRestartUserAgentASAP:NO];
@@ -1468,19 +1305,23 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark - NSUserNotificationCenterDelegate
 
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center
-       didActivateNotification:(NSUserNotification *)notification {
-    
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
     NSString *identifier = notification.userInfo[kUserNotificationCallControllerIdentifierKey];
-    [self showWindowOfCallControllerWithIdentifier:identifier];
-}
-
-- (void)showWindowOfCallControllerWithIdentifier:(NSString *)identifier {
-    CallController *callController = [self callControllerByIdentifier:identifier];
-    if (![NSApp isActive]) {
-        [NSApp activateIgnoringOtherApps:YES];
+    CallController *controller = [self callControllerByIdentifier:identifier];
+    switch (notification.activationType) {
+        case NSUserNotificationActivationTypeContentsClicked:
+            [controller showWindow:self];
+            [center removeDeliveredNotification:notification];
+            break;
+        case NSUserNotificationActivationTypeActionButtonClicked:
+            [controller acceptCall];
+            break;
+        case NSUserNotificationActivationTypeAdditionalActionClicked:
+            [controller hangUpCall];
+            break;
+        default:
+            break;
     }
-    [callController showWindow:nil];
 }
 
 
@@ -1488,8 +1329,8 @@ NS_ASSUME_NONNULL_END
 #pragma mark NSWorkspace notifications
 
 - (void)workspaceWillSleep:(NSNotification *)notification {
-    if ([[self userAgent] isStarted]) {
-        [self stopUserAgent];
+    if (self.userAgent.isStarted) {
+        [self stopUserAgentAndWait];
     }
 }
 

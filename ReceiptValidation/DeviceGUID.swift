@@ -20,24 +20,24 @@ import Foundation
 import IOKit
 
 struct DeviceGUID {
-    let dataValue: NSData
+    let dataValue: Data
 
     init() {
-        dataValue = createGUID()
+        dataValue = makeGUID()
     }
 }
 
-private func createGUID() -> NSData {
-    let iterator = createIterator()
-    guard iterator != 0 else { return NSData() }
+private func makeGUID() -> Data {
+    let iterator = makeIterator()
+    guard iterator != 0 else { return Data() }
 
-    var mac = NSData()
+    var mac = Data()
     var service = IOIteratorNext(iterator)
     while service != 0 {
         var parent: io_object_t = 0
         let status = IORegistryEntryGetParentEntry(service, kIOServicePlane, &parent)
         if status == KERN_SUCCESS {
-            mac = IORegistryEntryCreateCFProperty(parent, "IOMACAddress", kCFAllocatorDefault, 0).takeRetainedValue() as! CFDataRef
+            mac = (IORegistryEntryCreateCFProperty(parent, "IOMACAddress" as CFString, kCFAllocatorDefault, 0).takeRetainedValue() as! CFData) as Data
             IOObjectRelease(parent)
         }
         IOObjectRelease(service)
@@ -49,7 +49,7 @@ private func createGUID() -> NSData {
     return mac
 }
 
-private func createIterator() -> io_iterator_t {
+private func makeIterator() -> io_iterator_t {
     var port: mach_port_t = 0
     var status = IOMasterPort(mach_port_t(MACH_PORT_NULL), &port)
     guard status == KERN_SUCCESS else { return 0 }

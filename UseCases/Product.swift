@@ -21,10 +21,10 @@ import Foundation
 public struct Product {
     public let identifier: String
     public let name: String
-    public let price: NSDecimalNumber
+    public let price: Decimal
     public let localizedPrice: String
 
-    public init(identifier: String, name: String, price: NSDecimalNumber, localizedPrice: String) {
+    public init(identifier: String, name: String, price: Decimal, localizedPrice: String) {
         self.identifier = identifier
         self.name = name
         self.price = price
@@ -38,9 +38,17 @@ extension Product: Hashable {
     }
 }
 
-public func ==(lhs: Product, rhs: Product) -> Bool {
-    return lhs.identifier == rhs.identifier &&
-        lhs.name == rhs.name &&
-        lhs.price == rhs.price &&
-        lhs.localizedPrice == rhs.localizedPrice
+extension Product: Equatable {
+    public static func ==(lhs: Product, rhs: Product) -> Bool {
+        return lhs.identifier == rhs.identifier &&
+            lhs.name == rhs.name &&
+            lhs.price == rhs.price &&
+            lhs.localizedPrice == rhs.localizedPrice
+    }
+}
+
+extension Product: Comparable {
+    public static func <(lhs: Product, rhs: Product) -> Bool {
+        return lhs.price < rhs.price
+    }
 }

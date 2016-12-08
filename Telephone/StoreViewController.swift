@@ -22,25 +22,26 @@ import UseCases
 final class StoreViewController: NSViewController {
     private var target: StoreViewEventTarget
     private var workspace: NSWorkspace
-    private dynamic var products: [PresentationProduct] = []
-    private let formatter: NSDateFormatter = {
-        let f = NSDateFormatter()
-        f.dateStyle = .ShortStyle
+    fileprivate dynamic var products: [PresentationProduct] = []
+    fileprivate let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .short
         return f
     }()
 
-    @IBOutlet private var productsListView: NSView!
     @IBOutlet private var productsTableView: NSTableView!
-    @IBOutlet private var productsFetchErrorView: NSView!
-    @IBOutlet private var progressView: NSView!
-    @IBOutlet private var purchasedView: NSView!
-    @IBOutlet private var restorePurchasesButton: NSButton!
-    @IBOutlet private var subscriptionsButton: NSButton!
+    @IBOutlet fileprivate var productsListView: NSView!
+    @IBOutlet fileprivate var productsFetchErrorView: NSView!
+    @IBOutlet fileprivate var progressView: NSView!
+    @IBOutlet fileprivate var purchasedView: NSView!
+    @IBOutlet fileprivate var restorePurchasesButton: NSButton!
+    @IBOutlet fileprivate var refreshReceiptButton: NSButton!
+    @IBOutlet fileprivate var subscriptionsButton: NSButton!
 
-    @IBOutlet private weak var productsContentView: NSView!
-    @IBOutlet private weak var productsFetchErrorField: NSTextField!
-    @IBOutlet private weak var progressIndicator: NSProgressIndicator!
-    @IBOutlet private weak var expirationField: NSTextField!
+    @IBOutlet fileprivate weak var productsContentView: NSView!
+    @IBOutlet fileprivate weak var productsFetchErrorField: NSTextField!
+    @IBOutlet fileprivate weak var progressIndicator: NSProgressIndicator!
+    @IBOutlet fileprivate weak var expirationField: NSTextField!
 
     init(target: StoreViewEventTarget, workspace: NSWorkspace) {
         self.target = target
@@ -57,24 +58,32 @@ final class StoreViewController: NSViewController {
         target.viewShouldReloadData(self)
     }
 
-    func updateTarget(target: StoreViewEventTarget) {
+    func updateTarget(_ target: StoreViewEventTarget) {
         self.target = target
     }
 
-    @IBAction func fetchProducts(sender: AnyObject) {
+    @IBAction func fetchProducts(_ sender: NSButton) {
         target.viewDidStartProductFetch()
     }
 
-    @IBAction func purchaseProduct(sender: NSButton) {
-        target.viewDidMakePurchase(products[productsTableView.rowForView(sender)])
+    @IBAction func purchaseProduct(_ sender: NSButton) {
+        target.viewDidMakePurchase(product: products[productsTableView.row(for: sender)])
     }
 
-    @IBAction func restorePurchases(sender: AnyObject) {
+    @IBAction func restorePurchases(_ sender: NSButton) {
         target.viewDidStartPurchaseRestoration()
     }
 
-    @IBAction func manageSubscriptions(sender: AnyObject) {
-        workspace.openURL(NSURL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions")!)
+    @IBAction func refreshReceipt(_ sender: NSButton) {
+        makeReceiptRefreshAlert().beginSheetModal(for: view.window!) { response in
+            if response == NSAlertFirstButtonReturn {
+                self.target.viewDidStartReceiptRefresh()
+            }
+        }
+    }
+
+    @IBAction func manageSubscriptions(_ sender: NSButton) {
+        workspace.open(URL(string: "https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/manageSubscriptions")!)
     }
 }
 
@@ -83,12 +92,12 @@ extension StoreViewController: StoreView {
         showProgress()
     }
 
-    func showProducts(products: [PresentationProduct]) {
+    func show(_ products: [PresentationProduct]) {
         self.products = products
         showInProductsContentView(productsListView)
     }
 
-    func showProductsFetchError(error: String) {
+    func showProductsFetchError(_ error: String) {
         productsFetchErrorField.stringValue = error
         showInProductsContentView(productsFetchErrorView)
     }
@@ -101,39 +110,43 @@ extension StoreViewController: StoreView {
         showProgress()
     }
 
-    func showPurchaseError(error: String) {
-        purchaseErrorAlert(text: error).beginSheetModalForWindow(view.window!, completionHandler: nil)
+    func showPurchaseError(_ error: String) {
+        makePurchaseErrorAlert(text: error).beginSheetModal(for: view.window!, completionHandler: nil)
     }
 
     func showPurchaseRestorationProgress() {
         showProgress()
     }
 
-    func showPurchaseRestorationError(error: String) {
-        restorationErrorAlert(text: error).beginSheetModalForWindow(view.window!, completionHandler: nil)
+    func showPurchaseRestorationError(_ error: String) {
+        makeRestorationErrorAlert(text: error).beginSheetModal(for: view.window!, completionHandler: nil)
     }
 
     func disablePurchaseRestoration() {
-        restorePurchasesButton.enabled = false
+        restorePurchasesButton.isEnabled = false
+        refreshReceiptButton.isEnabled = false;
     }
 
     func enablePurchaseRestoration() {
-        subscriptionsButton.hidden = true
-        restorePurchasesButton.hidden = false
-        restorePurchasesButton.enabled = true
+        subscriptionsButton.isHidden = true
+        restorePurchasesButton.isHidden = false
+        refreshReceiptButton.isHidden = false
+        restorePurchasesButton.isEnabled = true
+        refreshReceiptButton.isEnabled = true
     }
 
-    func showPurchased(until date: NSDate) {
-        expirationField.stringValue = formatter.stringFromDate(date)
+    func showPurchased(until date: Date) {
+        expirationField.stringValue = formatter.string(from: date)
         showInProductsContentView(purchasedView)
     }
 
     func showSubscriptionManagement() {
-        restorePurchasesButton.hidden = true
-        subscriptionsButton.hidden = false
+        restorePurchasesButton.isHidden = true
+        refreshReceiptButton.isHidden = true
+        subscriptionsButton.isHidden = false
     }
 
-    private func showInProductsContentView(view: NSView) {
+    private func showInProductsContentView(_ view: NSView) {
         productsContentView.subviews.forEach { $0.removeFromSuperview() }
         productsContentView.addSubview(view)
     }
@@ -146,17 +159,32 @@ extension StoreViewController: StoreView {
 
 extension StoreViewController: NSTableViewDelegate {}
 
-private func purchaseErrorAlert(text text: String) -> NSAlert {
-    return alert(message: NSLocalizedString("Could not make purchase.", comment: "Product purchase error."), text: text)
+private func makePurchaseErrorAlert(text: String) -> NSAlert {
+    return makeAlert(message: NSLocalizedString("Could not make purchase.", comment: "Product purchase error."), text: text)
 }
 
-private func restorationErrorAlert(text text: String) -> NSAlert {
-    return alert(message: NSLocalizedString("Could not restore purchases.", comment: "Purchase restoration error."), text: text)
+private func makeRestorationErrorAlert(text: String) -> NSAlert {
+    return makeAlert(message: NSLocalizedString("Could not restore purchases.", comment: "Purchase restoration error."), text: text)
 }
 
-private func alert(message message: String, text: String) -> NSAlert {
+private func makeAlert(message: String, text: String) -> NSAlert {
     let result = NSAlert()
     result.messageText = message
     result.informativeText = text
+    return result
+}
+
+private func makeReceiptRefreshAlert() -> NSAlert {
+    let result = NSAlert()
+    result.messageText = NSLocalizedString("Refresh receipt?", comment: "Receipt refresh alert message text.")
+    result.informativeText = NSLocalizedString(
+        "Telepohne will quit and the system will attempt to refresh the application receipt. " +
+        "After that, Telephone will be started again. " +
+        "You may be asked to enter your App Store credentials.",
+        comment: "Receipt refresh alert informative text."
+    )
+    result.addButton(withTitle: NSLocalizedString("Quit and Refresh", comment: "Receipt refresh alert button."))
+    result.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel button."))
+    result.buttons[1].keyEquivalent = "\u{1b}"
     return result
 }

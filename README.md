@@ -39,6 +39,7 @@ Create `pjlib/include/pj/config_site.h`:
     #define PJ_DNS_MAX_IP_IN_A_REC 32
     #define PJ_DNS_SRV_MAX_ADDR 32
     #define PJSIP_MAX_RESOLVED_ADDRESSES 32
+    #define PJ_GETHOSTIP_DISABLE_LOCAL_RESOLUTION 1
 
 Build and install (remove `--with-opus` option if you don’t need Opus):
 
@@ -48,11 +49,11 @@ Build and install (remove `--with-opus` option if you don’t need Opus):
 
 ### LibreSSL
 
-    $ ftp http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.4.2.tar.gz
-    $ ftp http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.4.2.tar.gz.asc
-    $ gpg --verify libressl-2.4.2.tar.gz.asc
-    $ tar xzvf libressl-2.4.2.tar.gz
-    $ cd libressl-2.4.2
+    $ ftp http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.4.3.tar.gz
+    $ ftp http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.4.3.tar.gz.asc
+    $ gpg --verify libressl-2.4.3.tar.gz.asc
+    $ tar xzvf libressl-2.4.3.tar.gz
+    $ cd libressl-2.4.3
     $ ./configure --prefix=/path/to/Telephone/ThirdParty/LibreSSL --disable-shared CFLAGS='-mmacosx-version-min=10.10'
     $ make
     $ make install

@@ -19,39 +19,39 @@
 import UseCases
 
 public final class UseCaseFactorySpy {
-    public private(set) var invokedSoundIO = PresentationSoundIO(input: "", output: "", ringtoneOutput: "")
-    public private(set) var invokedRingtoneSoundName = ""
+    public fileprivate(set) var invokedSoundIO = PresentationSoundIO(input: "", output: "", ringtoneOutput: "")
+    public fileprivate(set) var invokedRingtoneSoundName = ""
 
-    private var soundIOLoad: ThrowingUseCase!
-    private var soundIOSave: UseCase!
-    private var ringtoneSoundNameSave: UseCase!
+    fileprivate var soundIOLoad: ThrowingUseCase!
+    fileprivate var soundIOSave: UseCase!
+    fileprivate var ringtoneSoundNameSave: UseCase!
 
     public init() {}
 
-    public func stub(withUserDefaultsSoundIOLoad useCase: ThrowingUseCase) {
+    public func stub(withSettingsSoundIOLoad useCase: ThrowingUseCase) {
         soundIOLoad = useCase
     }
 
-    public func stub(withUserDefaultsSoundIOSave useCase: UseCase) {
+    public func stub(withSettingsSoundIOSave useCase: UseCase) {
         soundIOSave = useCase
     }
 
-    public func stub(withUserDefaultsRingtoneSoundNameSave useCase: UseCase) {
+    public func stub(withSettingsRingtoneSoundNameSave useCase: UseCase) {
         ringtoneSoundNameSave = useCase
     }
 }
 
 extension UseCaseFactorySpy: UseCaseFactory {
-    public func createUserDefaultsSoundIOLoadUseCase(output output: UserDefaultsSoundIOLoadUseCaseOutput) -> ThrowingUseCase {
+    public func makeSettingsSoundIOLoadUseCase(output: SettingsSoundIOLoadUseCaseOutput) -> ThrowingUseCase {
         return soundIOLoad
     }
 
-    public func createUserDefaultsSoundIOSaveUseCase(soundIO soundIO: PresentationSoundIO) -> UseCase {
+    public func makeSettingsSoundIOSaveUseCase(soundIO: PresentationSoundIO) -> UseCase {
         invokedSoundIO = soundIO
         return soundIOSave
     }
 
-    public func createUserDefaultsRingtoneSoundNameSaveUseCase(name name: String) -> UseCase {
+    public func makeSettingsRingtoneSoundNameSaveUseCase(name: String) -> UseCase {
         invokedRingtoneSoundName = name
         return ringtoneSoundNameSave
     }
