@@ -2,8 +2,8 @@
 //  PreferencesController.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,17 +25,6 @@
 #import "GeneralPreferencesViewController.h"
 #import "NetworkPreferencesViewController.h"
 #import "SoundPreferencesViewController.h"
-
-
-NSString * const kSourceIndex = @"SourceIndex";
-NSString * const kDestinationIndex = @"DestinationIndex";
-
-NSString * const AKPreferencesControllerDidRemoveAccountNotification = @"AKPreferencesControllerDidRemoveAccount";
-NSString * const AKPreferencesControllerDidChangeAccountEnabledNotification
-    = @"AKPreferencesControllerDidChangeAccountEnabled";
-NSString * const AKPreferencesControllerDidSwapAccountsNotification = @"AKPreferencesControllerDidSwapAccounts";
-NSString * const AKPreferencesControllerDidChangeNetworkSettingsNotification
-    = @"AKPreferencesControllerDidChangeNetworkSettings";
 
 @implementation PreferencesController
 

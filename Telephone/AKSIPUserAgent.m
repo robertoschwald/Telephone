@@ -2,8 +2,8 @@
 //  AKSIPUserAgent.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -70,7 +70,6 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
 @property(nonatomic, assign) NSInteger ringbackCount;
 
 @property(nonatomic, readonly) NSThread *thread;
-@property(nonatomic) id<UserAgentAccountEventTarget> accountEventTarget;
 
 /// Updates codecs according to usesG711Only property value.
 - (void)updateCodecs;
@@ -556,8 +555,6 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
     
     [anAccount setOnline:YES];
 
-    [self.accountEventTarget didAddAccount:anAccount toUserAgent:self];
-    
     return YES;
 }
 
@@ -567,7 +564,6 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
         return NO;
     }
 
-    [self.accountEventTarget willRemoveAccount:anAccount fromUserAgent:self];
     [anAccount.delegate SIPAccountWillRemove:anAccount];
     
     [anAccount removeAllCalls];
@@ -732,10 +728,6 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
     });
     
     return [priorities[identifier] unsignedIntegerValue];
-}
-
-- (void)updateAccountEventTarget:(id<UserAgentAccountEventTarget>)target {
-    self.accountEventTarget = target;
 }
 
 - (NSString *)stringForSIPResponseCode:(NSInteger)responseCode {

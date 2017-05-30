@@ -2,8 +2,8 @@
 //  SimpleAccount.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 import UseCases
 
-public final class SimpleAccount: Account {
+public final class SimpleAccount {
     public let uuid: String
     public let domain: String
 
@@ -26,4 +26,8 @@ public final class SimpleAccount: Account {
         self.uuid = uuid
         self.domain = domain
     }
+}
+
+extension SimpleAccount: Account {
+    public func makeCall(to uri: URI) {}
 }

@@ -2,8 +2,8 @@
 //  UserAgentNotificationsToObservingAdapterTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -37,19 +37,19 @@ final class UserAgentNotificationsToEventTargetAdapterTests: XCTestCase {
     func testCallsDidFinishStarting() {
         center.post(makeUserAgentNotification(name: NSNotification.Name.AKSIPUserAgentDidFinishStarting.rawValue))
 
-        XCTAssertTrue(target.didCallUserAgentDidFinishStarting)
+        XCTAssertTrue(target.didCallDidFinishStarting)
     }
 
     func testCallsDidFinishStopping() {
         center.post(makeUserAgentNotification(name: NSNotification.Name.AKSIPUserAgentDidFinishStopping.rawValue))
 
-        XCTAssertTrue(target.didCallUserAgentDidFinishStopping)
+        XCTAssertTrue(target.didCallDidFinishStopping)
     }
 
     func testCallsDidDetectNAT() {
         center.post(makeUserAgentNotification(name: NSNotification.Name.AKSIPUserAgentDidDetectNAT.rawValue))
 
-        XCTAssertTrue(target.didCallUserAgentDidDetectNAT)
+        XCTAssertTrue(target.didCallDidDetectNAT)
     }
 
     func testCallsDidMakeCall() {

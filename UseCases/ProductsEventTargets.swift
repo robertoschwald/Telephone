@@ -2,8 +2,8 @@
 //  ProductsEventTargets.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -43,11 +43,11 @@ public final class ProductsEventTargets {
 }
 
 extension ProductsEventTargets: ProductsEventTarget {
-    public func productsDidFetch() {
-        targets.forEach() { $0.productsDidFetch() }
+    public func didFetch(_ products: Products) {
+        targets.forEach() { $0.didFetch(products) }
     }
 
-    public func productsDidFailFetching(error: String) {
-        targets.forEach { $0.productsDidFailFetching(error: error) }
+    public func didFailFetching(_ products: Products, error: String) {
+        targets.forEach { $0.didFailFetching(products, error: error) }
     }
 }

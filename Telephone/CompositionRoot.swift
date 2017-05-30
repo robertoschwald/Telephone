@@ -2,8 +2,8 @@
 //  CompositionRoot.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 //  GNU General Public License for more details.
 //
 
+import Contacts
 import Foundation
 import StoreKit
 import UseCases
@@ -30,12 +31,14 @@ final class CompositionRoot: NSObject {
     let settingsMigration: ProgressiveSettingsMigration
     let applicationDataLocations: ApplicationDataLocations
     let workstationSleepStatus: WorkspaceSleepStatus
+    let callHistoryViewEventTargetFactory: CallHistoryViewEventTargetFactory
     private let defaults: UserDefaults
     private let queue: DispatchQueue
 
     private let storeEventSource: StoreEventSource
     private let userAgentNotificationsToEventTargetAdapter: UserAgentNotificationsToEventTargetAdapter
     private let devicesChangeEventSource: SystemAudioDevicesChangeEventSource!
+    private let accountsNotificationsToEventTargetAdapter: AccountsNotificationsToEventTargetAdapter
     private let callNotificationsToEventTargetAdapter: CallNotificationsToEventTargetAdapter
 
     init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
@@ -146,21 +149,42 @@ final class CompositionRoot: NSObject {
 
         let callHistories = DefaultCallHistories(
             factory: NotifyingCallHistoryFactory(
-                factory: PersistentCallHistoryFactory(
-                    history: TruncatingCallHistoryFactory(limit: 1000),
-                    storage: SimplePropertyListStorageFactory(),
-                    locations: applicationDataLocations
+                origin: ReversedCallHistoryFactory(
+                    origin: PersistentCallHistoryFactory(
+                        history: TruncatingCallHistoryFactory(limit: 1000),
+                        storage: SimplePropertyListStorageFactory(manager: FileManager.default),
+                        locations: applicationDataLocations
+                    )
                 )
             )
         )
 
-        userAgent.updateAccountEventTarget(callHistories)
+        accountsNotificationsToEventTargetAdapter = AccountsNotificationsToEventTargetAdapter(
+            center: NotificationCenter.default, target: CallHistoriesHistoryRemoveUseCase(histories: callHistories)
+        )
 
         callNotificationsToEventTargetAdapter = CallNotificationsToEventTargetAdapter(
             center: NotificationCenter.default,
             target: CallHistoryCallEventTarget(
                 histories: callHistories, factory: DefaultCallHistoryRecordAddUseCaseFactory()
             )
+        )
+
+        let contacts: Contacts
+        if #available(macOS 10.11, *) {
+            contacts = CNContactStoreToContactsAdapter(store: CNContactStore())
+        } else {
+            contacts = ABAddressBookToContactsAdapter()
+        }
+
+        callHistoryViewEventTargetFactory = CallHistoryViewEventTargetFactory(
+            histories: callHistories,
+            matching: IndexedContactMatching(
+                factory: DefaultContactMatchingIndexFactory(contacts: contacts),
+                settings: SimpleContactMatchingSettings(settings: defaults)
+            ),
+            dateFormatter: ShortRelativeDateTimeFormatter(),
+            durationFormatter: DurationFormatter()
         )
 
         super.init()

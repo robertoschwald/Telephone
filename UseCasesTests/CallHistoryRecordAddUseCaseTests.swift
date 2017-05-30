@@ -2,8 +2,8 @@
 //  CallHistoryRecordAddUseCaseTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,7 +34,7 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsCopyOfRecordWithEmptyHostWhenHostMatchesDomain() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecordTestFactory().makeRecord(number: 1)
-        let sut = CallHistoryRecordAddUseCase(history: history, record: record, domain: record.host)
+        let sut = CallHistoryRecordAddUseCase(history: history, record: record, domain: record.uri.host)
 
         sut.execute()
 
@@ -43,7 +43,13 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
 
     func testAddsCopyOfRecordWithEmptyHostWhenUserIsATelephoneNumberLongerThanFourCharacters() {
         let history = TruncatingCallHistory()
-        let record = CallHistoryRecord(user: "12345", host: "any-host", date: Date(), duration: 60, isIncoming: false, isMissed: false)
+        let record = CallHistoryRecord(
+            uri: URI(user: "12345", host: "any-host", displayName: "any-name"),
+            date: Date(),
+            duration: 60,
+            isIncoming: false,
+            isMissed: false
+        )
         let sut = CallHistoryRecordAddUseCase(history: history, record: record, domain: "different")
 
         sut.execute()
@@ -54,7 +60,11 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsOriginalRecordWhenUserIsATelephoneNumberWithLengthEqualToFourCharacters() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecord(
-            user: "1234", host: "any-host", date: Date(), duration: 60, isIncoming: false, isMissed: false
+            uri: URI(user: "1234", host: "any-host", displayName: "any-name"),
+            date: Date(),
+            duration: 60,
+            isIncoming: false,
+            isMissed: false
         )
         let sut = CallHistoryRecordAddUseCase(history: history, record: record, domain: "different")
 
@@ -66,7 +76,11 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsOriginalRecordWhenUserIsATelephoneNumberShorterThanFourCharacters() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecord(
-            user: "123", host: "any-host", date: Date(), duration: 60, isIncoming: false, isMissed: false
+            uri: URI(user: "123", host: "any-host", displayName: "any-name"),
+            date: Date(),
+            duration: 60,
+            isIncoming: false,
+            isMissed: false
         )
         let sut = CallHistoryRecordAddUseCase(history: history, record: record, domain: "different")
 

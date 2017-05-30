@@ -2,8 +2,8 @@
 //  StoreEventTarget.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,9 +19,9 @@
 public protocol StoreEventTarget {
     func didStartPurchasingProduct(withIdentifier identifier: String)
 
-    func didPurchaseProducts()
-    func didFailPurchasingProducts(error: String)
-    func didCancelPurchasingProducts()
+    func didPurchase()
+    func didFailPurchasing(error: String)
+    func didCancelPurchasing()
 
     func didRestorePurchases()
     func didFailRestoringPurchases(error: String)

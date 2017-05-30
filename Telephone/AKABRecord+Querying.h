@@ -2,8 +2,8 @@
 //  AKABRecord+Querying.h
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,14 +16,17 @@
 //  GNU General Public License for more details.
 //
 
-#import <AddressBook/AddressBook.h>
-#import <Foundation/Foundation.h>
+@import AddressBook;
+@import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
 
-// A category for querying Address Book record.
 @interface ABRecord (AKRecordQueryingAdditions)
 
-// Addressbook record's full name in the proper order or company name.
 @property(nonatomic, readonly, copy) NSString *ak_fullName;
 
+- (NSString *)ak_fullNameWithNameOrdering:(NSInteger)nameOrdering;
+
 @end
+
+NS_ASSUME_NONNULL_END

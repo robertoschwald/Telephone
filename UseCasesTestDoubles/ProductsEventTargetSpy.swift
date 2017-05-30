@@ -2,8 +2,8 @@
 //  ProductsEventTargetSpy.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,18 +19,18 @@
 import UseCases
 
 public final class ProductsEventTargetSpy {
-    public fileprivate(set) var didCallProductsDidFetch = false
-    public fileprivate(set) var didCallProductsDidFailFetching = false
+    public fileprivate(set) var didCallDidFetch = false
+    public fileprivate(set) var didCallDidFailFetching = false
 
     public init() {}
 }
 
 extension ProductsEventTargetSpy: ProductsEventTarget {
-    public func productsDidFetch() {
-        didCallProductsDidFetch = true
+    public func didFetch(_ products: Products) {
+        didCallDidFetch = true
     }
 
-    public func productsDidFailFetching(error: String) {
-        didCallProductsDidFailFetching = true
+    public func didFailFetching(_ products: Products, error: String) {
+        didCallDidFailFetching = true
     }
 }

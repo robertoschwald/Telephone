@@ -1,9 +1,6 @@
 //
-//  NullCallHistory.swift
+//  CallHistoryCallMakeUseCase.swift
 //  Telephone
-//
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,14 +13,20 @@
 //  GNU General Public License for more details.
 //
 
-public final class NullCallHistory {
-    public init() {}
+public final class CallHistoryCallMakeUseCase {
+    fileprivate let account: Account
+    fileprivate let history: CallHistory
+    fileprivate let index: Int
+
+    public init(account: Account, history: CallHistory, index: Int) {
+        self.account = account
+        self.history = history
+        self.index = index
+    }
 }
 
-extension NullCallHistory: CallHistory {
-    public var allRecords: [CallHistoryRecord] { return [] }
-    public func add(_ record: CallHistoryRecord) {}
-    public func remove(_ record: CallHistoryRecord) {}
-    public func removeAll() {}
-    public func updateTarget(_ target: CallHistoryEventTarget) {}
+extension CallHistoryCallMakeUseCase: UseCase {
+    public func execute() {
+        account.makeCall(to: history.allRecords[index].uri)
+    }
 }

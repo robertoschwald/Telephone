@@ -2,8 +2,8 @@
 //  CallNotificationsToEventTargetAdapter.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,19 +26,14 @@ final class CallNotificationsToEventTargetAdapter {
     init(center: NotificationCenter, target: CallEventTarget) {
         self.center = center
         self.target = target
-        center.addObserver(
-            self,
-            selector: #selector(SIPCallDidDisconnect(_:)),
-            name: Notification.Name.AKSIPCallDidDisconnect,
-            object: nil
-        )
+        center.addObserver(self, selector: #selector(didDisconnect), name: .AKSIPCallDidDisconnect, object: nil)
     }
 
     deinit {
-        center.removeObserver(self, name: Notification.Name.AKSIPCallDidDisconnect, object: nil)
+        center.removeObserver(self, name: .AKSIPCallDidDisconnect, object: nil)
     }
 
-    @objc private func SIPCallDidDisconnect(_ notification: Notification) {
-        target.callDidDisconnect(notification.object as! Call)
+    @objc private func didDisconnect(_ notification: Notification) {
+        target.didDisconnect(notification.object as! Call)
     }
 }

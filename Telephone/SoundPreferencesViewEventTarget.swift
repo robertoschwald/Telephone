@@ -2,8 +2,8 @@
 //  SoundPreferencesViewEventTarget.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,9 +17,18 @@
 //
 
 @objc protocol SoundPreferencesViewEventTarget {
-    func viewShouldReloadData(_ view: SoundPreferencesView)
-    func viewShouldReloadSoundIO(_ view: SoundPreferencesView)
-    func viewDidChangeSoundIO(input: String, output: String, ringtoneOutput: String)
-    func viewDidChangeRingtoneName(_ name: String)
-    func viewWillDisappear(_ view: SoundPreferencesView)
+    @objc(viewShouldReloadData:)
+    func shouldReloadData(in view: SoundPreferencesView)
+
+    @objc(viewShouldReloadSoundIO:)
+    func shouldReloadSoundIO(in view: SoundPreferencesView)
+
+    @objc(viewDidChangeSoundIOWithInput:output:ringtoneOutput:)
+    func didChangeSoundIO(input: String, output: String, ringtoneOutput: String)
+
+    @objc(viewDidChangeRingtoneName:)
+    func didChangeRingtoneName(_ name: String)
+
+    @objc(viewWillDisappear:)
+    func willDisappear(_ view: SoundPreferencesView)
 }

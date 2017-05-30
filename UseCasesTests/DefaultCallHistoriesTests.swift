@@ -2,8 +2,8 @@
 //  DefaultCallHistoriesTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,26 +17,40 @@
 //
 
 import XCTest
-import UseCases
+@testable import UseCases
 import UseCasesTestDoubles
 
 final class DefaultCallHistoriesTests: XCTestCase {
-    func testSetsHistoryOnDidAddAccount() {
-        let sut = DefaultCallHistories(factory: CallHistoryFactoryStub(history: TruncatingCallHistory()))
-        let account = SimpleAccount(uuid: "any-uuid", domain: "any-domain")
+    func testCreatesHistoryOnFirstGet() {
+        let history = TruncatingCallHistory()
+        let sut = DefaultCallHistories(factory: CallHistoryFactorySpy(history: history))
 
-        sut.didAdd(account, to: UserAgentSpy())
+        let result = sut.history(withUUID: "any-uuid")
 
-        XCTAssertFalse(sut.history(for: account).isNil)
+        XCTAssertEqual(sut.count, 1)
+        XCTAssertTrue(result === history)
     }
 
-    func testRemovesHistoryOnWillRemoveAccount() {
-        let sut = DefaultCallHistories(factory: CallHistoryFactoryStub(history: TruncatingCallHistory()))
-        let account = SimpleAccount(uuid: "any-uuid", domain: "any-domain")
-        sut.didAdd(account, to: UserAgentSpy())
+    func testUsesExpectedUUIDOnHistoryCreation() {
+        let factory = CallHistoryFactorySpy(history: TruncatingCallHistory())
+        let sut = DefaultCallHistories(factory: factory)
+        let uuid = "any-uuid"
 
-        sut.willRemove(account, from: UserAgentSpy())
+        _ = sut.history(withUUID: uuid)
 
-        XCTAssertTrue(sut.history(for: account).isNil)
+        XCTAssertEqual(factory.invokedUUID, uuid)
+    }
+
+    func testRemovesHistoryOnRemove() {
+        let sut = DefaultCallHistories(factory: CallHistoryFactorySpy(history: TruncatingCallHistory()))
+        let uuid1 = "uuid1"
+        let uuid2 = "uuid2"
+        _ = sut.history(withUUID: uuid1)
+        _ = sut.history(withUUID: uuid2)
+
+        sut.remove(withUUID: uuid1)
+        sut.remove(withUUID: uuid2)
+
+        XCTAssertEqual(sut.count, 0)
     }
 }

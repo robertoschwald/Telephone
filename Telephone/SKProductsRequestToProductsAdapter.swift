@@ -2,8 +2,8 @@
 //  SKProductsRequestToProductsAdapter.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@ extension SKProductsRequestToProductsAdapter: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         DispatchQueue.main.async {
             (self.products, self.storeKitProducts) = self.productMaps(with: response.products)
-            self.target.productsDidFetch()
+            self.target.didFetch(self)
         }
     }
 
@@ -106,7 +106,7 @@ extension SKProductsRequestToProductsAdapter: SKRequestDelegate {
 
     private func notifyEventTargetAboutProductFetchFailure(request: SKRequest, error: String) {
         if request === self.request {
-            self.target.productsDidFailFetching(error: error)
+            self.target.didFailFetching(self, error: error)
         }
     }
 

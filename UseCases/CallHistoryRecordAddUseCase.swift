@@ -2,8 +2,8 @@
 //  CallHistoryRecordAddUseCase.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -42,6 +42,6 @@ extension CallHistoryRecordAddUseCase: UseCase {
     }
 
     private func shouldRemoveHost(from record: CallHistoryRecord) -> Bool {
-        return record.host == domain || record.user.isTelephoneNumber && record.user.characters.count > 4
+        return record.uri.host == domain || record.uri.user.isTelephoneNumber && record.uri.user.characters.count > 4
     }
 }

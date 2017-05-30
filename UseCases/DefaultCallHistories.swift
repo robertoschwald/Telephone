@@ -2,8 +2,8 @@
 //  DefaultCallHistories.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,23 +20,29 @@ public final class DefaultCallHistories {
     fileprivate var histories: [String: CallHistory] = [:]
     fileprivate let factory: CallHistoryFactory
 
+    var count: Int { return histories.count }
+
     public init(factory: CallHistoryFactory) {
         self.factory = factory
     }
 }
 
 extension DefaultCallHistories: CallHistories {
-    public func history(for account: Account) -> CallHistory {
-        return histories[account.uuid] ?? NullCallHistory()
-    }
-}
-
-extension DefaultCallHistories: UserAgentAccountEventTarget {
-    public func didAdd(_ account: Account, to agent: UserAgent) {
-        histories[account.uuid] = factory.make(uuid: account.uuid)
+    public func history(withUUID uuid: String) -> CallHistory {
+        if let history = histories[uuid] {
+            return history
+        } else {
+            return makeHistory(uuid: uuid)
+        }
     }
 
-    public func willRemove(_ account: Account, from agent: UserAgent) {
-        histories.removeValue(forKey: account.uuid)
+    public func remove(withUUID uuid: String) {
+        histories.removeValue(forKey: uuid)
+    }
+
+    private func makeHistory(uuid: String) -> CallHistory {
+        let result = factory.make(uuid: uuid)
+        histories[uuid] = result
+        return result
     }
 }

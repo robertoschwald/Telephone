@@ -2,8 +2,8 @@
 //  CallHistoryCallEventTargetTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -24,13 +24,12 @@ final class CallHistoryCallEventTargetTests: XCTestCase {
     func testCreatesUseCaseWithExpectedArgumentsOnDidDisconnect() {
         let account = SimpleAccount(uuid: "any-id", domain: "any-domain")
         let history: CallHistory = TruncatingCallHistory()
-        let histories = DefaultCallHistories(factory: CallHistoryFactoryStub(history: history))
-        histories.didAdd(account, to: UserAgentSpy())
-        let factory = CallHistoryRecordAddUseCaseFactoryStub(add: UseCaseSpy())
+        let histories = DefaultCallHistories(factory: CallHistoryFactorySpy(history: history))
+        let factory = CallHistoryRecordAddUseCaseFactorySpy(add: UseCaseSpy())
         let sut = CallHistoryCallEventTarget(histories: histories, factory: factory)
         let call = makeCall(account: account)
 
-        sut.callDidDisconnect(call)
+        sut.didDisconnect(call)
 
         XCTAssertTrue(factory.invokedHistory === history)
         XCTAssertEqual(factory.invokedRecord, CallHistoryRecord(call: call))
@@ -38,12 +37,12 @@ final class CallHistoryCallEventTargetTests: XCTestCase {
     }
 
     func testExecutesUseCaseOnDidDisconnect() {
-        let histories = DefaultCallHistories(factory: CallHistoryFactoryStub(history: TruncatingCallHistory()))
+        let histories = DefaultCallHistories(factory: CallHistoryFactorySpy(history: TruncatingCallHistory()))
         let add = UseCaseSpy()
-        let sut = CallHistoryCallEventTarget(histories: histories, factory: CallHistoryRecordAddUseCaseFactoryStub(add: add))
+        let sut = CallHistoryCallEventTarget(histories: histories, factory: CallHistoryRecordAddUseCaseFactorySpy(add: add))
         let call = makeCall(account: SimpleAccount(uuid: "any-id", domain: "any-domain"))
 
-        sut.callDidDisconnect(call)
+        sut.didDisconnect(call)
 
         XCTAssertTrue(add.didCallExecute)
     }
@@ -52,7 +51,7 @@ final class CallHistoryCallEventTargetTests: XCTestCase {
 private func makeCall(account: Account) -> Call {
     return SimpleCall(
         account: account,
-        remote: URI(user: "any-user", host: "any-host"),
+        remote: URI(user: "any-user", host: "any-host", displayName: "any-name"),
         date: Date(),
         duration: 60,
         isIncoming: false,

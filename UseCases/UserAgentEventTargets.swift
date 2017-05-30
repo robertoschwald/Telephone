@@ -2,8 +2,8 @@
 //  UserAgentEventTargets.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -25,23 +25,23 @@ public final class UserAgentEventTargets {
 }
 
 extension UserAgentEventTargets: UserAgentEventTarget {
-    public func userAgentDidFinishStarting(_ userAgent: UserAgent) {
-        targets.forEach { $0.userAgentDidFinishStarting(userAgent) }
+    public func didFinishStarting(_ agent: UserAgent) {
+        targets.forEach { $0.didFinishStarting(agent) }
     }
 
-    public func userAgentDidFinishStopping(_ userAgent: UserAgent) {
-        targets.forEach { $0.userAgentDidFinishStopping(userAgent) }
+    public func didFinishStopping(_ agent: UserAgent) {
+        targets.forEach { $0.didFinishStopping(agent) }
     }
 
-    public func userAgentDidDetectNAT(_ userAgent: UserAgent) {
-        targets.forEach { $0.userAgentDidDetectNAT(userAgent) }
+    public func didDetectNAT(_ agent: UserAgent) {
+        targets.forEach { $0.didDetectNAT(agent) }
     }
 
-    public func userAgentDidMakeCall(_ userAgent: UserAgent) {
-        targets.forEach { $0.userAgentDidMakeCall(userAgent) }
+    public func didMakeCall(_ agent: UserAgent) {
+        targets.forEach { $0.didMakeCall(agent) }
     }
 
-    public func userAgentDidReceiveCall(_ userAgent: UserAgent) {
-        targets.forEach { $0.userAgentDidReceiveCall(userAgent) }
+    public func didReceiveCall(_ agent: UserAgent) {
+        targets.forEach { $0.didReceiveCall(agent) }
     }
 }

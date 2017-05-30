@@ -2,8 +2,8 @@
 //  NotifyingCallHistory.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 public final class NotifyingCallHistory {
     fileprivate let origin: CallHistory
-    fileprivate var target: CallHistoryEventTarget = NullCallHistoryEventTarget()
+    fileprivate weak var target: CallHistoryEventTarget?
 
     public init(origin: CallHistory) {
         self.origin = origin
@@ -32,17 +32,17 @@ extension NotifyingCallHistory: CallHistory {
 
     public func add(_ record: CallHistoryRecord) {
         origin.add(record)
-        target.callHistoryDidUpdate(self)
+        target?.didUpdate(self)
     }
 
     public func remove(_ record: CallHistoryRecord) {
         origin.remove(record)
-        target.callHistoryDidUpdate(self)
+        target?.didUpdate(self)
     }
 
     public func removeAll() {
         origin.removeAll()
-        target.callHistoryDidUpdate(self)
+        target?.didUpdate(self)
     }
 
     public func updateTarget(_ target: CallHistoryEventTarget) {

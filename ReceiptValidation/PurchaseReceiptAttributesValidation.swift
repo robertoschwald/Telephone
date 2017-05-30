@@ -2,8 +2,8 @@
 //  PurchaseReceiptAttributesValidation.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,26 +26,30 @@ final class PurchaseReceiptAttributesValidation: NSObject {
 
 extension PurchaseReceiptAttributesValidation: ReceiptValidation {
     func validateReceipt(_ receipt: Data, completion: (_ result: Result, _ expiration: Date) -> Void) {
-        if let expiration = latestExpirationOfValidPurchaseReceipts(from: receipt) {
-            completion(.receiptIsValid, expiration)
+        if let r = purchaseReceipts(from: receipt).max(by: hasEarlierExpirationDate), isValid(r) {
+            completion(.receiptIsValid, r.expiration)
         } else {
             completion(.noActivePurchases, Date.distantPast)
         }
     }
 
-    private func latestExpirationOfValidPurchaseReceipts(from receipt: Data) -> Date? {
-        return validPurchaseReceipts(from: receipt).max(by: hasEarlierExpirationDate)?.expiration
+    private func purchaseReceipts(from receipt: Data) -> [ASN1PurchaseReceipt] {
+        return ASN1PurchaseReceipts(payload: ASN1ReceiptPayload(container: PKCS7Container(data: receipt)!)!).filter(hasExpectedID)
     }
 
-    private func validPurchaseReceipts(from receipt: Data) -> [ASN1PurchaseReceipt] {
-        return ASN1PurchaseReceipts(payload: ASN1ReceiptPayload(container: PKCS7Container(data: receipt)!)!).filter(isReceiptValid)
-    }
-
-    private func isReceiptValid(_ receipt: ASN1PurchaseReceipt) -> Bool {
-        return !receipt.isCancelled && receipt.expiration >= Date() && identifiers.contains(receipt.identifier)
+    private func hasExpectedID(_ receipt: ASN1PurchaseReceipt) -> Bool {
+        return identifiers.contains(receipt.identifier)
     }
 }
 
 private func hasEarlierExpirationDate(_ lhs: ASN1PurchaseReceipt, _ rhs: ASN1PurchaseReceipt) -> Bool {
     return lhs.expiration < rhs.expiration
+}
+
+private func isValid(_ receipt: ASN1PurchaseReceipt) -> Bool {
+    return !receipt.isCancelled && sixMonths(after: receipt.expiration) >= Date()
+}
+
+private func sixMonths(after date: Date) -> Date {
+    return date.addingTimeInterval(60 * 60 * 24 * 30 * 6)
 }

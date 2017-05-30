@@ -2,8 +2,8 @@
 //  CallHistoryRecordRemoveUseCase.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,16 +18,16 @@
 
 public final class CallHistoryRecordRemoveUseCase {
     fileprivate let history: CallHistory
-    fileprivate let record: CallHistoryRecord
+    fileprivate let index: Int
 
-    public init(history: CallHistory, record: CallHistoryRecord) {
+    public init(history: CallHistory, index: Int) {
         self.history = history
-        self.record = record
+        self.index = index
     }
 }
 
 extension CallHistoryRecordRemoveUseCase: UseCase {
     public func execute() {
-        history.remove(record)
+        history.remove(history.allRecords[index])
     }
 }

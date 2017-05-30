@@ -2,8 +2,8 @@
 //  CallHistoryRecordTestFactory.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,10 +23,9 @@ public final class CallHistoryRecordTestFactory {
 
     public func makeRecord(number: Int) -> CallHistoryRecord {
         return CallHistoryRecord(
-            user: "user-\(number)",
-            host: "host-\(number)",
+            uri: URI(user: "user-\(number)", host: "host-\(number)", displayName: "name-\(number)"),
             date: Date(),
-            duration: 60,
+            duration: 615,
             isIncoming: false,
             isMissed: false
         )

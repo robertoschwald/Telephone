@@ -2,8 +2,8 @@
 //  ActiveAccountViewController.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -53,6 +53,14 @@ NSString * const kPhoneLabel = @"PhoneLabel";
     }
 }
 
+- (BOOL)allowsCallDestinationInput {
+    return !self.callDestinationField.isHidden;
+}
+
+- (NSView *)keyView {
+    return self.callDestinationField;
+}
+
 - (instancetype)initWithAccountController:(AccountController *)accountController {
     if ((self = [self initWithNibName:@"ActiveAccountView" bundle:nil])) {
         _accountController = accountController;
@@ -96,6 +104,21 @@ NSString * const kPhoneLabel = @"PhoneLabel";
 
 - (IBAction)changeCallDestinationURIIndex:(id)sender {
     [self setCallDestinationURIIndex:[sender tag]];
+}
+
+- (void)allowCallDestinationInput {
+    self.callDestinationField.hidden = NO;
+    if (self.callDestinationField.acceptsFirstResponder) {
+        [self.view.window makeFirstResponder:self.callDestinationField];
+    }
+}
+
+- (void)disallowCallDestinationInput {
+    self.callDestinationField.hidden = YES;
+}
+
+- (void)updateNextKeyView:(NSView *)view {
+    self.keyView.nextKeyView = view;
 }
 
 

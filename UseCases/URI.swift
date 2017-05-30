@@ -2,8 +2,8 @@
 //  URI.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -21,9 +21,34 @@ import Foundation
 public final class URI: NSObject {
     public let user: String
     public let host: String
+    public let displayName: String
 
-    public init(user: String, host: String) {
+    public init(user: String, host: String, displayName: String) {
         self.user = user
         self.host = host
+        self.displayName = displayName
+    }
+
+    public override var description: String {
+        if !displayName.isEmpty {
+            return "\"\(displayName)\" <sip:\(user)@\(host)>"
+        } else {
+            return "<sip:\(user)@\(host)>"
+        }
+    }
+}
+
+extension URI {
+    public override func isEqual(_ object: Any?) -> Bool {
+        guard let uri = object as? URI else { return false }
+        return isEqual(to: uri)
+    }
+
+    public override var hash: Int {
+        return user.hash ^ host.hash ^ displayName.hash
+    }
+
+    private func isEqual(to uri: URI) -> Bool {
+        return user == uri.user && host == uri.host && displayName == uri.displayName
     }
 }

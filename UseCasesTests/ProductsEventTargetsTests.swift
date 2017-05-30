@@ -2,8 +2,8 @@
 //  ProductsEventTargetsTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -47,29 +47,29 @@ final class ProductsEventTargetsTests: XCTestCase {
         XCTAssertTrue(sut[0] === second)
     }
 
-    func testCallsDidFetchProductsOnAllTargets() {
+    func testCallsDidFetchOnAllTargets() {
         let first = ProductsEventTargetSpy()
         let second = ProductsEventTargetSpy()
         let sut = ProductsEventTargets()
         sut.add(first)
         sut.add(second)
 
-        sut.productsDidFetch()
+        sut.didFetch(SimpleProductsFake())
 
-        XCTAssertTrue(first.didCallProductsDidFetch)
-        XCTAssertTrue(second.didCallProductsDidFetch)
+        XCTAssertTrue(first.didCallDidFetch)
+        XCTAssertTrue(second.didCallDidFetch)
     }
 
-    func testCallsDidFailFetchingProductsOnAllTargets() {
+    func testCallsDidFailFetchingOnAllTargets() {
         let first = ProductsEventTargetSpy()
         let second = ProductsEventTargetSpy()
         let sut = ProductsEventTargets()
         sut.add(first)
         sut.add(second)
 
-        sut.productsDidFailFetching(error: "any")
+        sut.didFailFetching(SimpleProductsFake(), error: "any")
 
-        XCTAssertTrue(first.didCallProductsDidFailFetching)
-        XCTAssertTrue(second.didCallProductsDidFailFetching)
+        XCTAssertTrue(first.didCallDidFailFetching)
+        XCTAssertTrue(second.didCallDidFailFetching)
     }
 }

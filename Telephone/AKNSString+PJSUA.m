@@ -2,8 +2,8 @@
 //  AKNSString+PJSUA.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,9 +22,8 @@
 @implementation NSString (AKStringPJSUAAdditions)
 
 + (NSString *)stringWithPJString:(pj_str_t)pjString {
-    return [[NSString alloc] initWithBytes:pjString.ptr
-                                    length:(NSUInteger)pjString.slen
-                                  encoding:NSUTF8StringEncoding];
+    NSString *result = [[NSString alloc] initWithBytes:pjString.ptr length:(NSUInteger)pjString.slen encoding:NSUTF8StringEncoding];
+    return result ?: @"";
 }
 
 - (pj_str_t)pjString {

@@ -2,8 +2,8 @@
 //  SimplePropertyListStorageFactory.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,9 +17,16 @@
 //
 
 import Foundation
+import UseCases
 
 final class SimplePropertyListStorageFactory {
-    func make(directory: URL, name: String) -> SimplePropertyListStorage {
-        return SimplePropertyListStorage(url: directory.appendingPathComponent("\(name).plist"))
+    fileprivate let manager: FileManager
+
+    init(manager: FileManager) {
+        self.manager = manager
+    }
+
+    func make(url: SimplePropertyListStorageURL) -> SimplePropertyListStorage {
+        return SimplePropertyListStorage(url: url.url, manager: manager)
     }
 }

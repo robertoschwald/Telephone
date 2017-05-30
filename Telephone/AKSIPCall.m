@@ -2,8 +2,8 @@
 //  AKSIPCall.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,8 @@
 #import "AKSIPAccount.h"
 #import "AKSIPURI.h"
 #import "AKSIPUserAgent.h"
+
+#import "Telephone-Swift.h"
 
 #define THIS_FILE "AKSIPCall.m"
 
@@ -189,7 +191,7 @@ const NSInteger kAKSIPCallsMax = 8;
     _lastStatusText = [NSString stringWithPJString:call.last_status_text];
     _localURI = [AKSIPURI SIPURIWithString:[NSString stringWithPJString:call.local_info]];
     _remoteURI = [AKSIPURI SIPURIWithString:[NSString stringWithPJString:call.remote_info]];
-    _remote = [[URI alloc] initWithUser:_remoteURI.user host:_remoteURI.host];
+    _remote = [[URI alloc] initWithURI:_remoteURI];
 
     return self;
 }

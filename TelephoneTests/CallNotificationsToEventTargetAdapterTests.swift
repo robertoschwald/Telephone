@@ -2,8 +2,8 @@
 //  CallNotificationsToEventTargetAdapterTests.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class CallNotificationsToEventTargetAdapterTests: XCTestCase {
         let target = CallEventTargetSpy()
         let call = SimpleCall(
             account: SimpleAccount(uuid: "any-uuid", domain: "any-domain"),
-            remote: URI(user: "any-user", host: "any-host"),
+            remote: URI(user: "any-user", host: "any-host", displayName: "any-name"),
             date: Date(),
             duration: 0,
             isIncoming: false,
@@ -34,9 +34,9 @@ class CallNotificationsToEventTargetAdapterTests: XCTestCase {
         )
         withExtendedLifetime(CallNotificationsToEventTargetAdapter(center: center, target: target)) {
 
-            center.post(Notification(name: Notification.Name.AKSIPCallDidDisconnect, object: call, userInfo: nil))
+            center.post(Notification(name: .AKSIPCallDidDisconnect, object: call, userInfo: nil))
 
-            XCTAssertTrue(target.didCallCallDidDisconnect)
+            XCTAssertTrue(target.didCallDidDisconnect)
         }
     }
 }

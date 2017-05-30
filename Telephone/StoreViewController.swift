@@ -2,8 +2,8 @@
 //  StoreViewController.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ final class StoreViewController: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        target.viewShouldReloadData(self)
+        target.shouldReloadData()
     }
 
     func updateTarget(_ target: StoreViewEventTarget) {
@@ -63,21 +63,21 @@ final class StoreViewController: NSViewController {
     }
 
     @IBAction func fetchProducts(_ sender: NSButton) {
-        target.viewDidStartProductFetch()
+        target.didStartProductFetch()
     }
 
     @IBAction func purchaseProduct(_ sender: NSButton) {
-        target.viewDidMakePurchase(product: products[productsTableView.row(for: sender)])
+        target.didStartPurchasing(products[productsTableView.row(for: sender)])
     }
 
     @IBAction func restorePurchases(_ sender: NSButton) {
-        target.viewDidStartPurchaseRestoration()
+        target.didStartPurchaseRestoration()
     }
 
     @IBAction func refreshReceipt(_ sender: NSButton) {
         makeReceiptRefreshAlert().beginSheetModal(for: view.window!) { response in
             if response == NSAlertFirstButtonReturn {
-                self.target.viewDidStartReceiptRefresh()
+                self.target.didStartReceiptRefresh()
             }
         }
     }

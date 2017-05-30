@@ -2,8 +2,8 @@
 //  UserAgentNotificationsToEventTargetAdapter.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -75,24 +75,24 @@ final class UserAgentNotificationsToEventTargetAdapter {
 
     @objc private func SIPUserAgentDidFinishStarting(_ notification: Notification) {
         assert(agent === notification.object as! UserAgent)
-        target.userAgentDidFinishStarting(agent)
+        target.didFinishStarting(agent)
     }
 
     @objc private func SIPUserAgentDidFinishStopping(_ notification: Notification) {
         assert(agent === notification.object as! UserAgent)
-        target.userAgentDidFinishStopping(agent)
+        target.didFinishStopping(agent)
     }
 
     @objc private func SIPUserAgentDidDetectNAT(_ notification: Notification) {
         assert(agent === notification.object as! UserAgent)
-        target.userAgentDidDetectNAT(agent)
+        target.didDetectNAT(agent)
     }
 
     @objc private func SIPUserAgentDidMakeCall(_ notification: Notification) {
-        target.userAgentDidMakeCall(agent)
+        target.didMakeCall(agent)
     }
 
     @objc private func SIPUserAgentDidReceiveCall(_ notification: Notification) {
-        target.userAgentDidReceiveCall(agent)
+        target.didReceiveCall(agent)
     }
 }

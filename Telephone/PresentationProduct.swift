@@ -2,8 +2,8 @@
 //  PresentationProduct.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -30,11 +30,8 @@ final class PresentationProduct: NSObject {
 
 extension PresentationProduct {
     override func isEqual(_ object: Any?) -> Bool {
-        if let product = object as? PresentationProduct {
-            return isEqual(toProduct: product)
-        } else {
-            return false
-        }
+        guard let product = object as? PresentationProduct else { return false }
+        return isEqual(toProduct: product)
     }
 
     override var hash: Int {

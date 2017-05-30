@@ -2,8 +2,8 @@
 //  ActiveAccountViewController.h
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -40,6 +40,8 @@ extern NSString * const kPhoneLabel;
 // Call destination URI.
 @property(nonatomic, readonly, copy) AKSIPURI *callDestinationURI;
 
+@property(nonatomic, readonly) BOOL allowsCallDestinationInput;
+@property(nonatomic, readonly) NSView *keyView;
 
 // Initializes an ActiveAccountViewController object with a given account controller.
 - (instancetype)initWithAccountController:(AccountController *)accountController;
@@ -49,5 +51,10 @@ extern NSString * const kPhoneLabel;
 
 // Changes the active SIP URI index in the call destination token.
 - (IBAction)changeCallDestinationURIIndex:(id)sender;
+
+- (void)allowCallDestinationInput;
+- (void)disallowCallDestinationInput;
+
+- (void)updateNextKeyView:(NSView *)view;
 
 @end

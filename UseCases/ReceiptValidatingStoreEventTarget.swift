@@ -2,8 +2,8 @@
 //  ReceiptValidatingStoreEventTarget.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -31,18 +31,18 @@ extension ReceiptValidatingStoreEventTarget: StoreEventTarget {
         origin.didStartPurchasingProduct(withIdentifier: identifier)
     }
 
-    public func didPurchaseProducts() {
+    public func didPurchase() {
         receipt.validate { result in
             self.notifyOriginAboutPurchase(with: result)
         }
     }
 
-    public func didFailPurchasingProducts(error: String) {
-        origin.didFailPurchasingProducts(error: error)
+    public func didFailPurchasing(error: String) {
+        origin.didFailPurchasing(error: error)
     }
 
-    public func didCancelPurchasingProducts() {
-        origin.didCancelPurchasingProducts()
+    public func didCancelPurchasing() {
+        origin.didCancelPurchasing()
     }
 
     public func didRestorePurchases() {
@@ -61,9 +61,9 @@ extension ReceiptValidatingStoreEventTarget: StoreEventTarget {
 
     private func notifyOriginAboutPurchase(with result: ReceiptValidationResult) {
         if case .receiptIsValid = result {
-            origin.didPurchaseProducts()
+            origin.didPurchase()
         } else {
-            origin.didFailPurchasingProducts(error: result.localizedDescription)
+            origin.didFailPurchasing(error: result.localizedDescription)
         }
     }
 

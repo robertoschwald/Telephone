@@ -2,8 +2,8 @@
 //  AppController.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -76,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
 @property(nonatomic, readonly) id<ApplicationDataLocations> locations;
 @property(nonatomic, readonly) WorkspaceSleepStatus *sleepStatus;
+@property(nonatomic, readonly) CallHistoryViewEventTargetFactory *factory;
 @property(nonatomic, getter=isFinishedLaunching) BOOL finishedLaunching;
 @property(nonatomic, copy) NSString *destinationToCall;
 @property(nonatomic, getter=isUserSessionActive) BOOL userSessionActive;
@@ -224,6 +225,7 @@ NS_ASSUME_NONNULL_END
     _musicPlayer = _compositionRoot.musicPlayer;
     _locations = _compositionRoot.applicationDataLocations;
     _sleepStatus = _compositionRoot.workstationSleepStatus;
+    _factory = _compositionRoot.callHistoryViewEventTargetFactory;
     _destinationToCall = @"";
     _userSessionActive = YES;
     _accountControllers = [[NSMutableArray alloc] init];
@@ -774,10 +776,10 @@ NS_ASSUME_NONNULL_END
                                                                         userAgent:self.userAgent
                                                                  ringtonePlayback:self.ringtonePlayback
                                                                       musicPlayer:self.musicPlayer
-                                                                      sleepStatus:self.sleepStatus];
+                                                                      sleepStatus:self.sleepStatus
+                                                                          factory:self.factory];
     
     [controller setAccountDescription:[[controller account] SIPAddress]];
-    [[controller window] setExcludedFromWindowsMenu:YES];
     [controller setEnabled:YES];
     
     [[self accountControllers] addObject:controller];
@@ -835,9 +837,8 @@ NS_ASSUME_NONNULL_END
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
                                                                           musicPlayer:self.musicPlayer
-                                                                          sleepStatus:self.sleepStatus];
-        
-        [[controller window] setExcludedFromWindowsMenu:YES];
+                                                                          sleepStatus:self.sleepStatus
+                                                                              factory:self.factory];
         
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
@@ -869,9 +870,6 @@ NS_ASSUME_NONNULL_END
         [controller setAttemptingToUnregisterAccount:NO];
         [controller setShouldPresentRegistrationError:NO];
         [[controller window] orderOut:nil];
-        
-        // Prevent conflict with setFrameAutosaveName: when re-enabling the account.
-        [controller setWindow:nil];
     }
     
     [self updateCallsShouldDisplayAccountInfo];
@@ -1121,9 +1119,8 @@ NS_ASSUME_NONNULL_END
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
                                                                           musicPlayer:self.musicPlayer
-                                                                          sleepStatus:self.sleepStatus];
-        
-        [[controller window] setExcludedFromWindowsMenu:YES];
+                                                                          sleepStatus:self.sleepStatus
+                                                                              factory:self.factory];
         
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
@@ -1138,9 +1135,6 @@ NS_ASSUME_NONNULL_END
         [[self accountControllers] addObject:controller];
         
         if (![controller isEnabled]) {
-            // Prevent conflict with |setFrameAutosaveName:| when enabling the account.
-            [controller setWindow:nil];
-            
             continue;
         }
         

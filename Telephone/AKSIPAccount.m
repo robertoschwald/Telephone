@@ -2,8 +2,8 @@
 //  AKSIPAccount.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -257,6 +257,10 @@ NS_ASSUME_NONNULL_END
 
 - (void)updateIdentifier:(NSInteger)identifier {
     self.identifier = identifier;
+}
+
+- (void)makeCallTo:(URI *)uri {
+    NSLog(@"Not calling %@", uri);
 }
 
 - (void)makeCallTo:(AKSIPURI *)destination completion:(void (^ _Nonnull)(AKSIPCall * _Nullable))completion {

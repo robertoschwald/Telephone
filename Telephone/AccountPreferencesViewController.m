@@ -2,8 +2,8 @@
 //  AccountPreferencesViewController.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -130,6 +130,7 @@ static const NSUInteger kAccountsMax = 32;
 - (void)removeAccountAtIndex:(NSInteger)index {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *savedAccounts = [NSMutableArray arrayWithArray:[defaults arrayForKey:kAccounts]];
+    NSString *uuid = savedAccounts[index][kUUID];
     [savedAccounts removeObjectAtIndex:index];
     [defaults setObject:savedAccounts forKey:kAccounts];
     
@@ -139,7 +140,7 @@ static const NSUInteger kAccountsMax = 32;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:AKPreferencesControllerDidRemoveAccountNotification
                                                         object:[self preferencesController]
-                                                      userInfo:@{kAccountIndex: @(index)}];
+                                                      userInfo:@{kAccountIndex: @(index), kUUID: uuid}];
     [[self accountsTable] reloadData];
     
     // Select none, last or previous account.

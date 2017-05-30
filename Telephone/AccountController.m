@@ -2,8 +2,8 @@
 //  AccountController.m
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,7 @@
 #import "AKSIPUserAgent.h"
 #import "AKTelephoneNumberFormatter.h"
 
+#import "AccountToAccountControllerAdapter.h"
 #import "ActiveAccountViewController.h"
 #import "ActiveCallViewController.h"
 #import "AppController.h"
@@ -72,8 +73,14 @@ NSString * const kEnglish = @"en";
 NSString * const kRussian = @"ru";
 NSString * const kGerman = @"de";
 
+static NSArray<NSLayoutConstraint *> *FullSizeConstraintsForView(NSView *view);
+
 
 @interface AccountController ()
+
+@property(nonatomic) ActiveAccountViewController *activeAccountViewController;
+@property(nonatomic) CallHistoryViewController *callHistoryViewController;
+@property(nonatomic) CallHistoryViewEventTarget *callHistoryViewEventTarget;
 
 @property(nonatomic, readonly, getter=isAccountAdded) BOOL accountAdded;
 
@@ -81,6 +88,9 @@ NSString * const kGerman = @"de";
 @property(nonatomic, strong) NSTimer *reRegistrationTimer;
 
 @property(nonatomic, copy) NSString *destinationToCall;
+
+@property(nonatomic, weak) IBOutlet NSView *activeAccountView;
+@property(nonatomic, weak) IBOutlet NSView *callHistoryView;
 
 @property(nonatomic, weak) IBOutlet NSToolbarItem *accountStateToolbarItem;
 @property(nonatomic, weak) IBOutlet NSImageView *accountStateImageView;
@@ -96,7 +106,6 @@ NSString * const kGerman = @"de";
 
 @implementation AccountController
 
-@synthesize activeAccountViewController = _activeAccountViewController;
 @synthesize authenticationFailureController = _authenticationFailureController;
 
 - (void)setEnabled:(BOOL)flag {
@@ -204,21 +213,6 @@ NSString * const kGerman = @"de";
     return self.account.identifier != kAKSIPUserAgentInvalidIdentifier;
 }
 
-- (void)setAccountDescription:(NSString *)accountDescription {
-    if (_accountDescription != accountDescription) {
-        [[self window] setTitle:accountDescription];
-        _accountDescription = accountDescription;
-    }
-}
-
-- (ActiveAccountViewController *)activeAccountViewController {
-    if (_activeAccountViewController == nil) {
-        _activeAccountViewController = [[ActiveAccountViewController alloc] initWithAccountController:self];
-    }
-    
-    return _activeAccountViewController;
-}
-
 - (AuthenticationFailureController *)authenticationFailureController {
     if (_authenticationFailureController == nil) {
         _authenticationFailureController
@@ -228,11 +222,16 @@ NSString * const kGerman = @"de";
     return _authenticationFailureController;
 }
 
+- (BOOL)canMakeCalls {
+    return self.activeAccountViewController.allowsCallDestinationInput;
+}
+
 - (instancetype)initWithSIPAccount:(AKSIPAccount *)account
                          userAgent:(AKSIPUserAgent *)userAgent
                   ringtonePlayback:(id<RingtonePlaybackUseCase>)ringtonePlayback
                        musicPlayer:(id<MusicPlayer>)musicPlayer
-                       sleepStatus:(WorkspaceSleepStatus *)sleepStatus {
+                       sleepStatus:(WorkspaceSleepStatus *)sleepStatus
+                           factory:(CallHistoryViewEventTargetFactory *)factory {
 
     self = [super initWithWindowNibName:@"Account"];
     if (self == nil) {
@@ -244,13 +243,13 @@ NSString * const kGerman = @"de";
     _ringtonePlayback = ringtonePlayback;
     _musicPlayer = musicPlayer;
     _sleepStatus = sleepStatus;
+    _factory = factory;
     
     _callControllers = [[NSMutableArray alloc] init];
+    _accountDescription = account.SIPAddress;
     _destinationToCall = @"";
 
     [[self account] setDelegate:self];
-    
-    [[self window] setTitle:[[self account] SIPAddress]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(SIPUserAgentDidFinishStarting:)
@@ -281,7 +280,6 @@ NSString * const kGerman = @"de";
 
 - (void)awakeFromNib {
     [self setShouldCascadeWindows:NO];
-    [[self window] setFrameAutosaveName:[[self account] SIPAddress]];
 }
 
 - (void)registerAccount {
@@ -393,7 +391,7 @@ NSString * const kGerman = @"de";
     
     // Clean display-name part of the destination URI to prevent another call
     // party from seeing local Address Book records.
-    [destinationURI setDisplayName:nil];
+    [destinationURI setDisplayName:@""];
     
     if ([[destinationURI host] length] == 0) {
         [destinationURI setHost:[[[self account] registrationURI] host]];
@@ -430,7 +428,9 @@ NSString * const kGerman = @"de";
 }
 
 - (void)makeCallToURI:(AKSIPURI *)destinationURI phoneLabel:(NSString *)phoneLabel {
-    [self makeCallToURI:destinationURI phoneLabel:phoneLabel callTransferController:nil];
+    if (self.isAccountAdded) {
+        [self makeCallToURI:destinationURI phoneLabel:phoneLabel callTransferController:nil];
+    }
 }
 
 - (void)makeCallToDestinationRegisteringAccountIfNeeded:(NSString *)destination {
@@ -511,14 +511,11 @@ NSString * const kGerman = @"de";
 
     [[self accountStatePopUp] setTitle:NSLocalizedString(@"Available", @"Account registration Available menu item.")];
     [[self accountStateImageView] setImage:[NSImage imageNamed:@"available-state"]];
-    
-    if (![self isActiveViewDisplayed]) {
-        [[self window] setContentView:[[self activeAccountViewController] view]];
-        
-        if ([[[self activeAccountViewController] callDestinationField] acceptsFirstResponder]) {
-            [[self window] makeFirstResponder:[[self activeAccountViewController] callDestinationField]];
-        }
-    }
+
+    [[self availableStateItem] setState:NSOnState];
+    [[self unavailableStateItem] setState:NSOffState];
+
+    [self.activeAccountViewController allowCallDestinationInput];
 }
 
 - (void)showUnavailableState {
@@ -535,14 +532,11 @@ NSString * const kGerman = @"de";
 
     [[self accountStatePopUp] setTitle:NSLocalizedString(@"Unavailable", @"Account registration Unavailable menu item.")];
     [[self accountStateImageView] setImage:[NSImage imageNamed:@"unavailable-state"]];
-    
-    if (![self isActiveViewDisplayed]) {
-        [[self window] setContentView:[[self activeAccountViewController] view]];
-        
-        if ([[[self activeAccountViewController] callDestinationField] acceptsFirstResponder]) {
-            [[self window] makeFirstResponder:[[self activeAccountViewController] callDestinationField]];
-        }
-    }
+
+    [[self availableStateItem] setState:NSOffState];
+    [[self unavailableStateItem] setState:NSOnState];
+
+    [self.activeAccountViewController allowCallDestinationInput];
 }
 
 - (void)showOfflineState {
@@ -559,12 +553,11 @@ NSString * const kGerman = @"de";
 
     [[self accountStatePopUp] setTitle:NSLocalizedString(@"Offline", @"Account registration Offline menu item.")];
     [[self accountStateImageView] setImage:[NSImage imageNamed:@"offline-state"]];
-    
-    NSRect frame = [[[self window] contentView] frame];
-    NSView *emptyView = [[NSView alloc] initWithFrame:frame];
-    NSUInteger autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    [emptyView setAutoresizingMask:autoresizingMask];
-    [[self window] setContentView:emptyView];
+
+    [[self availableStateItem] setState:NSOffState];
+    [[self unavailableStateItem] setState:NSOffState];
+
+    [self.activeAccountViewController disallowCallDestinationInput];
 }
 
 - (void)showConnectingState {
@@ -587,15 +580,30 @@ NSString * const kGerman = @"de";
     [[self account] setRegistered:YES];
 }
 
-- (BOOL)isActiveViewDisplayed {
-    return [self.window.contentView isEqual:self.activeAccountViewController.view];
-}
-
 
 #pragma mark -
 #pragma mark NSWindow delegate methods
 
 - (void)windowDidLoad {
+    self.window.title = self.accountDescription;
+    self.window.frameAutosaveName = self.account.SIPAddress;
+    self.window.excludedFromWindowsMenu = YES;
+
+    self.activeAccountViewController = [[ActiveAccountViewController alloc] initWithAccountController:self];
+    [self.activeAccountView addSubview:self.activeAccountViewController.view];
+    [self.activeAccountView addConstraints:FullSizeConstraintsForView(self.activeAccountViewController.view)];
+
+    self.callHistoryViewController = [[CallHistoryViewController alloc] init];
+    self.callHistoryViewEventTarget = [self.factory makeWithAccount:[[AccountToAccountControllerAdapter alloc] initWithController:self]
+                                                               view:self.callHistoryViewController];
+    self.callHistoryViewController.target = self.callHistoryViewEventTarget;
+
+    [self.callHistoryView addSubview:self.callHistoryViewController.view];
+    [self.callHistoryView addConstraints:FullSizeConstraintsForView(self.callHistoryViewController.view)];
+
+    [self.activeAccountViewController updateNextKeyView:self.callHistoryViewController.keyView];
+    [self.callHistoryViewController updateNextKeyView:self.activeAccountViewController.keyView];
+
     [self showOfflineState];
 }
 
@@ -923,7 +931,7 @@ NSString * const kGerman = @"de";
     
     // Address Book search ends here.
     
-    [[aCallController window] setTitle:[[aCall remoteURI] SIPAddress]];
+    [[aCallController window] setTitle:([[aCall remoteURI] SIPAddress] ?: @"")];
     [aCallController setDisplayedName:finalDisplayedName];
     [aCallController setStatus:finalStatus];
     [aCallController setRedialURI:[aCall remoteURI]];
@@ -1040,3 +1048,11 @@ NSString * const kGerman = @"de";
 }
 
 @end
+
+static NSArray<NSLayoutConstraint *> *FullSizeConstraintsForView(NSView *view) {
+    NSMutableArray<NSLayoutConstraint *> *result = [NSMutableArray array];
+    NSDictionary *views = @{@"view": view};
+    [result addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|" options:0 metrics:nil views:views]];
+    [result addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:views]];
+    return result;
+}

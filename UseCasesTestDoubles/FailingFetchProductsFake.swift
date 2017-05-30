@@ -2,8 +2,8 @@
 //  FailingFetchProductsFake.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -34,6 +34,6 @@ extension FailingFetchProductsFake: Products {
     }
 
     public func fetch() {
-        target.productsDidFailFetching(error: error)
+        target.didFailFetching(self, error: error)
     }
 }

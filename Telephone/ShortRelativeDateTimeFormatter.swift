@@ -1,9 +1,9 @@
 //
-//  UserAgentAccountEventTarget.swift
+//  ShortRelativeDateTimeFormatter.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,10 +16,17 @@
 //  GNU General Public License for more details.
 //
 
-@objc public protocol UserAgentAccountEventTarget {
-    @objc(didAddAccount:toUserAgent:)
-    func didAdd(_ account: Account, to agent: UserAgent)
+import Foundation
 
-    @objc(willRemoveAccount:fromUserAgent:)
-    func willRemove(_ account: Account, from agent: UserAgent)
+final class ShortRelativeDateTimeFormatter: DateFormatter {
+    override init() {
+        super.init()
+        dateStyle = .short
+        timeStyle = .short
+        doesRelativeDateFormatting = true
+    }
+
+    required init?(coder decoder: NSCoder) {
+        fatalError("\(#function) is not supported")
+    }
 }

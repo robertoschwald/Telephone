@@ -2,8 +2,8 @@
 //  CallHistoryRecord.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,14 @@
 import Foundation
 
 public struct CallHistoryRecord {
-    public let user: String
-    public let host: String
+    public let uri: URI
     public let date: Date
     public let duration: Int
     public let isIncoming: Bool
     public let isMissed: Bool
 
-    public init(user: String, host: String, date: Date, duration: Int, isIncoming: Bool, isMissed: Bool) {
-        self.user = user
-        self.host = host
+    public init(uri: URI, date: Date, duration: Int, isIncoming: Bool, isMissed: Bool) {
+        self.uri = uri
         self.date = date
         self.duration = duration
         self.isIncoming = isIncoming
@@ -37,8 +35,7 @@ public struct CallHistoryRecord {
 
     public func removingHost() -> CallHistoryRecord {
         return CallHistoryRecord(
-            user: user,
-            host: "",
+            uri: URI(user: uri.user, host: "", displayName: uri.displayName),
             date: date,
             duration: duration,
             isIncoming: isIncoming,
@@ -49,8 +46,8 @@ public struct CallHistoryRecord {
 
 extension CallHistoryRecord: Equatable {
     public static func ==(lhs: CallHistoryRecord, rhs: CallHistoryRecord) -> Bool {
-        return lhs.user == rhs.user &&
-            lhs.host == rhs.host &&
+        return
+            lhs.uri == rhs.uri &&
             lhs.date == rhs.date &&
             lhs.duration == rhs.duration &&
             lhs.isIncoming == rhs.isIncoming &&
@@ -60,8 +57,7 @@ extension CallHistoryRecord: Equatable {
 
 extension CallHistoryRecord {
     public init(call: Call) {
-        user = call.remote.user
-        host = call.remote.host
+        uri = call.remote
         date = call.date
         duration = call.duration
         isIncoming = call.isIncoming

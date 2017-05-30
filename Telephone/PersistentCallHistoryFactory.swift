@@ -2,8 +2,8 @@
 //  PersistentCallHistoryFactory.swift
 //  Telephone
 //
-//  Copyright (c) 2008-2016 Alexey Kuznetsov
-//  Copyright (c) 2016 64 Characters
+//  Copyright © 2008-2016 Alexey Kuznetsov
+//  Copyright © 2016-2017 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,19 +20,22 @@ import Foundation
 import UseCases
 
 final class PersistentCallHistoryFactory {
-    private let history: TruncatingCallHistoryFactory
-    private let storage: SimplePropertyListStorageFactory
-    private let locations: ApplicationDataLocations
+    fileprivate let history: TruncatingCallHistoryFactory
+    fileprivate let storage: SimplePropertyListStorageFactory
+    fileprivate let locations: ApplicationDataLocations
 
     init(history: TruncatingCallHistoryFactory, storage: SimplePropertyListStorageFactory, locations: ApplicationDataLocations) {
         self.history = history
         self.storage = storage
         self.locations = locations
     }
+}
 
-    func make(uuid: String) -> PersistentCallHistory {
+extension PersistentCallHistoryFactory: CallHistoryFactory {
+    func make(uuid: String) -> CallHistory {
         return PersistentCallHistory(
-            origin: history.make(), storage: storage.make(directory: locations.callHistories(), name: uuid)
+            origin: history.make(),
+            storage: storage.make(url: SimplePropertyListStorageURL(directory: locations.callHistories(), name: uuid))
         )
     }
 }
