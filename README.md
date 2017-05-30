@@ -1,3 +1,14 @@
+# Label Support Branch
+
+This is a private fork of the original 64characters/Telephone project, which adds Label support to the search results.
+This is an interim solution until the new search GUI is available on the original project. When building and running this version, you see search results in the form "Contact Name &lt;Addressbook Label&gt; - &lt;number&gt;"
+
+WARNING
+-------
+The label support leaks the label to the remote party. So don't use offending labels in OSX Address Book :-)
+
+-------
+
 Telephone is a VoIP program which allows you to make phone calls over
 the internet. It can be used to call regular phones via any
 appropriate SIP provider. If your office or home phone works via SIP,
