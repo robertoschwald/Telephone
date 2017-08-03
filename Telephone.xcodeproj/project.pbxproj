@@ -3178,7 +3178,7 @@
 				TargetAttributes = {
 					8AE706221D491C210060FF4F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = B5WSA37RY8;
+						DevelopmentTeam = A8GCV2M324;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -3188,7 +3188,7 @@
 						};
 					};
 					8D1107260486CEB800E47090 = {
-						DevelopmentTeam = B5WSA37RY8;
+						DevelopmentTeam = A8GCV2M324;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -4376,7 +4376,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -4408,7 +4408,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/ThirdParty/LibreSSL/include\"",
 					"\"$(SRCROOT)/ReceiptValidation/ASN1\"",
@@ -4442,7 +4442,7 @@
 				INFOPLIST_FILE = UseCases/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCases;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.UseCases;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4465,7 +4465,7 @@
 				INFOPLIST_FILE = UseCases/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCases;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.UseCases;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4541,7 +4541,7 @@
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4562,7 +4562,7 @@
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4607,7 +4607,7 @@
 				INFOPLIST_FILE = DomainTestDoubles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTestDoubles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.DomainTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4629,7 +4629,7 @@
 				INFOPLIST_FILE = DomainTestDoubles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.DomainTestDoubles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.DomainTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4651,7 +4651,7 @@
 				INFOPLIST_FILE = UseCasesTestDoubles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTestDoubles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.UseCasesTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4673,7 +4673,7 @@
 				INFOPLIST_FILE = UseCasesTestDoubles/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.UseCasesTestDoubles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.UseCasesTestDoubles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -4769,7 +4769,7 @@
 				CODE_SIGN_ENTITLEMENTS = Telephone/Telephone.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"PJ_AUTOCONF=1",
@@ -4799,7 +4799,7 @@
 					"-lpj-x86_64-apple-darwin",
 					"-lopus",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone;
 				PRODUCT_NAME = Telephone;
 				SWIFT_OBJC_BRIDGING_HEADER = "Telephone/Telephone-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -4814,7 +4814,7 @@
 				CODE_SIGN_ENTITLEMENTS = Telephone/Telephone.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				GCC_PREPROCESSOR_DEFINITIONS = "PJ_AUTOCONF=1";
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/ThirdParty/PJSIP/include\"";
 				INFOPLIST_FILE = Telephone/Info.plist;
@@ -4841,7 +4841,7 @@
 					"-lpj-x86_64-apple-darwin",
 					"-lopus",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone;
 				PRODUCT_NAME = Telephone;
 				SWIFT_OBJC_BRIDGING_HEADER = "Telephone/Telephone-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
