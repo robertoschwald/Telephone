@@ -20,7 +20,7 @@ import XCTest
 import UseCasesTestDoubles
 
 final class CallHistoryViewEventTargetTests: XCTestCase {
-    func testExecutesCallHistoryRecordsGetUseCaseOnShouldReloadData() {
+    func testExecutesCallHistoryRecordGetAllUseCaseOnShouldReloadData() {
         let get = UseCaseSpy()
         let sut = CallHistoryViewEventTarget(
             recordsGet: get,
@@ -33,7 +33,7 @@ final class CallHistoryViewEventTargetTests: XCTestCase {
         XCTAssertTrue(get.didCallExecute)
     }
 
-    func testExecutesCallHistoryRecordsGetUseCaseOnDidUpdateHistory() {
+    func testExecutesCallHistoryRecordGetAllUseCaseOnDidUpdateHistory() {
         let get = UseCaseSpy()
         let sut = CallHistoryViewEventTarget(
             recordsGet: get,
@@ -46,17 +46,18 @@ final class CallHistoryViewEventTargetTests: XCTestCase {
         XCTAssertTrue(get.didCallExecute)
     }
 
-    func testCreatesCallHistoryCallMakeUseCaseWithExpectedIndexOnDidPickRecord() {
+    func testCreatesCallHistoryCallMakeUseCaseWithExpectedIdentifierOnDidPickRecord() {
         let factory = CallHistoryCallMakeUseCaseFactorySpy(callMake: UseCaseSpy())
         let sut = CallHistoryViewEventTarget(
             recordsGet: UseCaseSpy(),
             recordRemove: CallHistoryRecordRemoveUseCaseFactorySpy(remove: UseCaseSpy()),
             callMake: factory
         )
+        let identifier = "any"
 
-        sut.didPickRecord(at: 3)
+        sut.didPickRecord(withIdentifier: identifier)
 
-        XCTAssertEqual(factory.invokedIndex, 3)
+        XCTAssertEqual(factory.invokedIdentifier, identifier)
     }
 
     func testExecutesCallHistoryCallMakeUseCaseOnDidPickRecord() {
@@ -67,22 +68,23 @@ final class CallHistoryViewEventTargetTests: XCTestCase {
             callMake: CallHistoryCallMakeUseCaseFactorySpy(callMake: callMake)
         )
 
-        sut.didPickRecord(at: 1)
+        sut.didPickRecord(withIdentifier: "any")
 
         XCTAssertTrue(callMake.didCallExecute)
     }
 
-    func testCreatesCallHistoryRecordRemoveUseCaseWithExpectedIndexOnShouldRemoveRecord() {
+    func testCreatesCallHistoryRecordRemoveUseCaseWithExpectedIdentifierOnShouldRemoveRecord() {
         let factory = CallHistoryRecordRemoveUseCaseFactorySpy(remove: UseCaseSpy())
         let sut = CallHistoryViewEventTarget(
             recordsGet: UseCaseSpy(),
             recordRemove: factory,
             callMake: CallHistoryCallMakeUseCaseFactorySpy(callMake: UseCaseSpy())
         )
+        let identifier = "any"
 
-        sut.shouldRemoveRecord(at: 2)
+        sut.shouldRemoveRecord(withIdentifier: identifier)
 
-        XCTAssertEqual(factory.invokedIndex, 2)
+        XCTAssertEqual(factory.invokedIdentifier, identifier)
     }
 
     func testExecutesCallHistoryRecordRemoveUseCaseOnShouldRemoveRecord() {
@@ -93,7 +95,7 @@ final class CallHistoryViewEventTargetTests: XCTestCase {
             callMake: CallHistoryCallMakeUseCaseFactorySpy(callMake: UseCaseSpy())
         )
 
-        sut.shouldRemoveRecord(at: 0)
+        sut.shouldRemoveRecord(withIdentifier: "any")
 
         XCTAssertTrue(remove.didCallExecute)
     }

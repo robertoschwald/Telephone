@@ -1,5 +1,5 @@
 //
-//  CallHistoryRecordsGetUseCaseTests.swift
+//  ExecutionQueueSpy.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
@@ -17,20 +17,15 @@
 //
 
 import UseCases
-import UseCasesTestDoubles
-import XCTest
 
-final class CallHistoryRecordsGetUseCaseTests: XCTestCase {
-    func testCallsUpdateWithRecordsFromHistoryOnExecute() {
-        let factory = CallHistoryRecordTestFactory()
-        let history = TruncatingCallHistory()
-        history.add(factory.makeRecord(number: 1))
-        history.add(factory.makeRecord(number: 2))
-        let output = CallHistoryRecordsGetUseCaseOutputSpy()
-        let sut = CallHistoryRecordsGetUseCase(history: history, output: output)
+public final class ExecutionQueueSpy {
+    public fileprivate(set) var didCallAdd = false
 
-        sut.execute()
+    public init() {}
+}
 
-        XCTAssertEqual(output.invokedRecords, history.allRecords)
+extension ExecutionQueueSpy: ExecutionQueue {
+    public func add(_ block: @escaping () -> Void) {
+        didCallAdd = true
     }
 }

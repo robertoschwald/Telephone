@@ -18,35 +18,64 @@
 
 import UseCases
 
-final class CallHistoryViewEventTargetFactory: NSObject {
+final class CallHistoryViewEventTargetFactory {
     private let histories: CallHistories
-    private let matching: ContactMatching
+    private let index: ContactMatchingIndex
+    private let settings: ContactMatchingSettings
     private let dateFormatter: DateFormatter
     private let durationFormatter: DateComponentsFormatter
+    private let background: ExecutionQueue
+    private let main: ExecutionQueue
 
-    init(histories: CallHistories, matching: ContactMatching, dateFormatter: DateFormatter, durationFormatter: DateComponentsFormatter) {
+    init(
+        histories: CallHistories,
+        index: ContactMatchingIndex,
+        settings: ContactMatchingSettings,
+        dateFormatter: DateFormatter,
+        durationFormatter: DateComponentsFormatter,
+        background: ExecutionQueue,
+        main: ExecutionQueue
+        ) {
         self.histories = histories
-        self.matching = matching
+        self.index = index
+        self.settings = settings
         self.dateFormatter = dateFormatter
         self.durationFormatter = durationFormatter
+        self.background = background
+        self.main = main
     }
 
     func make(account: Account, view: CallHistoryView) -> CallHistoryViewEventTarget {
         let history = histories.history(withUUID: account.uuid)
-        let result = CallHistoryViewEventTarget(
-            recordsGet: CallHistoryRecordsGetUseCase(
-                history: history,
-                output: ContactCallHistoryRecordsGetUseCase(
-                    matching: matching,
-                    output: CallHistoryViewPresenter(
-                        view: view, dateFormatter: dateFormatter, durationFormatter: durationFormatter
-                    )
-                )
-            ),
-            recordRemove: DefaultCallHistoryRecordRemoveUseCaseFactory(history: history),
-            callMake: DefaultCallHistoryCallMakeUseCaseFactory(account: account, history: history)
+        let factory = FallingBackMatchedContactFactory(
+            matching: IndexedContactMatching(index: index, settings: settings, domain: account.domain)
         )
-        history.updateTarget(result)
+        let result = CallHistoryViewEventTarget(
+            recordsGet: EnqueuingUseCase(
+                origin: CallHistoryRecordGetAllUseCase(
+                    history: history,
+                    output: ContactCallHistoryRecordGetAllUseCase(
+                        factory: factory,
+                        output: EnqueuingContactCallHistoryRecordGetAllUseCaseOutput(
+                            origin: CallHistoryViewPresenter(
+                                view: view, dateFormatter: dateFormatter, durationFormatter: durationFormatter
+                            ),
+                            queue: main
+                        )
+                    )
+                ),
+                queue: background
+            ),
+            recordRemove: EnqueueingCallHistoryRecordRemoveUseCaseFactory(
+                origin: DefaultCallHistoryRecordRemoveUseCaseFactory(history: history), queue: background
+            ),
+            callMake: EnqueuingCallHistoryCallMakeUseCaseFactory(
+                account: account, history: history, factory: factory, accountQueue: main, historyQueue: background
+            )
+        )
+        history.updateTarget(
+            EnqueuingCallHistoryEventTarget(origin: WeakCallHistoryEventTarget(origin: result), queue: main)
+        )
         return result
     }
 }

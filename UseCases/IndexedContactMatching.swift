@@ -17,15 +17,16 @@
 //
 
 public final class IndexedContactMatching {
-    fileprivate lazy var index: ContactMatchingIndex = { return self.factory.make(maxPhoneNumberLength: self.length) }()
     fileprivate lazy var length: Int = { return self.settings.significantPhoneNumberLength }()
 
-    private let factory: ContactMatchingIndexFactory
+    fileprivate let index: ContactMatchingIndex
     private let settings: ContactMatchingSettings
+    fileprivate let domain: String
 
-    public init(factory: ContactMatchingIndexFactory, settings: ContactMatchingSettings) {
-        self.factory = factory
+    public init(index: ContactMatchingIndex, settings: ContactMatchingSettings, domain: String) {
+        self.index = index
         self.settings = settings
+        self.domain = domain
     }
 }
 
@@ -35,10 +36,14 @@ extension IndexedContactMatching: ContactMatching {
     }
 
     private func emailMatch(for uri: URI) -> MatchedContact? {
-        return index.contact(forEmail: NormalizedLowercasedString("\(uri.user)@\(uri.host)"))
+        return index.contact(forEmail: NormalizedLowercasedString(email(for: uri)))
     }
 
     private func phoneNumberMatch(for uri: URI) -> MatchedContact? {
         return index.contact(forPhone: ExtractedPhoneNumber(uri.user, maxLength: length))
+    }
+
+    private func email(for uri: URI) -> String {
+        return uri.host.isEmpty ? "\(uri.user)@\(domain)" : "\(uri.user)@\(uri.host)"
     }
 }

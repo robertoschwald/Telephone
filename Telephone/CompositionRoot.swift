@@ -31,20 +31,19 @@ final class CompositionRoot: NSObject {
     let settingsMigration: ProgressiveSettingsMigration
     let applicationDataLocations: ApplicationDataLocations
     let workstationSleepStatus: WorkspaceSleepStatus
-    let callHistoryViewEventTargetFactory: CallHistoryViewEventTargetFactory
+    let callHistoryViewEventTargetFactory: AsyncCallHistoryViewEventTargetFactory
     private let defaults: UserDefaults
-    private let queue: DispatchQueue
 
     private let storeEventSource: StoreEventSource
     private let userAgentNotificationsToEventTargetAdapter: UserAgentNotificationsToEventTargetAdapter
     private let devicesChangeEventSource: SystemAudioDevicesChangeEventSource!
     private let accountsNotificationsToEventTargetAdapter: AccountsNotificationsToEventTargetAdapter
     private let callNotificationsToEventTargetAdapter: CallNotificationsToEventTargetAdapter
+    private let contactStoreNotificationsToContactsChangeEventTargetAdapter: Any
 
     init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
         userAgent = AKSIPUserAgent.shared()
         defaults = UserDefaults.standard
-        queue = makeQueue()
 
         let audioDevices = SystemAudioDevices()
         let useCaseFactory = DefaultUseCaseFactory(repository: audioDevices, settings: defaults)
@@ -136,6 +135,9 @@ final class CompositionRoot: NSObject {
             target: userAgentSoundIOSelection,
             agent: userAgent
         )
+
+        let background = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".background-queue", qos: .userInitiated)
+
         devicesChangeEventSource = SystemAudioDevicesChangeEventSource(
             target: SystemAudioDevicesChangeEventTargets(
                 targets: [
@@ -144,7 +146,7 @@ final class CompositionRoot: NSObject {
                     PreferencesSoundIOUpdater(preferences: preferencesController)
                 ]
             ),
-            queue: queue
+            queue: background
         )
 
         let callHistories = DefaultCallHistories(
@@ -159,32 +161,64 @@ final class CompositionRoot: NSObject {
             )
         )
 
+        let contacts: Contacts
+        let contactsBackground: ExecutionQueue
+        if #available(macOS 10.11, *) {
+            contacts = CNContactStoreToContactsAdapter()
+            contactsBackground = GCDExecutionQueue(queue: background)
+        } else {
+            contacts = ABAddressBookToContactsAdapter()
+            contactsBackground = ThreadExecutionQueue(thread: makeAndStartThread())
+        }
+
         accountsNotificationsToEventTargetAdapter = AccountsNotificationsToEventTargetAdapter(
-            center: NotificationCenter.default, target: CallHistoriesHistoryRemoveUseCase(histories: callHistories)
+            center: NotificationCenter.default,
+            target: EnqueuingAccountsEventTarget(
+                origin: CallHistoriesHistoryRemoveUseCase(histories: callHistories), queue: contactsBackground
+            )
         )
 
         callNotificationsToEventTargetAdapter = CallNotificationsToEventTargetAdapter(
             center: NotificationCenter.default,
-            target: CallHistoryCallEventTarget(
-                histories: callHistories, factory: DefaultCallHistoryRecordAddUseCaseFactory()
-            )
+            target: EnqueuingCallEventTarget(
+                origin: CallHistoryCallEventTarget(
+                    histories: callHistories,
+                    generator: UUIDIdentifierGenerator(),
+                    factory: DefaultCallHistoryRecordAddUseCaseFactory()
+                ),
+                queue: contactsBackground)
         )
 
-        let contacts: Contacts
+        let contactMatchingSettings = SimpleContactMatchingSettings(settings: defaults)
+        let contactMatchingIndex = LazyDiscardingContactMatchingIndex(
+            factory: SimpleContactMatchingIndexFactory(contacts: contacts, settings: contactMatchingSettings)
+        )
+        let contactsChangeEventTarget = EnqueuingContactsChangeEventTarget(origin: contactMatchingIndex, queue: contactsBackground)
+
         if #available(macOS 10.11, *) {
-            contacts = CNContactStoreToContactsAdapter(store: CNContactStore())
+            contactStoreNotificationsToContactsChangeEventTargetAdapter = CNContactStoreNotificationsToContactsChangeEventTargetAdapter(
+                center: NotificationCenter.default, target: contactsChangeEventTarget
+            )
         } else {
-            contacts = ABAddressBookToContactsAdapter()
+            contactStoreNotificationsToContactsChangeEventTargetAdapter = ABAddressBookNotificationsToContactsChangeEventTargetAdapter(
+                center: NotificationCenter.default, target: contactsChangeEventTarget
+            )
         }
 
-        callHistoryViewEventTargetFactory = CallHistoryViewEventTargetFactory(
-            histories: callHistories,
-            matching: IndexedContactMatching(
-                factory: DefaultContactMatchingIndexFactory(contacts: contacts),
-                settings: SimpleContactMatchingSettings(settings: defaults)
+        let main = GCDExecutionQueue(queue: DispatchQueue.main)
+
+        callHistoryViewEventTargetFactory = AsyncCallHistoryViewEventTargetFactory(
+            origin: CallHistoryViewEventTargetFactory(
+                histories: callHistories,
+                index: contactMatchingIndex,
+                settings: contactMatchingSettings,
+                dateFormatter: ShortRelativeDateTimeFormatter(),
+                durationFormatter: DurationFormatter(),
+                background: contactsBackground,
+                main: main
             ),
-            dateFormatter: ShortRelativeDateTimeFormatter(),
-            durationFormatter: DurationFormatter()
+            background: contactsBackground,
+            main: main
         )
 
         super.init()
@@ -197,7 +231,9 @@ final class CompositionRoot: NSObject {
     }
 }
 
-private func makeQueue() -> DispatchQueue {
-    let label = Bundle.main.bundleIdentifier! + ".background-queue"
-    return DispatchQueue(label: label, attributes: [])
+private func makeAndStartThread() -> Thread {
+    let thread = WaitingThread()
+    thread.qualityOfService = .userInitiated
+    thread.start()
+    return thread
 }

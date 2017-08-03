@@ -1,5 +1,5 @@
 //
-//  ContactCallHistoryRecordsGetUseCaseOutputSpy.swift
+//  EnqueuingAccountsEventTarget.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
@@ -16,16 +16,20 @@
 //  GNU General Public License for more details.
 //
 
-import UseCases
+public final class EnqueuingAccountsEventTarget {
+    fileprivate let origin: AccountsEventTarget
+    fileprivate let queue: ExecutionQueue
 
-public final class ContactCallHistoryRecordsGetUseCaseOutputSpy {
-    public fileprivate(set) var invokedRecords: [ContactCallHistoryRecord] = []
-
-    public init() {}
+    public init(origin: AccountsEventTarget, queue: ExecutionQueue) {
+        self.origin = origin
+        self.queue = queue
+    }
 }
 
-extension ContactCallHistoryRecordsGetUseCaseOutputSpy: ContactCallHistoryRecordsGetUseCaseOutput {
-    public func update(records: [ContactCallHistoryRecord]) {
-        invokedRecords = records
+extension EnqueuingAccountsEventTarget: AccountsEventTarget {
+    public func didRemoveAccount(withUUID uuid: String) {
+        queue.add {
+            self.origin.didRemoveAccount(withUUID: uuid)
+        }
     }
 }

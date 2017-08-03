@@ -24,19 +24,13 @@ class CallNotificationsToEventTargetAdapterTests: XCTestCase {
     func testCallsDidDisconnect() {
         let center = NotificationCenter.default
         let target = CallEventTargetSpy()
-        let call = SimpleCall(
-            account: SimpleAccount(uuid: "any-uuid", domain: "any-domain"),
-            remote: URI(user: "any-user", host: "any-host", displayName: "any-name"),
-            date: Date(),
-            duration: 0,
-            isIncoming: false,
-            isMissed: false
-        )
+        let call = CallTestFactory().make()
         withExtendedLifetime(CallNotificationsToEventTargetAdapter(center: center, target: target)) {
 
             center.post(Notification(name: .AKSIPCallDidDisconnect, object: call, userInfo: nil))
 
             XCTAssertTrue(target.didCallDidDisconnect)
+            XCTAssertTrue(target.invokedCall === call)
         }
     }
 }

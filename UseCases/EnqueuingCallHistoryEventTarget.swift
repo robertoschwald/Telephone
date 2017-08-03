@@ -1,5 +1,5 @@
 //
-//  NullThrowingUseCase.swift
+//  EnqueuingCallHistoryEventTarget.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
@@ -16,8 +16,20 @@
 //  GNU General Public License for more details.
 //
 
-public final class NullThrowingUseCase: ThrowingUseCase {
-    public init() {}
+public final class EnqueuingCallHistoryEventTarget {
+    fileprivate let origin: CallHistoryEventTarget
+    fileprivate let queue: ExecutionQueue
 
-    public func execute() throws {}
+    public init(origin: CallHistoryEventTarget, queue: ExecutionQueue) {
+        self.origin = origin
+        self.queue = queue
+    }
+}
+
+extension EnqueuingCallHistoryEventTarget: CallHistoryEventTarget {
+    public func didUpdate(_ history: CallHistory) {
+        queue.add {
+            self.origin.didUpdate(history)
+        }
+    }
 }

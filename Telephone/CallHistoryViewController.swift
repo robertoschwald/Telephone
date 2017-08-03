@@ -22,7 +22,11 @@ final class CallHistoryViewController: NSViewController {
     var keyView: NSView {
         return tableView
     }
-    weak var target: CallHistoryViewEventTarget?
+    weak var target: CallHistoryViewEventTarget? {
+        didSet {
+            target?.shouldReloadData()
+        }
+    }
     fileprivate var records: [PresentationCallHistoryRecord] = []
     @IBOutlet fileprivate weak var tableView: NSTableView!
 
@@ -59,15 +63,15 @@ final class CallHistoryViewController: NSViewController {
 
     private func pickRecord() {
         guard !records.isEmpty else { return }
-        target?.didPickRecord(at: tableView.selectedRow)
+        target?.didPickRecord(withIdentifier: records[tableView.selectedRow].identifier)
     }
 
     private func deleteRecord() {
         guard !records.isEmpty else { return }
-        let index = tableView.selectedRow
-        makeAlert(recordName: records[index].date).beginSheetModal(for: view.window!) { response in
+        let record = records[tableView.selectedRow]
+        makeAlert(recordName: record.date).beginSheetModal(for: view.window!) { response in
             if response == NSAlertFirstButtonReturn {
-                self.target?.shouldRemoveRecord(at: index)
+                self.target?.shouldRemoveRecord(withIdentifier: record.identifier)
             }
         }
     }
@@ -114,6 +118,22 @@ extension CallHistoryViewController: NSTableViewDataSource {
 
     func tableView(_ view: NSTableView, objectValueFor column: NSTableColumn?, row: Int) -> Any? {
         return records[row]
+    }
+}
+
+extension CallHistoryViewController: NSTableViewDelegate {
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        updateSeparators()
+    }
+
+    func tableViewSelectionIsChanging(_ notification: Notification) {
+        updateSeparators()
+    }
+
+    private func updateSeparators() {
+        tableView.enumerateAvailableRowViews { (view, _) in
+            view.needsDisplay = true
+        }
     }
 }
 

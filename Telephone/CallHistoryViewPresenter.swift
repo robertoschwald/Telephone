@@ -31,13 +31,14 @@ final class CallHistoryViewPresenter {
     }
 }
 
-extension CallHistoryViewPresenter: ContactCallHistoryRecordsGetUseCaseOutput {
+extension CallHistoryViewPresenter: ContactCallHistoryRecordGetAllUseCaseOutput {
     func update(records: [ContactCallHistoryRecord]) {
         view.show(records.map(makeRecord))
     }
 
     private func makeRecord(from record: ContactCallHistoryRecord) -> PresentationCallHistoryRecord {
         return PresentationCallHistoryRecord(
+            identifier: record.origin.identifier,
             contact: PresentationContact(contact: record.contact, color: contactColor(for: record)),
             date: dateFormatter.string(from: record.origin.date),
             duration: durationFormatter.string(from: TimeInterval(record.origin.duration)) ?? "",
