@@ -75,7 +75,7 @@ extension PersistentCallHistory: CallHistory {
 
 private extension CallHistoryRecord {
     init(dictionary: [String: Any]) {
-        identifier = dictionary[Keys.identifier.rawValue] as! String
+        identifier = dictionary[Keys.identifier.rawValue] as? String ?? ""
         let user = dictionary[Keys.user.rawValue] as? String ?? ""
         let host = dictionary[Keys.host.rawValue] as? String ?? ""
         let name = dictionary[Keys.name.rawValue] as? String ?? ""
