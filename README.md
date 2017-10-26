@@ -1,7 +1,7 @@
 # Label Support Branch
 
 This is a private fork of the original https://github.com/64characters/Telephone master branch, which adds Label support to the search results.
-This is an interim solution until the new search GUI is available on the original project. When building and running this version, you see search results in the form "Contact Name - Addressbook-Label &lt;number&gt;"
+This is an interim solution until the new search GUI is available on the original project. When building and running this version, you see search results in format: "Contact Name - &lt;Addressbook-Label&gt; &lt;number&gt;"
 
 Example:   "John Doe - Mobile &lt;01234567879&gt;"
 
