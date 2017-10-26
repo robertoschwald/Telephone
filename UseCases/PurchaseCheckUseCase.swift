@@ -18,14 +18,9 @@
 
 import Foundation
 
-public protocol PurchaseCheckUseCaseOutput {
-    func didCheckPurchase(expiration: Date)
-    func didFailCheckingPurchase()
-}
-
 public final class PurchaseCheckUseCase {
-    fileprivate let receipt: Receipt
-    fileprivate let output: PurchaseCheckUseCaseOutput
+    private let receipt: Receipt
+    private let output: PurchaseCheckUseCaseOutput
 
     public init(receipt: Receipt, output: PurchaseCheckUseCaseOutput) {
         self.receipt = receipt

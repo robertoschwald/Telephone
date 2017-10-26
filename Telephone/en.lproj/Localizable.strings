@@ -153,6 +153,9 @@
 /* Network settings change confirmation. */
 "Save changes to the network settings?" = "Save changes to the network settings?";
 
+/* Show more call history records button. */
+"Show %d more…" = "Show %d more…";
+
 /* Sound preferences window title. */
 "Sound" = "Sound";
 

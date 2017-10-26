@@ -22,16 +22,18 @@ import StoreKit
 import UseCases
 
 final class CompositionRoot: NSObject {
-    let userAgent: AKSIPUserAgent
-    let preferencesController: PreferencesController
-    let ringtonePlayback: RingtonePlaybackUseCase
-    let storeWindowController: StoreWindowController
-    let purchaseReminder: PurchaseReminderUseCase
-    let musicPlayer: MusicPlayer
-    let settingsMigration: ProgressiveSettingsMigration
-    let applicationDataLocations: ApplicationDataLocations
-    let workstationSleepStatus: WorkspaceSleepStatus
-    let callHistoryViewEventTargetFactory: AsyncCallHistoryViewEventTargetFactory
+    @objc let userAgent: AKSIPUserAgent
+    @objc let preferencesController: PreferencesController
+    @objc let ringtonePlayback: RingtonePlaybackUseCase
+    @objc let storeWindowPresenter: StoreWindowPresenter
+    @objc let purchaseReminder: PurchaseReminderUseCase
+    @objc let musicPlayer: MusicPlayer
+    @objc let settingsMigration: ProgressiveSettingsMigration
+    @objc let applicationDataLocations: ApplicationDataLocations
+    @objc let orphanLogFileRemoval: OrphanLogFileRemoval
+    @objc let workstationSleepStatus: WorkspaceSleepStatus
+    @objc let callHistoryViewEventTargetFactory: AsyncCallHistoryViewEventTargetFactory
+    @objc let callHistoryPurchaseCheckUseCaseFactory: AsyncCallHistoryPurchaseCheckUseCaseFactory
     private let defaults: UserDefaults
 
     private let storeEventSource: StoreEventSource
@@ -41,7 +43,7 @@ final class CompositionRoot: NSObject {
     private let callNotificationsToEventTargetAdapter: CallNotificationsToEventTargetAdapter
     private let contactStoreNotificationsToContactsChangeEventTargetAdapter: Any
 
-    init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
+    @objc init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
         userAgent = AKSIPUserAgent.shared()
         defaults = UserDefaults.standard
 
@@ -66,7 +68,7 @@ final class CompositionRoot: NSObject {
         let productsEventTargets = ProductsEventTargets()
 
         let storeViewController = StoreViewController(
-            target: NullStoreViewEventTarget(), workspace: NSWorkspace.shared()
+            target: NullStoreViewEventTarget(), workspace: NSWorkspace.shared
         )
         let products = SKProductsRequestToProductsAdapter(expected: ExpectedProducts(), target: productsEventTargets)
         let store = SKPaymentQueueToStoreAdapter(queue: SKPaymentQueue.default(), products: products)
@@ -84,7 +86,7 @@ final class CompositionRoot: NSObject {
         )
         storeViewController.updateTarget(storeViewEventTarget)
 
-        storeWindowController = StoreWindowController(contentViewController: storeViewController)
+        storeWindowPresenter = StoreWindowPresenter(controller: StoreWindowController(contentViewController: storeViewController))
 
         purchaseReminder = PurchaseReminderUseCase(
             accounts: SettingsAccounts(settings: defaults),
@@ -92,12 +94,15 @@ final class CompositionRoot: NSObject {
             settings: UserDefaultsPurchaseReminderSettings(defaults: defaults),
             now: Date(),
             version: Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String,
-            output: storeWindowController
+            output: storeWindowPresenter
         )
+
+        let storeEventTargets = StoreEventTargets()
+        storeEventTargets.add(storeViewEventTarget)
 
         storeEventSource = StoreEventSource(
             queue: SKPaymentQueue.default(),
-            target: ReceiptValidatingStoreEventTarget(origin: storeViewEventTarget, receipt: receipt)
+            target: ReceiptValidatingStoreEventTarget(origin: storeEventTargets, receipt: receipt)
         )
 
         let userAgentSoundIOSelection = DelayingUserAgentSoundIOSelectionUseCase(
@@ -129,7 +134,9 @@ final class CompositionRoot: NSObject {
             manager: FileManager.default
         )
 
-        workstationSleepStatus = WorkspaceSleepStatus(workspace: NSWorkspace.shared())
+        orphanLogFileRemoval = OrphanLogFileRemoval(locations: applicationDataLocations, manager: FileManager.default)
+
+        workstationSleepStatus = WorkspaceSleepStatus(workspace: NSWorkspace.shared)
 
         userAgentNotificationsToEventTargetAdapter = UserAgentNotificationsToEventTargetAdapter(
             target: userAgentSoundIOSelection,
@@ -212,10 +219,20 @@ final class CompositionRoot: NSObject {
                 histories: callHistories,
                 index: contactMatchingIndex,
                 settings: contactMatchingSettings,
+                receipt: receipt,
                 dateFormatter: ShortRelativeDateTimeFormatter(),
                 durationFormatter: DurationFormatter(),
+                storeEventTargets: storeEventTargets,
                 background: contactsBackground,
                 main: main
+            ),
+            background: contactsBackground,
+            main: main
+        )
+
+        callHistoryPurchaseCheckUseCaseFactory = AsyncCallHistoryPurchaseCheckUseCaseFactory(
+            origin: CallHistoryPurchaseCheckUseCaseFactory(
+                histories: callHistories, receipt: receipt, background: contactsBackground, main: main
             ),
             background: contactsBackground,
             main: main

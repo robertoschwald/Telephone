@@ -19,19 +19,22 @@
 import Cocoa
 
 final class CallHistoryViewController: NSViewController {
-    var keyView: NSView {
+    @objc var keyView: NSView {
         return tableView
     }
-    weak var target: CallHistoryViewEventTarget? {
+    @objc weak var target: CallHistoryViewEventTarget? {
         didSet {
             target?.shouldReloadData()
         }
     }
-    fileprivate var records: [PresentationCallHistoryRecord] = []
-    @IBOutlet fileprivate weak var tableView: NSTableView!
+    var recordCount: Int {
+        return records.count
+    }
+    private var records: [PresentationCallHistoryRecord] = []
+    @IBOutlet private weak var tableView: NSTableView!
 
     init() {
-        super.init(nibName: "CallHistoryViewController", bundle: nil)!
+        super.init(nibName: NSNib.Name(rawValue: "CallHistoryViewController"), bundle: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -52,7 +55,7 @@ final class CallHistoryViewController: NSViewController {
         }
     }
 
-    func updateNextKeyView(_ view: NSView) {
+    @objc func updateNextKeyView(_ view: NSView) {
         keyView.nextKeyView = view
     }
 
@@ -70,7 +73,7 @@ final class CallHistoryViewController: NSViewController {
         guard !records.isEmpty else { return }
         let record = records[tableView.selectedRow]
         makeAlert(recordName: record.date).beginSheetModal(for: view.window!) { response in
-            if response == NSAlertFirstButtonReturn {
+            if response == .alertFirstButtonReturn {
                 self.target?.shouldRemoveRecord(withIdentifier: record.identifier)
             }
         }
@@ -95,8 +98,14 @@ extension CallHistoryViewController: CallHistoryView {
     }
 
     private func reloadTableView(old: [PresentationCallHistoryRecord], new: [PresentationCallHistoryRecord]) {
-        if case let diff = ArrayDifference(before: old, after: new), diff.isPrepended, diff.count <= 2 {
-            tableView.insertRows(at: IndexSet(integersIn: 0..<diff.count), withAnimation: .slideDown)
+        let diff = ArrayDifference(before: old, after: new)
+        if case .prepended(count: let count) = diff, count <= 2 {
+            tableView.insertRows(at: IndexSet(integersIn: 0..<count), withAnimation: .slideDown)
+        } else if case .shiftedByOne = diff {
+            tableView.beginUpdates()
+            tableView.insertRows(at: IndexSet(integer: 0), withAnimation: .slideDown)
+            tableView.removeRows(at: IndexSet(integer: old.count), withAnimation: .slideDown)
+            tableView.endUpdates()
         } else {
             tableView.reloadData()
         }

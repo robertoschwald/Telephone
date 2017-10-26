@@ -40,8 +40,6 @@
 #import "Telephone-Swift.h"
 
 
-NSString * const kUserNotificationCallControllerIdentifierKey = @"UserNotificationCallControllerIdentifier";
-
 // Bouncing icon in the Dock time interval.
 static const NSTimeInterval kUserAttentionRequestInterval = 8.0;
 
@@ -72,11 +70,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) CompositionRoot *compositionRoot;
 @property(nonatomic, readonly) PreferencesController *preferencesController;
+@property(nonatomic, readonly) StoreWindowPresenter *storeWindowPresenter;
 @property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
 @property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
 @property(nonatomic, readonly) id<ApplicationDataLocations> locations;
 @property(nonatomic, readonly) WorkspaceSleepStatus *sleepStatus;
-@property(nonatomic, readonly) AsyncCallHistoryViewEventTargetFactory *factory;
+@property(nonatomic, readonly) AsyncCallHistoryViewEventTargetFactory *callHistoryViewEventTargetFactory;
+@property(nonatomic, readonly) AsyncCallHistoryPurchaseCheckUseCaseFactory *purchaseCheckUseCaseFactory;
 @property(nonatomic, getter=isFinishedLaunching) BOOL finishedLaunching;
 @property(nonatomic, copy) NSString *destinationToCall;
 @property(nonatomic, getter=isUserSessionActive) BOOL userSessionActive;
@@ -183,8 +183,8 @@ NS_ASSUME_NONNULL_END
         defaultsDict[kTransportPublicHost] = @"";
         defaultsDict[kRingingSound] = @"Purr";
         defaultsDict[kSignificantPhoneNumberLength] = @9;
-        defaultsDict[kAutoCloseCallWindow] = @NO;
-        defaultsDict[kAutoCloseMissedCallWindow] = @NO;
+        defaultsDict[kAutoCloseCallWindow] = @YES;
+        defaultsDict[kAutoCloseMissedCallWindow] = @YES;
         defaultsDict[kCallWaiting] = @YES;
         defaultsDict[kUseG711Only] = @NO;
 
@@ -221,11 +221,13 @@ NS_ASSUME_NONNULL_END
     _userAgent = _compositionRoot.userAgent;
     [[self userAgent] setDelegate:self];
     _preferencesController = _compositionRoot.preferencesController;
+    _storeWindowPresenter = _compositionRoot.storeWindowPresenter;
     _ringtonePlayback = _compositionRoot.ringtonePlayback;
     _musicPlayer = _compositionRoot.musicPlayer;
     _locations = _compositionRoot.applicationDataLocations;
     _sleepStatus = _compositionRoot.workstationSleepStatus;
-    _factory = _compositionRoot.callHistoryViewEventTargetFactory;
+    _callHistoryViewEventTargetFactory = _compositionRoot.callHistoryViewEventTargetFactory;
+    _purchaseCheckUseCaseFactory = _compositionRoot.callHistoryPurchaseCheckUseCaseFactory;
     _destinationToCall = @"";
     _userSessionActive = YES;
     _accountControllers = [[NSMutableArray alloc] init];
@@ -331,7 +333,7 @@ NS_ASSUME_NONNULL_END
 }
 
 - (IBAction)showStoreWindow:(id)sender {
-    [self.compositionRoot.storeWindowController showWindowCentered];
+    [self.storeWindowPresenter present];
 }
 
 - (IBAction)showPreferencePanel:(id)sender {
@@ -379,10 +381,16 @@ NS_ASSUME_NONNULL_END
                                                                 repeats:YES]];
 }
 
+- (void)stopUserAttentionTimer {
+    if (self.userAttentionTimer != nil) {
+        [self.userAttentionTimer invalidate];
+        self.userAttentionTimer = nil;
+    }
+}
+
 - (void)stopUserAttentionTimerIfNeeded {
-    if (![self hasIncomingCallControllers] && [self userAttentionTimer] != nil) {
-        [[self userAttentionTimer] invalidate];
-        [self setUserAttentionTimer:nil];
+    if (![self hasIncomingCallControllers]) {
+        [self stopUserAttentionTimer];
     }
 }
 
@@ -438,11 +446,11 @@ NS_ASSUME_NONNULL_END
 }
 
 - (IBAction)toggleAccountWindow:(id)sender {
-    AccountController *accountController = [sender representedObject];
-    if ([[accountController window] isKeyWindow]) {
-        [[accountController window] performClose:self];
+    AccountController *controller = [sender representedObject];
+    if (controller.isWindowKey) {
+        [controller hideWindow];
     } else {
-        [[accountController window] makeKeyAndOrderFront:self];
+        [controller showWindow];
     }
 }
 
@@ -762,7 +770,7 @@ NS_ASSUME_NONNULL_END
 #pragma mark AccountSetupController delegate
 
 - (void)accountSetupControllerDidAddAccount:(NSNotification *)notification {
-    NSDictionary *dict = [notification userInfo];
+    NSDictionary *dict = notification.userInfo;
     
     AKSIPAccount *account = [[AKSIPAccount alloc] initWithUUID:dict[kUUID]
                                                       fullName:dict[kFullName]
@@ -773,20 +781,21 @@ NS_ASSUME_NONNULL_END
                                                         domain:dict[kDomain]];
     
     AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
+                                                               accountDescription:account.SIPAddress
                                                                         userAgent:self.userAgent
                                                                  ringtonePlayback:self.ringtonePlayback
                                                                       musicPlayer:self.musicPlayer
                                                                       sleepStatus:self.sleepStatus
-                                                                          factory:self.factory];
+                                                callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
+                                                      purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
+                                                             storeWindowPresenter:self.storeWindowPresenter];
+    controller.enabled = YES;
     
-    [controller setAccountDescription:[[controller account] SIPAddress]];
-    [controller setEnabled:YES];
-    
-    [[self accountControllers] addObject:controller];
+    [self.accountControllers addObject:controller];
     [self updateCallsShouldDisplayAccountInfo];
     [self updateAccountsMenuItems];
     
-    [[controller window] orderFront:self];
+    [controller showWindowWithoutMakingKey];
 
     [self registerAccountIfManualRegistrationRequired:controller];
 }
@@ -832,20 +841,21 @@ NS_ASSUME_NONNULL_END
         }
         account.updatesContactHeader = [accountDict[kUpdateContactHeader] boolValue];
         account.updatesViaHeader = [accountDict[kUpdateViaHeader] boolValue];
-        
-        AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
-                                                                            userAgent:self.userAgent
-                                                                     ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer
-                                                                          sleepStatus:self.sleepStatus
-                                                                              factory:self.factory];
-        
+
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
             description = account.SIPAddress;
         }
-        [controller setAccountDescription:description];
         
+        AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
+                                                                   accountDescription:description
+                                                                            userAgent:self.userAgent
+                                                                     ringtonePlayback:self.ringtonePlayback
+                                                                          musicPlayer:self.musicPlayer
+                                                                          sleepStatus:self.sleepStatus
+                                                    callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
+                                                          purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
+                                                                 storeWindowPresenter:self.storeWindowPresenter];
         [controller setAccountUnavailable:NO];
         [controller setEnabled:YES];
         [controller setSubstitutesPlusCharacter:[accountDict[kSubstitutePlusCharacter] boolValue]];
@@ -853,7 +863,7 @@ NS_ASSUME_NONNULL_END
         
         [self accountControllers][index] = controller;
         
-        [[controller window] orderFront:nil];
+        [controller showWindowWithoutMakingKey];
 
         [self registerAccountIfManualRegistrationRequired:controller];
         
@@ -869,7 +879,7 @@ NS_ASSUME_NONNULL_END
         [controller setAttemptingToRegisterAccount:NO];
         [controller setAttemptingToUnregisterAccount:NO];
         [controller setShouldPresentRegistrationError:NO];
-        [[controller window] orderOut:nil];
+        [controller hideWindow];
     }
     
     [self updateCallsShouldDisplayAccountInfo];
@@ -1032,6 +1042,10 @@ NS_ASSUME_NONNULL_END
 #pragma mark -
 #pragma mark NSApplication delegate methods
 
+- (void)applicationWillFinishLaunching:(NSNotification *)notification {
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NSFullScreenMenuItemEverywhere"];
+}
+
 // Application control starts here.
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     NSBundle *mainBundle = [NSBundle mainBundle];
@@ -1114,20 +1128,22 @@ NS_ASSUME_NONNULL_END
         }
         account.updatesContactHeader = [accountDict[kUpdateContactHeader] boolValue];
         account.updatesViaHeader = [accountDict[kUpdateViaHeader] boolValue];
-        
-        AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
-                                                                            userAgent:self.userAgent
-                                                                     ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer
-                                                                          sleepStatus:self.sleepStatus
-                                                                              factory:self.factory];
-        
+
         NSString *description = accountDict[kDescription];
         if ([description length] == 0) {
             description = account.SIPAddress;
         }
-        [controller setAccountDescription:description];
         
+        AccountController *controller = [[AccountController alloc] initWithSIPAccount:account
+                                                                   accountDescription:description
+                                                                            userAgent:self.userAgent
+                                                                     ringtonePlayback:self.ringtonePlayback
+                                                                          musicPlayer:self.musicPlayer
+                                                                          sleepStatus:self.sleepStatus
+                                                    callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
+                                                          purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
+                                                                 storeWindowPresenter:self.storeWindowPresenter];
+
         [controller setEnabled:[accountDict[kAccountEnabled] boolValue]];
         [controller setSubstitutesPlusCharacter:[accountDict[kSubstitutePlusCharacter] boolValue]];
         [controller setPlusCharacterSubstitution:accountDict[kPlusCharacterSubstitutionString]];
@@ -1139,12 +1155,10 @@ NS_ASSUME_NONNULL_END
         }
         
         if (i == 0) {
-            [[controller window] makeKeyAndOrderFront:self];
-            
+            [controller showWindow];
         } else {
-            NSWindow *previousAccountWindow = [[self accountControllers][(i - 1)] window];
-            
-            [[controller window] orderWindow:NSWindowBelow relativeTo:[previousAccountWindow windowNumber]];
+            AccountController *previous = self.accountControllers[i - 1];
+            [controller orderWindow:NSWindowBelow relativeTo:previous.windowNumber];
         }
     }
     
@@ -1169,6 +1183,8 @@ NS_ASSUME_NONNULL_END
 
     [self makeCallAfterLaunchIfNeeded];
 
+    [self.compositionRoot.orphanLogFileRemoval performSelector:@selector(execute) withObject:nil afterDelay:0];
+
     [self setFinishedLaunching:YES];
 }
 
@@ -1192,7 +1208,7 @@ NS_ASSUME_NONNULL_END
     } else {
         // Show window of first enalbed account.
         if ([NSApp keyWindow] == nil && [[self enabledAccountControllers] count] > 0) {
-            [[self enabledAccountControllers][0] showWindow:self];
+            [[self enabledAccountControllers][0] showWindow];
         }
     }
     
@@ -1200,11 +1216,8 @@ NS_ASSUME_NONNULL_END
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)aNotification {
-    // Invalidate application's Dock icon bouncing timer.
-    if ([self userAttentionTimer] != nil) {
-        [[self userAttentionTimer] invalidate];
-        [self setUserAttentionTimer:nil];
-    }
+    [self stopUserAttentionTimer];
+    [NSUserNotificationCenter.defaultUserNotificationCenter removeAllDeliveredNotifications];
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender {
@@ -1300,8 +1313,7 @@ NS_ASSUME_NONNULL_END
 #pragma mark - NSUserNotificationCenterDelegate
 
 - (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification {
-    NSString *identifier = notification.userInfo[kUserNotificationCallControllerIdentifierKey];
-    CallController *controller = [self callControllerByIdentifier:identifier];
+    CallController *controller = [self callControllerByIdentifier:notification.identifier];
     switch (notification.activationType) {
         case NSUserNotificationActivationTypeContentsClicked:
             [controller showWindow:self];
@@ -1422,7 +1434,8 @@ NS_ASSUME_NONNULL_END
 
 - (void)makeCallTo:(NSString *)destination {
     if ([self canMakeCall]) {
-        [self.enabledAccountControllers[0] makeCallToDestinationRegisteringAccountIfNeeded:destination];
+        [self.enabledAccountControllers[0] makeCallToDestinationRegisteringAccountIfNeeded:
+         [[SanitizedCallDestination alloc] initWithString:destination]];
     }
 }
 

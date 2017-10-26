@@ -19,8 +19,8 @@
 import Foundation
 
 final class DirectoryCreatingApplicationDataLocations {
-    fileprivate let origin: ApplicationDataLocations
-    fileprivate let manager: FileManager
+    private let origin: ApplicationDataLocations
+    private let manager: FileManager
 
     init(origin: ApplicationDataLocations, manager: FileManager) {
         self.origin = origin
@@ -29,6 +29,10 @@ final class DirectoryCreatingApplicationDataLocations {
 }
 
 extension DirectoryCreatingApplicationDataLocations: ApplicationDataLocations {
+    func root() -> URL {
+        return createDirectory(at: origin.root())
+    }
+
     func logs() -> URL {
         return createDirectory(at: origin.logs())
     }
