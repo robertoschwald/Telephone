@@ -96,8 +96,6 @@ EOF
 echo "PJLIB CONFIG:"  >> $telephone_lib_logfile 2>&1
 cat pjlib/include/pj/config_site.h  >> $telephone_lib_logfile 2>&1
 
-echo " "
-
 ./configure --prefix=${TELEPHONE_PROJECT_DIR}/ThirdParty/PJSIP --with-opus=/path/to/Telephone/ThirdParty/Opus --disable-libyuv --disable-libwebrtc --host=x86_64-apple-darwin CFLAGS='-mmacosx-version-min=10.10'  >> $telephone_lib_logfile  2>&1
 if [ $? != 0 ]; then
         echo "Configure PJSIP ${PJSIP_VERSION} failed. Check $telephone_lib_logfile"
@@ -159,10 +157,7 @@ cd ..
 
 rm -r $telephone_lib_tmp_dir
 
-echo " "
-echo " "
-echo " "
-echo " "
 echo "Logfile: $telephone_lib_logfile"
+echo " "
 echo "Done. Compile in XCode, now"
 
