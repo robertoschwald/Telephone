@@ -19,6 +19,13 @@ internet connection.
 
 ## Building
 
+execute:
+```
+./setup-libraries.sh
+```
+
+or build manually:
+
 ### Opus
 
 Opus codec is optional.
