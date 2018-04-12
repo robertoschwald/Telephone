@@ -1,9 +1,9 @@
 //
-//  AccountsNotificationsToEventTargetAdapterTests.swift
+//  AKSIPCallEventSourceTests.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,20 +16,21 @@
 //  GNU General Public License for more details.
 //
 
+import UseCases
 import UseCasesTestDoubles
 import XCTest
 
-final class AccountsNotificationsToEventTargetAdapterTests: XCTestCase {
-    func testCallDidRemoveAccountWithExpectedUUIDOnNotification() {
+class AKSIPCallEventSourceTests: XCTestCase {
+    func testCallsDidDisconnect() {
         let center = NotificationCenter.default
-        let target = AccountsEventTargetSpy()
-        let uuid = "uuid-123"
-        withExtendedLifetime(AccountsNotificationsToEventTargetAdapter(center: center, target: target)) {
+        let target = CallEventTargetSpy()
+        let call = CallTestFactory().make()
+        withExtendedLifetime(AKSIPCallEventSource(center: center, target: target)) {
 
-            center.post(Notification(name: .AKPreferencesControllerDidRemoveAccount, object: nil, userInfo: [kUUID: uuid]))
+            center.post(Notification(name: .AKSIPCallDidDisconnect, object: call, userInfo: nil))
 
-            XCTAssertTrue(target.didCallDidRemoveAccount)
-            XCTAssertEqual(target.invokedUUID, uuid)
+            XCTAssertTrue(target.didCallDidDisconnect)
+            XCTAssertTrue(target.invokedCall === call)
         }
     }
 }

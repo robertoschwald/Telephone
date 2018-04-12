@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -52,6 +52,7 @@ static const BOOL kAKSIPUserAgentDefaultDetectsVoiceActivity = YES;
 static const BOOL kAKSIPUserAgentDefaultUsesICE = NO;
 static const NSInteger kAKSIPUserAgentDefaultTransportPort = 0;
 static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
+static const BOOL kAKSIPUserAgentDefaultLocksCodec = YES;
 
 
 @interface AKSIPUserAgent ()
@@ -121,8 +122,12 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
     return self.state == AKSIPUserAgentStateStarted;
 }
 
-- (NSUInteger)activeCallsCount {
-    return pjsua_call_get_count();
+- (NSInteger)activeCallsCount {
+    NSInteger count = 0;
+    for (AKSIPAccount *account in self.accounts) {
+        count += [account activeCallsCount];
+    }
+    return count;
 }
 
 - (AKSIPUserAgentCallData *)callData {
@@ -215,6 +220,7 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
     [self setUsesICE:kAKSIPUserAgentDefaultUsesICE];
     [self setTransportPort:kAKSIPUserAgentDefaultTransportPort];
     [self setUsesG711Only:kAKSIPUserAgentDefaultUsesG711Only];
+    [self setLocksCodec:kAKSIPUserAgentDefaultLocksCodec];
     
     [self setRingbackSlot:kAKSIPUserAgentInvalidIdentifier];
 
@@ -532,6 +538,8 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
     
     accountConfig.allow_contact_rewrite = anAccount.updatesContactHeader ? PJ_TRUE : PJ_FALSE;
     accountConfig.allow_via_rewrite = anAccount.updatesViaHeader ? PJ_TRUE : PJ_FALSE;
+
+    accountConfig.lock_codec = self.locksCodec ? PJ_TRUE : PJ_FALSE;
     
     pjsua_acc_id accountIdentifier;
     pj_status_t status = pjsua_acc_add(&accountConfig, PJ_FALSE,
@@ -714,8 +722,8 @@ static const BOOL kAKSIPUserAgentDefaultUsesG711Only = NO;
                        @"opus/48000/2":  @(127),
                        @"iLBC/8000/1":   @(126),
                        @"GSM/8000/1":    @(125),
-                       @"PCMU/8000/1":   @(124),
-                       @"PCMA/8000/1":   @(123),
+                       @"PCMA/8000/1":   @(124),
+                       @"PCMU/8000/1":   @(123),
                        @"G722/16000/1":  @(122)
                        };
     });

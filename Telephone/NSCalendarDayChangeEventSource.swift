@@ -1,9 +1,9 @@
 //
-//  AccountsNotificationsToEventTargetAdapter.swift
+//  NSCalendarDayChangeEventSource.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,24 +17,23 @@
 //
 
 import Foundation
+import UseCases
 
-final class AccountsNotificationsToEventTargetAdapter {
+final class NSCalendarDayChangeEventSource {
     private let center: NotificationCenter
-    private let target: AccountsEventTarget
+    private let target: DayChangeEventTarget
 
-    init(center: NotificationCenter, target: AccountsEventTarget) {
+    init(center: NotificationCenter, target: DayChangeEventTarget) {
         self.center = center
         self.target = target
-        center.addObserver(
-            self, selector: #selector(didRemoveAccount), name: .AKPreferencesControllerDidRemoveAccount, object: nil
-        )
+        center.addObserver(self, selector: #selector(dayDidChange), name: .NSCalendarDayChanged, object: nil)
     }
 
     deinit {
-        center.removeObserver(self, name: .AKPreferencesControllerDidRemoveAccount, object: nil)
+        center.removeObserver(self)
     }
 
-    @objc private func didRemoveAccount(_ notification: Notification) {
-        target.didRemoveAccount(withUUID: notification.userInfo![kUUID] as! String)
+    @objc private func dayDidChange(_ notification: Notification) {
+        target.dayDidChange()
     }
 }

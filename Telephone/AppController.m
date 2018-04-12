@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -67,13 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) NSArray *accountsMenuItems;
 @property(nonatomic, weak) IBOutlet NSMenu *windowMenu;
 @property(nonatomic, weak) IBOutlet NSMenuItem *preferencesMenuItem;
+@property(nonatomic, weak) IBOutlet HelpMenuActionRedirect *helpMenuActionRedirect;
 
 @property(nonatomic, readonly) CompositionRoot *compositionRoot;
 @property(nonatomic, readonly) PreferencesController *preferencesController;
 @property(nonatomic, readonly) StoreWindowPresenter *storeWindowPresenter;
 @property(nonatomic, readonly) id<RingtonePlaybackUseCase> ringtonePlayback;
-@property(nonatomic, readonly) id<MusicPlayer> musicPlayer;
-@property(nonatomic, readonly) id<ApplicationDataLocations> locations;
 @property(nonatomic, readonly) WorkspaceSleepStatus *sleepStatus;
 @property(nonatomic, readonly) AsyncCallHistoryViewEventTargetFactory *callHistoryViewEventTargetFactory;
 @property(nonatomic, readonly) AsyncCallHistoryPurchaseCheckUseCaseFactory *purchaseCheckUseCaseFactory;
@@ -187,6 +186,7 @@ NS_ASSUME_NONNULL_END
         defaultsDict[kAutoCloseMissedCallWindow] = @YES;
         defaultsDict[kCallWaiting] = @YES;
         defaultsDict[kUseG711Only] = @NO;
+        defaultsDict[kLockCodec] = @NO;
 
         NSString *preferredLocalization = [[NSBundle mainBundle] preferredLocalizations][0];
         
@@ -223,8 +223,6 @@ NS_ASSUME_NONNULL_END
     _preferencesController = _compositionRoot.preferencesController;
     _storeWindowPresenter = _compositionRoot.storeWindowPresenter;
     _ringtonePlayback = _compositionRoot.ringtonePlayback;
-    _musicPlayer = _compositionRoot.musicPlayer;
-    _locations = _compositionRoot.applicationDataLocations;
     _sleepStatus = _compositionRoot.workstationSleepStatus;
     _callHistoryViewEventTargetFactory = _compositionRoot.callHistoryViewEventTargetFactory;
     _purchaseCheckUseCaseFactory = _compositionRoot.callHistoryPurchaseCheckUseCaseFactory;
@@ -337,11 +335,7 @@ NS_ASSUME_NONNULL_END
 }
 
 - (IBAction)showPreferencePanel:(id)sender {
-    if (![[[self preferencesController] window] isVisible]) {
-        [[[self preferencesController] window] center];
-    }
-    
-    [[self preferencesController] showWindow:nil];
+    [self.preferencesController showWindowCentered];
 }
 
 - (IBAction)addAccountOnFirstLaunch:(id)sender {
@@ -500,6 +494,13 @@ NS_ASSUME_NONNULL_END
 - (void)optOutOfAutomaticWindowTabbing {
     if ([NSWindow respondsToSelector:@selector(allowsAutomaticWindowTabbing)]) {
         NSWindow.allowsAutomaticWindowTabbing = NO;
+    }
+}
+
+- (void)showAccountPreferencesIfNeeded {
+    if ([self enabledAccountControllers].count == 0)  {
+        [self.preferencesController showWindowCentered];
+        [self.preferencesController showAccounts];
     }
 }
 
@@ -784,7 +785,6 @@ NS_ASSUME_NONNULL_END
                                                                accountDescription:account.SIPAddress
                                                                         userAgent:self.userAgent
                                                                  ringtonePlayback:self.ringtonePlayback
-                                                                      musicPlayer:self.musicPlayer
                                                                       sleepStatus:self.sleepStatus
                                                 callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
                                                       purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
@@ -851,7 +851,6 @@ NS_ASSUME_NONNULL_END
                                                                    accountDescription:description
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer
                                                                           sleepStatus:self.sleepStatus
                                                     callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
                                                           purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
@@ -1054,6 +1053,8 @@ NS_ASSUME_NONNULL_END
     [self optOutOfAutomaticWindowTabbing];
 
     [self.compositionRoot.settingsMigration execute];
+
+    self.helpMenuActionRedirect.target = self.compositionRoot.helpMenuActionTarget;
     
     // Read main settings from defaults.
     if ([defaults boolForKey:kUseDNSSRV]) {
@@ -1072,7 +1073,7 @@ NS_ASSUME_NONNULL_END
     NSString *bundleShortVersion = [mainBundle infoDictionary][@"CFBundleShortVersionString"];
     
     [[self userAgent] setUserAgentString:[NSString stringWithFormat:@"%@ %@", bundleName, bundleShortVersion]];
-    [[self userAgent] setLogFileName:[[self.locations logs] URLByAppendingPathComponent:@"Telephone.log"].path];
+    [[self userAgent] setLogFileName:self.compositionRoot.logFileURL.pathValue];
     [[self userAgent] setLogLevel:[defaults integerForKey:kLogLevel]];
     [[self userAgent] setConsoleLogLevel:[defaults integerForKey:kConsoleLogLevel]];
     [[self userAgent] setDetectsVoiceActivity:[defaults boolForKey:kVoiceActivityDetection]];
@@ -1080,6 +1081,7 @@ NS_ASSUME_NONNULL_END
     [[self userAgent] setTransportPort:[defaults integerForKey:kTransportPort]];
     [[self userAgent] setTransportPublicHost:[defaults stringForKey:kTransportPublicHost]];
     [[self userAgent] setUsesG711Only:[defaults boolForKey:kUseG711Only]];
+    [[self userAgent] setLocksCodec:[defaults boolForKey:kLockCodec]];
 
     NSArray *savedAccounts = [defaults arrayForKey:kAccounts];
     
@@ -1138,7 +1140,6 @@ NS_ASSUME_NONNULL_END
                                                                    accountDescription:description
                                                                             userAgent:self.userAgent
                                                                      ringtonePlayback:self.ringtonePlayback
-                                                                          musicPlayer:self.musicPlayer
                                                                           sleepStatus:self.sleepStatus
                                                     callHistoryViewEventTargetFactory:self.callHistoryViewEventTargetFactory
                                                           purchaseCheckUseCaseFactory:self.purchaseCheckUseCaseFactory
@@ -1184,6 +1185,8 @@ NS_ASSUME_NONNULL_END
     [self makeCallAfterLaunchIfNeeded];
 
     [self.compositionRoot.orphanLogFileRemoval performSelector:@selector(execute) withObject:nil afterDelay:0];
+
+    [self showAccountPreferencesIfNeeded];
 
     [self setFinishedLaunching:YES];
 }

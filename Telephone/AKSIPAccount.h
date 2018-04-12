@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -124,10 +124,11 @@ extern const NSInteger kAKSIPAccountDefaultReregistrationTime;
 // Makes a call to a given destination URI.
 - (void)makeCallTo:(AKSIPURI *)destination completion:(void (^)(AKSIPCall *))completion;
 
-- (AKSIPCall *)addCallWithIdentifier:(NSInteger)identifier;
+- (AKSIPCall *)addCallWithInfo:(pjsua_call_info)info;
 - (nullable AKSIPCall *)callWithIdentifier:(NSInteger)identifier;
 - (void)removeCall:(AKSIPCall *)call;
 - (void)removeAllCalls;
+- (NSInteger)activeCallsCount;
 
 @end
 

@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,13 +17,16 @@
 //
 
 public final class DelayingUserAgentSoundIOSelectionUseCase {
-    private let useCase: ThrowingUseCase
-    private let userAgent: UserAgent
     private var selection: ThrowingUseCase?
 
-    public init(useCase: ThrowingUseCase, userAgent: UserAgent) {
+    private let useCase: ThrowingUseCase
+    private let agent: UserAgent
+    private let calls: Calls
+
+    public init(useCase: ThrowingUseCase, agent: UserAgent, calls: Calls) {
         self.useCase = useCase
-        self.userAgent = userAgent
+        self.agent = agent
+        self.calls = calls
     }
 }
 
@@ -34,7 +37,7 @@ extension DelayingUserAgentSoundIOSelectionUseCase: UseCase {
     }
 
     private func selectSoundIOOrLogErrorIfNeeded() {
-        if userAgent.hasActiveCalls {
+        if calls.haveActive {
             selectSoundIOOrLogError()
         }
     }

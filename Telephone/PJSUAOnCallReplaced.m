@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -24,22 +24,20 @@
 
 #define THIS_FILE "PJSUAOnCallReplaced.m"
 
-void PJSUAOnCallReplaced(pjsua_call_id oldCallID, pjsua_call_id newCallID) {
-    pjsua_call_info oldCallInfo, newCallInfo;
-    pjsua_call_get_info(oldCallID, &oldCallInfo);
-    pjsua_call_get_info(newCallID, &newCallInfo);
+void PJSUAOnCallReplaced(pjsua_call_id oldID, pjsua_call_id newID) {
+    pjsua_call_info oldInfo, newInfo;
+    pjsua_call_get_info(oldID, &oldInfo);
+    pjsua_call_get_info(newID, &newInfo);
 
     PJ_LOG(3, (THIS_FILE, "Call %d with %.*s is being replaced by call %d with %.*s",
-               oldCallID,
-               (int)oldCallInfo.remote_info.slen, oldCallInfo.remote_info.ptr,
-               newCallID,
-               (int)newCallInfo.remote_info.slen, newCallInfo.remote_info.ptr));
+               oldID, (int)oldInfo.remote_info.slen, oldInfo.remote_info.ptr,
+               newID, (int)newInfo.remote_info.slen, newInfo.remote_info.ptr));
 
-    NSInteger accountIdentifier = newCallInfo.acc_id;
+    NSInteger accountIdentifier = newInfo.acc_id;
     dispatch_async(dispatch_get_main_queue(), ^{
-        PJ_LOG(3, (THIS_FILE, "Creating AKSIPCall for call %d from replaced callback", newCallID));
+        PJ_LOG(3, (THIS_FILE, "Creating AKSIPCall for call %d from replaced callback", newID));
         AKSIPUserAgent *userAgent = [AKSIPUserAgent sharedUserAgent];
         AKSIPAccount *account = [userAgent accountWithIdentifier:accountIdentifier];
-        [account addCallWithIdentifier:newCallID];
+        [account addCallWithInfo:newInfo];
     });
 }

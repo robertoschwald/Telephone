@@ -1,9 +1,9 @@
 //
-//  ConditionalMusicPlayer.swift
+//  CallsMusicPlayer.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,25 +16,23 @@
 //  GNU General Public License for more details.
 //
 
-public final class ConditionalMusicPlayer {
+public final class CallsMusicPlayer {
     private let origin: MusicPlayer
-    private let settings: MusicPlayerSettings
+    private let calls: Calls
 
-    public init(origin: MusicPlayer, settings: MusicPlayerSettings) {
+    public init(origin: MusicPlayer, calls: Calls) {
         self.origin = origin
-        self.settings = settings
+        self.calls = calls
     }
 }
 
-extension ConditionalMusicPlayer: MusicPlayer {
-    @objc public func pause() {
-        if settings.shouldPause {
-            origin.pause()
-        }
+extension CallsMusicPlayer: MusicPlayer {
+    public func pause() {
+        origin.pause()
     }
 
-    @objc public func resume() {
-        if settings.shouldPause {
+    public func resume() {
+        if !calls.haveActive {
             origin.resume()
         }
     }

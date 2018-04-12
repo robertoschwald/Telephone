@@ -1,9 +1,9 @@
 //
-//  ABAddressBookNotificationsToContactsChangeEventTargetAdapter.swift
+//  CNContactStoreContactsChangeEventSource.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,24 +16,23 @@
 //  GNU General Public License for more details.
 //
 
-import AddressBook
+import Contacts
 import Foundation
 import UseCases
 
-final class ABAddressBookNotificationsToContactsChangeEventTargetAdapter {
+@available(OSX 10.11, *)
+final class CNContactStoreContactsChangeEventSource {
     private let center: NotificationCenter
     private let target: ContactsChangeEventTarget
 
     init(center: NotificationCenter, target: ContactsChangeEventTarget) {
         self.center = center
         self.target = target
-        center.addObserver(self, selector: #selector(contactsDidChange), name: .abDatabaseChanged, object: nil)
-        center.addObserver(self, selector: #selector(contactsDidChange), name: .abDatabaseChangedExternally, object: nil)
+        center.addObserver(self, selector: #selector(contactsDidChange), name: .CNContactStoreDidChange, object: nil)
     }
 
     deinit {
-        center.removeObserver(self, name: .abDatabaseChanged, object: nil)
-        center.removeObserver(self, name: .abDatabaseChangedExternally, object: nil)
+        center.removeObserver(self, name: .CNContactStoreDidChange, object: nil)
     }
 
     @objc private func contactsDidChange(_ notification: Notification) {

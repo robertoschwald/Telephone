@@ -5,20 +5,26 @@
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "CFV-wm-kqZ"; */
 "CFV-wm-kqZ.title" = "Text Cell";
 
+/* Class = "NSTextFieldCell"; title = "Privacy Policy"; ObjectID = "DU9-Ky-gjo"; */
+"DU9-Ky-gjo.title" = "Datenschutzrichtlinie";
+
 /* Class = "NSTextFieldCell"; title = "Thank you!"; ObjectID = "L2v-xq-Wr7"; */
 "L2v-xq-Wr7.title" = "Danke!";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "NEN-L8-9I9"; */
 "NEN-L8-9I9.title" = "Table View Cell";
 
-/* Class = "NSTextFieldCell"; title = "Telephone is a free and open source app that is supported only by its users. Please consider becoming a patron to make ongoing development possible.\n\nThe subscription renews automatically and can be cancelled almost any time based on Mac App Store subscription rules."; ObjectID = "W5b-g9-V4l"; */
-"W5b-g9-V4l.title" = "Telefon ist eine freie und quelloffene App, die ausschließlich von ihren Benutzern unterstützt wird. Bitte überlegen Sie sich, das Projekt zu unterstützen, um ständige Weiterentwicklung zu ermöglichen.\n\nDas Abo verlängert sich automatisch und kann fast jederzeit gemäß App-Store-Bedingungen gekündigt werden.";
+/* Class = "NSTextFieldCell"; title = "Telephone Pro is a subscription to unlock the full call history and to support ongoing app development.\n\nPayment will be charged to your iTunes account and auto-renews unless disabled in your iTunes account settings at least 24 hours before the end of the current period. The subscription can be managed in your iTunes account settings."; ObjectID = "W5b-g9-V4l"; */
+"W5b-g9-V4l.title" = "Telefon Pro ist ein Abo, das die unbeschränkte Anrufliste freischaltet und die ständige Weiterentwicklung ermöglicht.\n\nDie Zahlung erfolgt zu Lasten des iTunes-Kontos. Das Abo wird automatisch verlängert, es sei denn, die automatische Verlängerung wird spätestens 24 Stunden vor dem Ende des laufenden Zeitraums ausgeschaltet. Das Abo kann in iTunes-Kontoeinstellungen verwaltet werden.";
 
 /* Class = "NSTextFieldCell"; title = "Your subscription ends on "; ObjectID = "Z9K-5X-9uS"; */
 "Z9K-5X-9uS.title" = "Ihr Abonnement endet am ";
 
 /* Class = "NSTextFieldCell"; title = "Dec 31, 2016"; ObjectID = "efh-fd-jws"; */
 "efh-fd-jws.title" = "Dec 31, 2016";
+
+/* Class = "NSTextFieldCell"; title = "Terms of Use"; ObjectID = "iih-o0-zci"; */
+"iih-o0-zci.title" = "Nutzungsbedingungen";
 
 /* Class = "NSButtonCell"; title = "Manage Subscriptions…"; ObjectID = "lhf-s5-m1W"; */
 "lhf-s5-m1W.title" = "Abonnements verwalten …";

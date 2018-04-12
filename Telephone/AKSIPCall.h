@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSUInteger, AKSIPCallState) {
 @property(nonatomic, readonly, getter=isOnLocalHold) BOOL onLocalHold;
 @property(nonatomic, readonly, getter=isOnRemoteHold) BOOL onRemoteHold;
 
-- (instancetype)initWithSIPAccount:(AKSIPAccount *)account identifier:(NSInteger)identifier;
+- (instancetype)initWithSIPAccount:(AKSIPAccount *)account info:(pjsua_call_info)info;
 
 - (void)answer;
 - (void)hangUp;

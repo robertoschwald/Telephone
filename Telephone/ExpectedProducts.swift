@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
 
 struct ExpectedProducts {
     private let map = [
-        "com.tlphn.Telephone.iap.month": NSLocalizedString("Monthly optional patronage", comment: "Product name."),
-        "com.tlphn.Telephone.iap.year": NSLocalizedString("Yearly optional patronage", comment: "Product name.")
+        "com.tlphn.Telephone.iap.month": NSLocalizedString("Monthly", comment: "Product name."),
+        "com.tlphn.Telephone.iap.year": NSLocalizedString("Yearly", comment: "Product name.")
     ]
 
     var identifiers: Set<String> {

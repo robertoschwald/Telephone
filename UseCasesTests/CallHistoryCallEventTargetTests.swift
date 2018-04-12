@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -24,19 +24,16 @@ final class CallHistoryCallEventTargetTests: XCTestCase {
     func testCreatesUseCaseWithExpectedArgumentsOnDidDisconnect() {
         let account = SimpleAccount(uuid: "any-id", domain: "any-domain")
         let history: CallHistory = TruncatingCallHistory()
-        let identifier = "foobar"
         let factory = CallHistoryRecordAddUseCaseFactorySpy(add: UseCaseSpy())
         let sut = CallHistoryCallEventTarget(
-            histories: DefaultCallHistories(factory: CallHistoryFactorySpy(history: history)),
-            generator: IdentifierGeneratorStub(identifier: identifier),
-            factory: factory
+            histories: DefaultCallHistories(factory: CallHistoryFactorySpy(history: history)), factory: factory
         )
         let call = makeCall(account: account)
 
         sut.didDisconnect(call)
 
         XCTAssertTrue(factory.invokedHistory === history)
-        XCTAssertEqual(factory.invokedRecord, CallHistoryRecord(identifier: identifier, call: call))
+        XCTAssertEqual(factory.invokedRecord, CallHistoryRecord(call: call))
         XCTAssertEqual(factory.invokedDomain, account.domain)
     }
 
@@ -44,9 +41,7 @@ final class CallHistoryCallEventTargetTests: XCTestCase {
         let histories = DefaultCallHistories(factory: CallHistoryFactorySpy(history: TruncatingCallHistory()))
         let add = UseCaseSpy()
         let sut = CallHistoryCallEventTarget(
-            histories: histories,
-            generator: IdentifierGeneratorStub(identifier: "any"),
-            factory: CallHistoryRecordAddUseCaseFactorySpy(add: add)
+            histories: histories, factory: CallHistoryRecordAddUseCaseFactorySpy(add: add)
         )
         let call = makeCall(account: SimpleAccount(uuid: "any-id", domain: "any-domain"))
 

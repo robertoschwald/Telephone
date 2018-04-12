@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -27,21 +27,22 @@ final class CompositionRoot: NSObject {
     @objc let ringtonePlayback: RingtonePlaybackUseCase
     @objc let storeWindowPresenter: StoreWindowPresenter
     @objc let purchaseReminder: PurchaseReminderUseCase
-    @objc let musicPlayer: MusicPlayer
     @objc let settingsMigration: ProgressiveSettingsMigration
-    @objc let applicationDataLocations: ApplicationDataLocations
     @objc let orphanLogFileRemoval: OrphanLogFileRemoval
     @objc let workstationSleepStatus: WorkspaceSleepStatus
     @objc let callHistoryViewEventTargetFactory: AsyncCallHistoryViewEventTargetFactory
     @objc let callHistoryPurchaseCheckUseCaseFactory: AsyncCallHistoryPurchaseCheckUseCaseFactory
+    @objc let logFileURL: LogFileURL
+    @objc let helpMenuActionTarget: HelpMenuActionTarget
     private let defaults: UserDefaults
 
-    private let storeEventSource: StoreEventSource
-    private let userAgentNotificationsToEventTargetAdapter: UserAgentNotificationsToEventTargetAdapter
+    private let storeEventSource: SKPaymentQueueStoreEventSource
+    private let userAgentEventSource: AKSIPUserAgentEventSource
     private let devicesChangeEventSource: SystemAudioDevicesChangeEventSource!
-    private let accountsNotificationsToEventTargetAdapter: AccountsNotificationsToEventTargetAdapter
-    private let callNotificationsToEventTargetAdapter: CallNotificationsToEventTargetAdapter
-    private let contactStoreNotificationsToContactsChangeEventTargetAdapter: Any
+    private let accountsEventSource: PreferencesControllerAccountsEventSource
+    private let callEventSource: AKSIPCallEventSource
+    private let contactsChangeEventSource: Any
+    private let dayChangeEventSource: NSCalendarDayChangeEventSource
 
     @objc init(preferencesControllerDelegate: PreferencesControllerDelegate, conditionalRingtonePlaybackUseCaseDelegate: ConditionalRingtonePlaybackUseCaseDelegate) {
         userAgent = AKSIPUserAgent.shared()
@@ -100,14 +101,15 @@ final class CompositionRoot: NSObject {
         let storeEventTargets = StoreEventTargets()
         storeEventTargets.add(storeViewEventTarget)
 
-        storeEventSource = StoreEventSource(
+        storeEventSource = SKPaymentQueueStoreEventSource(
             queue: SKPaymentQueue.default(),
             target: ReceiptValidatingStoreEventTarget(origin: storeEventTargets, receipt: receipt)
         )
 
         let userAgentSoundIOSelection = DelayingUserAgentSoundIOSelectionUseCase(
             useCase: UserAgentSoundIOSelectionUseCase(repository: audioDevices, userAgent: userAgent, settings: defaults),
-            userAgent: userAgent
+            agent: userAgent,
+            calls: userAgent
         )
 
         preferencesController = PreferencesController(
@@ -122,14 +124,9 @@ final class CompositionRoot: NSObject {
             )
         )
 
-        musicPlayer = ConditionalMusicPlayer(
-            origin: AvailableMusicPlayers(factory: MusicPlayerFactory()),
-            settings: SimpleMusicPlayerSettings(settings: defaults)
-        )
-
         settingsMigration = ProgressiveSettingsMigration(settings: defaults, factory: DefaultSettingsMigrationFactory())
 
-        applicationDataLocations = DirectoryCreatingApplicationDataLocations(
+        let applicationDataLocations = DirectoryCreatingApplicationDataLocations(
             origin: SimpleApplicationDataLocations(manager: FileManager.default, bundle: Bundle.main),
             manager: FileManager.default
         )
@@ -138,8 +135,12 @@ final class CompositionRoot: NSObject {
 
         workstationSleepStatus = WorkspaceSleepStatus(workspace: NSWorkspace.shared)
 
-        userAgentNotificationsToEventTargetAdapter = UserAgentNotificationsToEventTargetAdapter(
-            target: userAgentSoundIOSelection,
+        userAgentEventSource = AKSIPUserAgentEventSource(
+            target: UserAgentEventTargets(
+                targets: [
+                    userAgentSoundIOSelection, BackgroundActivityUserAgentEventTarget(process: ProcessInfo.processInfo)
+                ]
+            ),
             agent: userAgent
         )
 
@@ -178,22 +179,33 @@ final class CompositionRoot: NSObject {
             contactsBackground = ThreadExecutionQueue(thread: makeAndStartThread())
         }
 
-        accountsNotificationsToEventTargetAdapter = AccountsNotificationsToEventTargetAdapter(
+        accountsEventSource = PreferencesControllerAccountsEventSource(
             center: NotificationCenter.default,
             target: EnqueuingAccountsEventTarget(
                 origin: CallHistoriesHistoryRemoveUseCase(histories: callHistories), queue: contactsBackground
             )
         )
 
-        callNotificationsToEventTargetAdapter = CallNotificationsToEventTargetAdapter(
+        callEventSource = AKSIPCallEventSource(
             center: NotificationCenter.default,
-            target: EnqueuingCallEventTarget(
-                origin: CallHistoryCallEventTarget(
-                    histories: callHistories,
-                    generator: UUIDIdentifierGenerator(),
-                    factory: DefaultCallHistoryRecordAddUseCaseFactory()
-                ),
-                queue: contactsBackground)
+            target: CallEventTargets(
+                targets: [
+                    EnqueuingCallEventTarget(
+                        origin: CallHistoryCallEventTarget(
+                            histories: callHistories, factory: DefaultCallHistoryRecordAddUseCaseFactory()
+                        ),
+                        queue: contactsBackground
+                    ),
+                    MusicPlayerCallEventTarget(
+                        player: SettingsMusicPlayer(
+                            origin: CallsMusicPlayer(
+                                origin: AvailableMusicPlayers(factory: MusicPlayerFactory()), calls: userAgent
+                            ),
+                            settings: SimpleMusicPlayerSettings(settings: defaults)
+                        )
+                    )
+                ]
+            )
         )
 
         let contactMatchingSettings = SimpleContactMatchingSettings(settings: defaults)
@@ -203,14 +215,17 @@ final class CompositionRoot: NSObject {
         let contactsChangeEventTarget = EnqueuingContactsChangeEventTarget(origin: contactMatchingIndex, queue: contactsBackground)
 
         if #available(macOS 10.11, *) {
-            contactStoreNotificationsToContactsChangeEventTargetAdapter = CNContactStoreNotificationsToContactsChangeEventTargetAdapter(
+            contactsChangeEventSource = CNContactStoreContactsChangeEventSource(
                 center: NotificationCenter.default, target: contactsChangeEventTarget
             )
         } else {
-            contactStoreNotificationsToContactsChangeEventTargetAdapter = ABAddressBookNotificationsToContactsChangeEventTargetAdapter(
+            contactsChangeEventSource = ABAddressBookContactsChangeEventSource(
                 center: NotificationCenter.default, target: contactsChangeEventTarget
             )
         }
+
+        let dayChangeEventTargets = DayChangeEventTargets()
+        dayChangeEventSource = NSCalendarDayChangeEventSource(center: NotificationCenter.default, target: dayChangeEventTargets)
 
         let main = GCDExecutionQueue(queue: DispatchQueue.main)
 
@@ -223,6 +238,7 @@ final class CompositionRoot: NSObject {
                 dateFormatter: ShortRelativeDateTimeFormatter(),
                 durationFormatter: DurationFormatter(),
                 storeEventTargets: storeEventTargets,
+                dayChangeEventTargets: dayChangeEventTargets,
                 background: contactsBackground,
                 main: main
             ),
@@ -236,6 +252,16 @@ final class CompositionRoot: NSObject {
             ),
             background: contactsBackground,
             main: main
+        )
+
+        logFileURL = LogFileURL(locations: applicationDataLocations, filename: "Telephone.log")
+
+        helpMenuActionTarget = HelpMenuActionTarget(
+            logFileURL: logFileURL,
+            homepageURL: URL(string: "https://www.64characters.com/telephone/")!,
+            faqURL: URL(string: "https://www.64characters.com/telephone/faq/")!,
+            fileBrowser: NSWorkspace.shared,
+            webBrowser: NSWorkspace.shared
         )
 
         super.init()

@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -80,7 +80,7 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 @property(nonatomic, assign) AKNATType detectedNATType;
 
 // The number of acitve calls controlled by the receiver.
-@property(nonatomic, readonly, assign) NSUInteger activeCallsCount;
+@property(nonatomic, readonly, assign) NSInteger activeCallsCount;
 
 // Receiver's call data.
 @property(nonatomic, readonly, assign) AKSIPUserAgentCallData *callData;
@@ -140,6 +140,15 @@ extern const NSInteger kAKSIPUserAgentInvalidIdentifier;
 
 /// A Boolean value indicating if only G.711 codec is used.
 @property(nonatomic, assign) BOOL usesG711Only;
+
+/// A Boolean value indicating if a codec should be locked.
+///
+/// If remote sends SDP answer containing more than one format or codec in
+/// the media line, send re-INVITE or UPDATE with just one codec to lock
+/// which codec to use.
+///
+/// Default: YES.
+@property(nonatomic, assign) BOOL locksCodec;
 
 
 // Returns the shared SIP user agent object.

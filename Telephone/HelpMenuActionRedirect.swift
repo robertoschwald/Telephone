@@ -1,9 +1,9 @@
 //
-//  IdentifierGeneratorStub.swift
+//  HelpMenuActionRedirect.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,18 +16,20 @@
 //  GNU General Public License for more details.
 //
 
-import UseCases
+import Foundation
 
-public final class IdentifierGeneratorStub {
-    private let identifier: String
+final class HelpMenuActionRedirect: NSObject {
+    @objc var target: HelpMenuActionTarget?
 
-    public init(identifier: String) {
-        self.identifier = identifier
+    @IBAction func showLogFile(_ sender: NSMenuItem) {
+        target?.showLogFile()
     }
-}
 
-extension IdentifierGeneratorStub: IdentifierGenerator {
-    public func generate() -> String {
-        return identifier
+    @IBAction func openHomepage(_ sender: NSMenuItem) {
+        target?.openHomepage()
+    }
+
+    @IBAction func openFAQ(_ sender: NSMenuItem) {
+        target?.openFAQ()
     }
 }

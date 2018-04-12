@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,9 +26,8 @@ public struct CallHistoryRecord {
     public let isIncoming: Bool
     public let isMissed: Bool
 
-    public init(identifier: String, uri: URI, date: Date, duration: Int, isIncoming: Bool, isMissed: Bool) {
-        precondition(!identifier.isEmpty)
-        self.identifier = identifier
+    public init(uri: URI, date: Date, duration: Int, isIncoming: Bool, isMissed: Bool) {
+        identifier = "\(uri.user)@\(uri.host)|\(date.timeIntervalSinceReferenceDate)|\(duration)|\(isIncoming ? 1 : 0)"
         self.uri = uri
         self.date = date
         self.duration = duration
@@ -38,7 +37,6 @@ public struct CallHistoryRecord {
 
     public func removingHost() -> CallHistoryRecord {
         return CallHistoryRecord(
-            identifier: identifier,
             uri: URI(user: uri.user, host: "", displayName: uri.displayName),
             date: date,
             duration: duration,
@@ -51,7 +49,6 @@ public struct CallHistoryRecord {
 extension CallHistoryRecord: Equatable {
     public static func ==(lhs: CallHistoryRecord, rhs: CallHistoryRecord) -> Bool {
         return
-            lhs.identifier == rhs.identifier &&
             lhs.uri == rhs.uri &&
             lhs.date == rhs.date &&
             lhs.duration == rhs.duration &&
@@ -61,9 +58,8 @@ extension CallHistoryRecord: Equatable {
 }
 
 extension CallHistoryRecord {
-    public init(identifier: String, call: Call) {
+    public init(call: Call) {
         self.init(
-            identifier: identifier,
             uri: call.remote,
             date: call.date,
             duration: call.duration,

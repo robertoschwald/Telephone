@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 #import "AKSIPURIFormatter.h"
 #import "AKTelephoneNumberFormatter.h"
 
-#import "AccountToAccountControllerAdapter.h"
+#import "AccountControllerToAccountAdapter.h"
 #import "AccountViewController.h"
 #import "AccountWindowController.h"
 #import "ActiveAccountViewController.h"
@@ -181,7 +181,6 @@ static NSString * const kRussian = @"ru";
                 accountDescription:(NSString *)accountDescription
                          userAgent:(AKSIPUserAgent *)userAgent
                   ringtonePlayback:(id<RingtonePlaybackUseCase>)ringtonePlayback
-                       musicPlayer:(id<MusicPlayer>)musicPlayer
                        sleepStatus:(WorkspaceSleepStatus *)sleepStatus
  callHistoryViewEventTargetFactory:(AsyncCallHistoryViewEventTargetFactory *)callHistoryViewEventTargetFactory
        purchaseCheckUseCaseFactory:(AsyncCallHistoryPurchaseCheckUseCaseFactory *)purchaseCheckUseCaseFactory
@@ -196,7 +195,6 @@ static NSString * const kRussian = @"ru";
     _account.delegate = self;
     _userAgent = userAgent;
     _ringtonePlayback = ringtonePlayback;
-    _musicPlayer = musicPlayer;
     _sleepStatus = sleepStatus;
 
     _callControllers = [[NSMutableArray alloc] init];
@@ -208,7 +206,7 @@ static NSString * const kRussian = @"ru";
                                                callHistoryViewController:[[CallHistoryViewController alloc] init]
                                        callHistoryViewEventTargetFactory:callHistoryViewEventTargetFactory
                                              purchaseCheckUseCaseFactory:purchaseCheckUseCaseFactory
-                                                                 account:[[AccountToAccountControllerAdapter alloc] initWithController:self]
+                                                                 account:[[AccountControllerToAccountAdapter alloc] initWithController:self]
                                                     storeWindowPresenter:storeWindowPresenter];
     _windowController = [[AccountWindowController alloc] initWithAccountDescription:_accountDescription
                                                                          SIPAddress:_account.SIPAddress
@@ -296,7 +294,6 @@ static NSString * const kRussian = @"ru";
                                                       accountController:self
                                                               userAgent:self.userAgent
                                                        ringtonePlayback:self.ringtonePlayback
-                                                            musicPlayer:self.musicPlayer
                                                                delegate:self];
     } else {
         aCallController = callTransferController;
@@ -626,13 +623,10 @@ static NSString * const kRussian = @"ru";
         }
     }
     
-    [self.musicPlayer pause];
-    
     CallController *aCallController = [[CallController alloc] initWithWindowNibName:@"Call"
                                                                   accountController:self
                                                                           userAgent:self.userAgent
                                                                    ringtonePlayback:self.ringtonePlayback
-                                                                        musicPlayer:self.musicPlayer
                                                                            delegate:self];
     
     [aCallController setCall:aCall];

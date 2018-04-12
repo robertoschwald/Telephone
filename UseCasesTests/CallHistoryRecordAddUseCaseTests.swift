@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -44,7 +44,6 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsCopyOfRecordWithEmptyHostWhenUserIsATelephoneNumberLongerThanFourCharacters() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecord(
-            identifier: "any-identifier",
             uri: URI(user: "12345", host: "any-host", displayName: "any-name"),
             date: Date(),
             duration: 60,
@@ -61,7 +60,6 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsOriginalRecordWhenUserIsATelephoneNumberWithLengthEqualToFourCharacters() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecord(
-            identifier: "any-identifier",
             uri: URI(user: "1234", host: "any-host", displayName: "any-name"),
             date: Date(),
             duration: 60,
@@ -78,7 +76,6 @@ final class CallHistoryRecordAddUseCaseTests: XCTestCase {
     func testAddsOriginalRecordWhenUserIsATelephoneNumberShorterThanFourCharacters() {
         let history = TruncatingCallHistory()
         let record = CallHistoryRecord(
-            identifier: "any-identifier",
             uri: URI(user: "123", host: "any-host", displayName: "any-name"),
             date: Date(),
             duration: 60,

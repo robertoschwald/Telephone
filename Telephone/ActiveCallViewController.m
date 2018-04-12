@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -189,7 +189,7 @@
 #pragma mark AKActiveCallViewDelegate protocol
 
 - (void)activeCallView:(AKActiveCallView *)sender didReceiveText:(NSString *)aString {
-    NSCharacterSet *DTMFCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789*#abcdABCD"];
+    NSCharacterSet *DTMFCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789*#abcdrABCDR"];
     
     BOOL isDTMFValid = YES;
     for (NSUInteger i = 0; i < [aString length]; ++i) {

@@ -1,9 +1,9 @@
 //
-//  IdentifierGenerator.swift
+//  LogFileURL.swift
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -16,6 +16,13 @@
 //  GNU General Public License for more details.
 //
 
-public protocol IdentifierGenerator {
-    func generate() -> String
+import Foundation
+
+final class LogFileURL: NSObject {
+    @objc let urlValue: URL
+    @objc var pathValue: String { return urlValue.path }
+
+    init(locations: ApplicationDataLocations, filename: String) {
+        urlValue = locations.logs().appendingPathComponent(filename)
+    }
 }

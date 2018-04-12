@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@
 @class AccountController, AKSIPCall, AKSIPURI, AKSIPUserAgent;
 @class IncomingCallViewController, ActiveCallViewController;
 @class EndedCallViewController, CallTransferController;
-@protocol MusicPlayer, RingtonePlaybackUseCase;
+@protocol RingtonePlaybackUseCase;
 
 // A call controller.
 @interface CallController : NSWindowController <AKSIPCallDelegate> {
@@ -99,7 +99,6 @@
                     accountController:(AccountController *)accountController
                             userAgent:(AKSIPUserAgent *)userAgent
                      ringtonePlayback:(id<RingtonePlaybackUseCase>)ringtonePlayback
-                          musicPlayer:(id<MusicPlayer>)musicPlayer
                              delegate:(id<CallControllerDelegate>)delegate;
 
 // Accepts an incoming call.

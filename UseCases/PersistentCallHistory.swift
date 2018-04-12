@@ -3,7 +3,7 @@
 //  Telephone
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -75,22 +75,23 @@ extension PersistentCallHistory: CallHistory {
 
 private extension CallHistoryRecord {
     init(dictionary: [String: Any]) {
-        identifier = dictionary[Keys.identifier.rawValue] as? String ?? ""
-        let user = dictionary[Keys.user.rawValue] as? String ?? ""
-        let host = dictionary[Keys.host.rawValue] as? String ?? ""
-        let name = dictionary[Keys.name.rawValue] as? String ?? ""
-        uri = URI(user: user, host: host, displayName: name)
-        date = dictionary[Keys.date.rawValue] as? Date ?? Date.distantPast
-        duration = dictionary[Keys.duration.rawValue] as? Int ?? 0
-        isIncoming = dictionary[Keys.incoming.rawValue] as? Bool ?? false
-        isMissed = dictionary[Keys.missed.rawValue] as? Bool ?? false
+        self.init(
+            uri: URI(
+                user: dictionary[Keys.user.rawValue] as? String ?? "",
+                host: dictionary[Keys.host.rawValue] as? String ?? "",
+                displayName: dictionary[Keys.name.rawValue] as? String ?? ""
+            ),
+            date: dictionary[Keys.date.rawValue] as? Date ?? Date.distantPast,
+            duration: dictionary[Keys.duration.rawValue] as? Int ?? 0,
+            isIncoming: dictionary[Keys.incoming.rawValue] as? Bool ?? false,
+            isMissed: dictionary[Keys.missed.rawValue] as? Bool ?? false
+        )
     }
 }
 
 private func dictionaries(from records: [CallHistoryRecord]) -> [[String: Any]] {
     return records.map {
         [
-            Keys.identifier.rawValue: $0.identifier,
             Keys.user.rawValue: $0.uri.user,
             Keys.host.rawValue: $0.uri.host,
             Keys.name.rawValue: $0.uri.displayName,
@@ -103,5 +104,5 @@ private func dictionaries(from records: [CallHistoryRecord]) -> [[String: Any]] 
 }
 
 private enum Keys: String {
-    case identifier, user, host, name, date, duration, incoming, missed
+    case user, host, name, date, duration, incoming, missed
 }

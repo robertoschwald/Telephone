@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.6</string>
+	<string>1.3.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -38,11 +38,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>126-sym-label-robertoschwald</string>
+	<string>131-sym-label-robertoschwald</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
+	<string>public.app-category.business</string>
 	<key>LSHasLocalizedDisplayName</key>
 	<true/>
 	<key>LSMinimumSystemVersion</key>
@@ -50,7 +50,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Details from your contacts can be used for displaying names and phone labels and for phone number autocomplete.</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2016–2017 64 Characters</string>
+	<string>© 2016–2018 64 Characters</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>

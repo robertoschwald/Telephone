@@ -3,7 +3,7 @@
 //  TelephoneTests
 //
 //  Copyright © 2008-2016 Alexey Kuznetsov
-//  Copyright © 2016-2017 64 Characters
+//  Copyright © 2016-2018 64 Characters
 //
 //  Telephone is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -41,5 +41,13 @@ final class SanitizedCallDestinationTests: XCTestCase {
 
     func testRemovesHeadersFromTelURI() {
         XCTAssertEqual(SanitizedCallDestination("tel:123?headers").value, "tel:123")
+    }
+
+    func testRemovesEscapedSpaces() {
+        XCTAssertEqual(SanitizedCallDestination("tel:+1%20234%2056789").value, "tel:+123456789")
+    }
+
+    func testRemovesSlashesRemovesHeadersRemovesEscapedSpaces() {
+        XCTAssertEqual(SanitizedCallDestination("tel://+1%20234%2056789?header=value").value, "tel:+123456789")
     }
 }
