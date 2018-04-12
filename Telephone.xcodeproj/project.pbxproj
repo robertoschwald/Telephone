@@ -3403,7 +3403,6 @@
 				TargetAttributes = {
 					8AE706221D491C210060FF4F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = A8GCV2M324;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -3459,11 +3458,9 @@
 						ProvisioningStyle = Manual;
 					};
 					AAF2990F0F575044007B5036 = {
-						DevelopmentTeam = B5WSA37RY8;
 						ProvisioningStyle = Automatic;
 					};
 					AAF299960F57566B007B5036 = {
-						DevelopmentTeam = B5WSA37RY8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -4689,7 +4686,7 @@
 					"\"$(SRCROOT)/ThirdParty/LibreSSL/lib\"",
 				);
 				OTHER_LDFLAGS = "-lcrypto";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.ReceiptValidation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.ReceiptValidation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = singlefile;
@@ -4723,7 +4720,7 @@
 					"\"$(SRCROOT)/ThirdParty/LibreSSL/lib\"",
 				);
 				OTHER_LDFLAGS = "-lcrypto";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.ReceiptValidation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.ReceiptValidation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ReceiptValidation/ReceiptValidation-Bridging-Header.h";
@@ -4872,7 +4869,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -4897,7 +4894,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tlphn.Telephone.Domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.Telephone.Domain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -5047,10 +5044,10 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookPhonePlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.TelephoneAddressBookPhonePlugIn;
 				PRODUCT_NAME = TelephoneAddressBookPhonePlugIn;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -5062,10 +5059,10 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookPhonePlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.TelephoneAddressBookPhonePlugIn;
 				PRODUCT_NAME = TelephoneAddressBookPhonePlugIn;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
@@ -5079,11 +5076,11 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookSIPAddressPlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.TelephoneAddressBookSIPAddressPlugIn;
 				PRODUCT_NAME = TelephoneAddressBookSIPAddressPlugIn;
 				WRAPPER_EXTENSION = bundle;
 			};
@@ -5095,10 +5092,10 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEVELOPMENT_TEAM = B5WSA37RY8;
+				DEVELOPMENT_TEAM = A8GCV2M324;
 				INFOPLIST_FILE = "AddressBookPlugIns/TelephoneAddressBookSIPAddressPlugIn-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tlphn.${PRODUCT_NAME:identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.symentis.TelephoneAddressBookSIPAddressPlugIn;
 				PRODUCT_NAME = TelephoneAddressBookSIPAddressPlugIn;
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = bundle;
